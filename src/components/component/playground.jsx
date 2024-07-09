@@ -120,7 +120,7 @@ const CanvasDrawingApp = () => {
 
     return (
         <div className="flex min-h-screen">
-            <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col object-contain">
+            <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain">
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
                         <AvatarImage src="https://github.com/HasanYahya101.png" />
