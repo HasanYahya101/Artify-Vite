@@ -312,7 +312,7 @@ const CanvasDrawingApp = () => {
                                     </TooltipTrigger>
                                 </PopoverTriggerArrow>
                                 <PopoverContentArrow className="" side="right"
-                                    align="center" sideOffset={4}
+                                    align="center" sideOffset={3}
                                 >
                                     <div className="flex flex-col h-full">
                                         <div className="p-4 border-b">
