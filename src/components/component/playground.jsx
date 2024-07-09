@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover-download";
 import { Popover as PopoverArrow, PopoverContent as PopoverContentArrow, PopoverTrigger as PopoverTriggerArrow } from "@/components/ui/popover-sidebar";
+import { Slider } from "@/components/ui/slider";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -350,6 +351,9 @@ const CanvasDrawingApp = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className='border-t'>
+
                                         </div>
                                     </div>
                                 </PopoverContentArrow>
