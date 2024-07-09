@@ -230,17 +230,19 @@ const CanvasDrawingApp = () => {
                                 <Button variant="ghost" size="icon"
                                     onClick={() => handleButtonClick()}
                                 >
-                                    <div className='h-6 w-6 rounded-full'
+                                    <div className='h-6 w-6 rounded-full relative overflow-hidden'
                                         style={{ backgroundColor: color }}
-                                    />
+                                    >
+                                        <input
+                                            type="color"
+                                            ref={colorInputRef}
+                                            onChange={handleColorChange}
+                                            style={{ visibility: 'hidden' }}
+                                            value={color}
+                                            className='absolute rounded-full'
+                                        />
+                                    </div>
                                 </Button>
-                                <input
-                                    type="color"
-                                    ref={colorInputRef}
-                                    onChange={handleColorChange}
-                                    style={{ display: 'none' }}
-                                    value={color}
-                                />
                             </TooltipTrigger>
                             <TooltipContent>
                                 <span className='text-gray-500'>Color
