@@ -131,8 +131,8 @@ const CanvasDrawingApp = () => {
                     </Button>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon">
-                        <Slash className="w-6 h-6" />
+                    <Button variant="ghost" size="icon" className="group">
+                        <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
                     </Button>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
