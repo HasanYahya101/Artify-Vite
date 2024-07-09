@@ -8,6 +8,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -105,6 +106,16 @@ const CanvasDrawingApp = () => {
         link.click();
     };
 
+    const colorInputRef = useRef(null);
+
+    const handleButtonClick = () => {
+        colorInputRef.current.click();
+    };
+
+    const handleColorChange = (e) => {
+        setColor(e.target.value);
+    };
+
     const [selected, setSelected] = useState('pencil');
 
     return (
@@ -169,11 +180,29 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant={selected === 'color picker' ? 'secondary' : 'ghost'} size="icon"
-                                    onClick={() => setSelected('color picker')}
-                                >
-                                    <Pipette className="w-6 h-6" />
-                                </Button>
+                                <Popover>
+                                    <PopoverTrigger>
+                                        <Button variant={selected === 'color picker' ? 'secondary' : 'ghost'} size="icon"
+                                            onClick={() => setSelected('color picker')}
+                                        >
+                                            <Pipette className="w-6 h-6" />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className="w-64">
+                                        <div className="flex flex-col space-y-2">
+                                            <label htmlFor="color-picker" className="text-sm font-medium">
+                                                Select Color
+                                            </label>
+                                            <input
+                                                id="color-picker"
+                                                type="color"
+                                                value={color}
+                                                onChange={handleColorChange}
+                                                className="w-full h-8"
+                                            />
+                                        </div>
+                                    </PopoverContent>
+                                </Popover>
                             </TooltipTrigger>
                             <TooltipContent>
                                 <span className='text-gray-500'>Color Picker</span>
@@ -216,9 +245,20 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant="ghost" size="icon">
-                                    <div className='h-6 w-6 bg-black rounded-full' />
+                                <Button variant="ghost" size="icon"
+                                    onClick={() => handleButtonClick()}
+                                >
+                                    <div className='h-6 w-6 rounded-full'
+                                        style={{ backgroundColor: color }}
+                                    />
                                 </Button>
+                                <input
+                                    type="color"
+                                    ref={colorInputRef}
+                                    onChange={handleColorChange}
+                                    style={{ display: 'none' }}
+                                    value={color}
+                                />
                             </TooltipTrigger>
                             <TooltipContent>
                                 <span className='text-gray-500'>Color
