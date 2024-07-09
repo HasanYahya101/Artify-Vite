@@ -225,14 +225,13 @@ const CanvasDrawingApp = () => {
                     JPEG
                 </button>
             </div>
-            <div className="ml-20">
-                <canvas
+            <div className="ml-20 rounded-md border-black h-[70vh] w-[50vh]">
+                <canvas className="border border-black rounded-md"
                     ref={canvasRef}
                     onMouseDown={handleMouseDown}
                     onMouseUp={stopDrawing}
                     onMouseOut={stopDrawing}
                     onMouseMove={draw}
-                    className="border border-gray-300"
                 />
             </div>
         </div>
