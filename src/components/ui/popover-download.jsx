@@ -9,7 +9,7 @@ const Popover = PopoverPrimitive.Root
 
 const PopoverTrigger = PopoverPrimitive.Trigger
 
-const PopoverContent = React.forwardRef(({ className, align = "center", sideOffset = 4, ...props }, ref) => (
+const PopoverContent = React.forwardRef(({ className, hoverJPEG, align = "center", sideOffset = 4, ...props }, ref) => (
   <PopoverPrimitive.Portal>
     <PopoverPrimitive.Content
       ref={ref}
@@ -27,7 +27,7 @@ const PopoverContent = React.forwardRef(({ className, align = "center", sideOffs
       {...props} >
       {props.children}
       <div className="relative">
-        <div className="absolute bottom-0 left-3 w-2 h-2 bg-popover transform rotate-45 translate-y-1 translate-x-4"></div>
+        <div className={`absolute bottom-0 left-3 w-2 h-2 ${hoverJPEG === false ? 'bg-popover' : 'bg-gray-100'} transform rotate-45 translate-y-1 translate-x-4`}></div>
       </div>
     </PopoverPrimitive.Content>
   </PopoverPrimitive.Portal>

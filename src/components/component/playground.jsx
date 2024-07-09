@@ -118,6 +118,9 @@ const CanvasDrawingApp = () => {
 
     const [selected, setSelected] = useState('pencil');
 
+
+    const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
+
     return (
         <div className="flex min-h-screen">
             <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain">
@@ -263,12 +266,17 @@ const CanvasDrawingApp = () => {
                                         </Button>
                                     </TooltipTrigger>
                                 </PopoverTrigger>
-                                <PopoverContent className='mx-4' side="top">
+                                <PopoverContent className='mx-4 mb-0.5' side="top"
+                                    hoverJPEG={isHoveredJPEG}
+                                >
                                     <div className="grid grid-rows-2">
                                         <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100 z-10">
                                             Download PNG
                                         </div>
-                                        <div className="items-center text-center justify-center p-2 border-t border-l border-r rounded-b cursor-pointer hover:bg-gray-100 z-10">
+                                        <div className="items-center text-center justify-center p-2 border-t border-l border-r rounded-b cursor-pointer hover:bg-gray-100 z-10"
+                                            onMouseEnter={() => setIsHoveredJPEG(true)}
+                                            onMouseLeave={() => setIsHoveredJPEG(false)}
+                                        >
                                             Download JPEG
                                         </div>
                                     </div>
