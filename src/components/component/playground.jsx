@@ -384,6 +384,7 @@ const CanvasDrawingApp = () => {
                                                     step={1}
                                                     value={[thickness]}
                                                     onValueChange={(value) => setThickness(value)}
+                                                    className="hover:cursor-move"
                                                 />
                                             </div>
                                             <div className="border-t" />
