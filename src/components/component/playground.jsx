@@ -2,6 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -110,46 +116,124 @@ const CanvasDrawingApp = () => {
                     </Avatar>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center mt-2">
-                    <Button variant="ghost" size="icon">
-                        <Pencil className="w-6 h-6" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <Pencil className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Pencil: Used to draw on canvas</span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon">
-                        <Eraser className="w-6 h-6" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <Eraser className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Eraser: Used to erase pixels</span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon">
-                        <SquareIcon className="w-6 h-6" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <SquareIcon className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Shapes: Used to draw shapes <i className='fas fa-chevron-down'>(Expandable)</i></span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 {/*div for color picker*/}
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon">
-                        <Pipette className="w-6 h-6" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <Pipette className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Color Picker: Used to pick color from canvas</span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon">
-                        <PaintBucket className="w-6 h-6" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <PaintBucket className="w-6 h-6" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Fill: Used to fill shapes with color</span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon" className="group">
-                        <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon" className="group">
+                                    <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Thickness: Used to set thickness of pencil <i className='fas fa-chevron-down'>(Expandable)</i>
+                                </span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center mb-2">
-                    <Button variant="ghost" size="icon">
-                        <div className='h-6 w-6 bg-black rounded-full' />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <div className='h-6 w-6 bg-black rounded-full' />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Color: Used to set color of pencil <i>
+                                    (Expandable)
+                                </i>
+                                </span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
                 <div className='mt-auto flex-1' />
                 <div className="p-4 border-t flex justify-center">
-                    <Button variant="outline" size="sm">
-                        <Download size={20} />
-                    </Button>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="outline" size="sm">
+                                    <Download size={20} />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Export: Used to export drawing
+                                    <i> (png or jpeg)</i>
+                                </span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
                 </div>
             </aside>
 
