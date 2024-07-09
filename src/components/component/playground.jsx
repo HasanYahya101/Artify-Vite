@@ -321,22 +321,32 @@ const CanvasDrawingApp = () => {
                                                 <div className="grid grid-cols-4 gap-2">
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "12px", height: "12px" }} />
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 5 ? 'bg-black' : 'bg-muted'}`} style={{ width: "5px", height: "5px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "18px", height: "18px" }} />
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 9 ? 'bg-black' : 'bg-muted'}`} style={{ width: "9px", height: "9px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "24px", height: "24px" }} />
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 12 ? 'bg-black' : 'bg-muted'}`} style={{ width: "12px", height: "12px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "28px", height: "28px" }} />
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 18 ? 'bg-black' : 'bg-muted'}`} style={{ width: "18px", height: "18px" }} />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 24 ? 'bg-black' : 'bg-muted'}`} style={{ width: "24px", height: "24px" }} />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 28 ? 'bg-black' : 'bg-muted'}`} style={{ width: "28px", height: "28px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
