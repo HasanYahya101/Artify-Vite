@@ -101,7 +101,7 @@ const CanvasDrawingApp = () => {
 
     return (
         <div className="flex min-h-screen">
-            <aside className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col">
+            <aside className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col object-contain">
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
                         <AvatarImage src="https://github.com/HasanYahya101.png" />
@@ -109,38 +109,38 @@ const CanvasDrawingApp = () => {
                         >HY</AvatarFallback>
                     </Avatar>
                 </div>
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <SquareIcon className="w-6 h-6" />
                     </Button>
                 </div>
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <Pencil className="w-6 h-6" />
                     </Button>
                 </div>
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <Eraser className="w-6 h-6" />
                     </Button>
                 </div>
                 {/*div for color picker*/}
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <div className='h-6 w-6 bg-black rounded-full' />
                     </Button>
                 </div>
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <Slash className="w-6 h-6" />
                     </Button>
                 </div>
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <Pipette className="w-6 h-6" />
                     </Button>
                 </div>
-                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <PaintBucket className="w-6 h-6" />
                     </Button>
