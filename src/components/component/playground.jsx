@@ -260,7 +260,7 @@ const CanvasDrawingApp = () => {
                                             <Download size={20} />
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className='mx-4' side="bottom" align="center">
+                                    <PopoverContent className='mx-4' side="top">
                                         <div className="grid grid-rows-2">
                                             <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100">
                                                 Download PNG
