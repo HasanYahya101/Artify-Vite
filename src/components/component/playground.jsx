@@ -255,25 +255,25 @@ const CanvasDrawingApp = () => {
                 <div className="p-4 border-t flex justify-center">
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger>
-                                <Popover>
-                                    <PopoverTrigger>
+                            <Popover>
+                                <PopoverTrigger>
+                                    <TooltipTrigger>
                                         <Button variant="outline" size="sm">
                                             <Download size={20} />
                                         </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className='mx-4' side="top">
-                                        <div className="grid grid-rows-2">
-                                            <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100 z-10">
-                                                Download PNG
-                                            </div>
-                                            <div className="items-center text-center justify-center p-2 border-t border-l border-r rounded-b cursor-pointer hover:bg-gray-100 z-10">
-                                                Download JPEG
-                                            </div>
+                                    </TooltipTrigger>
+                                </PopoverTrigger>
+                                <PopoverContent className='mx-4' side="top">
+                                    <div className="grid grid-rows-2">
+                                        <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100 z-10">
+                                            Download PNG
                                         </div>
-                                    </PopoverContent>
-                                </Popover>
-                            </TooltipTrigger>
+                                        <div className="items-center text-center justify-center p-2 border-t border-l border-r rounded-b cursor-pointer hover:bg-gray-100 z-10">
+                                            Download JPEG
+                                        </div>
+                                    </div>
+                                </PopoverContent>
+                            </Popover>
                             <TooltipContent>
                                 <span className='text-gray-500'>Export
                                 </span>
