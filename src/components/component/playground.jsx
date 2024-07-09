@@ -215,11 +215,65 @@ const CanvasDrawingApp = () => {
                 <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger>
-                                <Button variant="ghost" size="icon" className="group">
-                                    <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
-                                </Button>
-                            </TooltipTrigger>
+                            <PopoverArrow>
+                                <PopoverTriggerArrow>
+                                    <TooltipTrigger>
+                                        <Button variant="ghost" size="icon" className="group">
+                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
+                                        </Button>
+                                    </TooltipTrigger>
+                                </PopoverTriggerArrow>
+                                <PopoverContentArrow className="" side="right"
+                                    align="center" sideOffset={4}
+                                >
+                                    <div className="flex flex-col h-full">
+                                        <div className="p-4 border-b">
+                                            <h2 className="text-lg font-semibold">Drawing Shapes</h2>
+                                        </div>
+                                        <div className="flex-1 overflow-auto p-4 space-y-4 justify-center">
+                                            <div>
+                                                <div className="grid grid-cols-4 gap-2">
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <SquareIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <CircleIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <TriangleIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <StarIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <HexagonIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <OctagonIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant="ghost" size="icon">
+                                                            <Slash className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </PopoverContentArrow>
+                            </PopoverArrow>
                             <TooltipContent>
                                 <span className='text-gray-500'>Thickness
                                 </span>
