@@ -99,7 +99,7 @@ const CanvasDrawingApp = () => {
     };
 
     return (
-        <div className="flex">
+        <div className="flex min-h-screen">
             <aside
                 className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-64 rounded-lg bg-background border shadow-lg">
                 <div className="flex flex-col h-full">
