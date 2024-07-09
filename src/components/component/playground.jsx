@@ -121,7 +121,7 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button size="icon" variant={selected === 'pencil' ? 'outline' : 'ghost'}
+                                <Button size="icon" variant={selected === 'pencil' ? 'secondary' : 'ghost'}
                                     onClick={() => setSelected('pencil')}
                                 >
                                     <Pencil className="w-6 h-6" />
@@ -137,7 +137,7 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant={selected === 'eraser' ? 'outline' : 'ghost'} size="icon"
+                                <Button variant={selected === 'eraser' ? 'secondary' : 'ghost'} size="icon"
                                     onClick={() => setSelected('eraser')}
                                 >
                                     <Eraser className="w-6 h-6" />
@@ -153,7 +153,7 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant={selected === 'shapes' ? 'outline' : 'ghost'} size="icon"
+                                <Button variant={selected === 'shapes' ? 'secondary' : 'ghost'} size="icon"
                                     onClick={() => setSelected('shapes')}
                                 >
                                     <SquareIcon className="w-6 h-6" />
@@ -170,7 +170,7 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant={selected === 'color picker' ? 'outline' : 'ghost'} size="icon"
+                                <Button variant={selected === 'color picker' ? 'secondary' : 'ghost'} size="icon"
                                     onClick={() => setSelected('color picker')}
                                 >
                                     <Pipette className="w-6 h-6" />
@@ -186,7 +186,7 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant={selected === 'fill' ? 'outline' : 'ghost'} size="icon"
+                                <Button variant={selected === 'fill' ? 'secondary' : 'ghost'} size="icon"
                                     onClick={() => setSelected('fill')}
                                 >
                                     <PaintBucket className="w-6 h-6" />
