@@ -313,44 +313,39 @@ const CanvasDrawingApp = () => {
                                 >
                                     <div className="flex flex-col h-full">
                                         <div className="p-4 border-b">
-                                            <h2 className="text-lg font-semibold">Drawing Shapes</h2>
+                                            <h2 className="text-lg font-semibold">Select Thickness</h2>
                                         </div>
                                         <div className="flex-1 overflow-auto p-3 space-y-1 justify-center">
                                             <div>
                                                 <div className="grid grid-cols-4 gap-2">
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon">
-                                                            <SquareIcon className="w-6 h-6" />
+                                                            <div className="w-6 h-6 bg-muted rounded-full" />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon">
-                                                            <CircleIcon className="w-6 h-6" />
+                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "12px", height: "12px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon">
-                                                            <TriangleIcon className="w-6 h-6" />
+                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "18px", height: "18px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon">
-                                                            <StarIcon className="w-6 h-6" />
+                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "24px", height: "24px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon">
-                                                            <HexagonIcon className="w-6 h-6" />
+                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "30px", height: "30px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon">
-                                                            <OctagonIcon className="w-6 h-6" />
-                                                        </Button>
-                                                    </div>
-                                                    <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <Slash className="w-6 h-6" />
+                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "36px", height: "36px" }} />
                                                         </Button>
                                                     </div>
                                                 </div>
