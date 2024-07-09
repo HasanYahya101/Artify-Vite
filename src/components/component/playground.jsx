@@ -105,7 +105,8 @@ const CanvasDrawingApp = () => {
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
                         <AvatarImage src="https://github.com/HasanYahya101.png" />
-                        <AvatarFallback>HY</AvatarFallback>
+                        <AvatarFallback className="bg-gray-100"
+                        >HY</AvatarFallback>
                     </Avatar>
                 </div>
                 <div className="flex-1 px-4 flex flex-col items-center justify-center">
