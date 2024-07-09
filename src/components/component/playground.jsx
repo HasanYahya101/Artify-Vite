@@ -230,7 +230,7 @@ const CanvasDrawingApp = () => {
                                 <Button variant="ghost" size="icon"
                                     onClick={() => handleButtonClick()}
                                 >
-                                    <div className='h-6 w-6 rounded-full relative overflow-hidden'
+                                    <div className='h-6 w-6 rounded-full relative overflow-hidden border-black border'
                                         style={{ backgroundColor: color }}
                                     >
                                         <input
