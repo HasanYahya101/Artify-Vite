@@ -322,7 +322,7 @@ const CanvasDrawingApp = () => {
                                             <div className='p-3'>
                                                 <div className="grid grid-cols-4 gap-2">
                                                     <div className="p-1"
-                                                        onClick={() => setThickness(5)}
+                                                        onClick={() => setThickness(thickness => [thickness[0] === 5 ? 5 : 5])}
                                                     >
                                                         <Button variant="ghost" size="icon" className="group">
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 5 ? 'bg-black' : 'bg-muted'}`} style={{ width: "5px", height: "5px" }} />
@@ -330,42 +330,42 @@ const CanvasDrawingApp = () => {
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group"
-                                                            onClick={() => setThickness(9)}
+                                                            onClick={() => setThickness(thickness => [thickness[0] === 9 ? 9 : 9])}
                                                         >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 9 ? 'bg-black' : 'bg-muted'}`} style={{ width: "9px", height: "9px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group"
-                                                            onClick={() => setThickness(12)}
+                                                            onClick={() => setThickness(thickness => [thickness[0] === 12 ? 12 : 12])}
                                                         >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 12 ? 'bg-black' : 'bg-muted'}`} style={{ width: "12px", height: "12px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group"
-                                                            onClick={() => setThickness(18)}
+                                                            onClick={() => setThickness(thickness => [thickness[0] === 18 ? 18 : 18])}
                                                         >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 18 ? 'bg-black' : 'bg-muted'}`} style={{ width: "18px", height: "18px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group"
-                                                            onClick={() => setThickness(24)}
+                                                            onClick={() => setThickness(thickness => [thickness[0] === 24 ? 24 : 24])}
                                                         >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 24 ? 'bg-black' : 'bg-muted'}`} style={{ width: "24px", height: "24px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group"
-                                                            onClick={() => setThickness(28)}
+                                                            onClick={() => setThickness(thickness => [thickness[0] === 28 ? 28 : 28])}
                                                         >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 28 ? 'bg-black' : 'bg-muted'}`} style={{ width: "28px", height: "28px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group"
-                                                            onClick={() => setThickness(30)}
+                                                            onClick={() => setThickness(thickness => [thickness[0] === 30 ? 30 : 30])}
                                                         >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 30 ? 'bg-black' : 'bg-muted'}`} style={{ width: "30px", height: "30px" }} />
                                                         </Button>
@@ -397,7 +397,6 @@ const CanvasDrawingApp = () => {
                                             <div className='space-y-6 flex-1'></div>
                                         </div>
                                         <div className='border-t'>
-
                                         </div>
                                     </div>
                                 </PopoverContentArrow>
