@@ -264,10 +264,10 @@ const CanvasDrawingApp = () => {
                                     </PopoverTrigger>
                                     <PopoverContent className='mx-4' side="top">
                                         <div className="grid grid-rows-2">
-                                            <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100">
+                                            <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100 z-10">
                                                 Download PNG
                                             </div>
-                                            <div className="items-center text-center justify-center p-2 border rounded-b cursor-pointer hover:bg-gray-100">
+                                            <div className="items-center text-center justify-center p-2 border-t border-l border-r rounded-b cursor-pointer hover:bg-gray-100 z-10">
                                                 Download JPEG
                                             </div>
                                         </div>
