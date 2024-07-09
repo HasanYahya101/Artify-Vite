@@ -124,7 +124,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Pencil: Used to draw on canvas</span>
+                                <span className='text-gray-500'>Pencil</span>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -138,7 +138,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Eraser: Used to erase pixels</span>
+                                <span className='text-gray-500'>Eraser</span>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -152,7 +152,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Shapes: Used to draw shapes <i className='fas fa-chevron-down'>(Expandable)</i></span>
+                                <span className='text-gray-500'>Shapes</span>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -167,7 +167,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Color Picker: Used to pick color from canvas</span>
+                                <span className='text-gray-500'>Color Picker</span>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -181,7 +181,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Fill: Used to fill shapes with color</span>
+                                <span className='text-gray-500'>Fill</span>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -195,7 +195,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Thickness: Used to set thickness of pencil <i className='fas fa-chevron-down'>(Expandable)</i>
+                                <span className='text-gray-500'>Thickness
                                 </span>
                             </TooltipContent>
                         </Tooltip>
@@ -210,9 +210,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Color: Used to set color of pencil <i>
-                                    (Expandable)
-                                </i>
+                                <span className='text-gray-500'>Color
                                 </span>
                             </TooltipContent>
                         </Tooltip>
@@ -228,8 +226,7 @@ const CanvasDrawingApp = () => {
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent>
-                                <span className='text-gray-500'>Export: Used to export drawing
-                                    <i> (png or jpeg)</i>
+                                <span className='text-gray-500'>Export
                                 </span>
                             </TooltipContent>
                         </Tooltip>
