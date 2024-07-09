@@ -18,7 +18,7 @@ const CanvasDrawingApp = () => {
     const [isDrawing, setIsDrawing] = useState(false);
     const [tool, setTool] = useState('pencil');
     const [color, setColor] = useState('#000000');
-    const [thickness, setThickness] = useState(2);
+    const [thickness, setThickness] = useState(5);
     const [startX, setStartX] = useState(0);
     const [startY, setStartY] = useState(0);
     const [savedImageData, setSavedImageData] = useState(null);
@@ -305,7 +305,7 @@ const CanvasDrawingApp = () => {
                                 <PopoverTriggerArrow>
                                     <TooltipTrigger>
                                         <Button variant="ghost" size="icon" className="group">
-                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
+                                            <div className="bg-muted rounded-full group-hover:bg-white" style={{ width: `${thickness}px`, height: `${thickness}px` }} />
                                         </Button>
                                     </TooltipTrigger>
                                 </PopoverTriggerArrow>
@@ -316,14 +316,9 @@ const CanvasDrawingApp = () => {
                                         <div className="p-4 border-b">
                                             <h2 className="text-lg font-semibold">Select Thickness</h2>
                                         </div>
-                                        <div className="flex-1 overflow-auto p-3 space-y-1 justify-center">
-                                            <div>
+                                        <div className="flex-1 overflow-auto space-y-1 justify-center">
+                                            <div className='p-3'>
                                                 <div className="grid grid-cols-4 gap-2">
-                                                    <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
-                                                        </Button>
-                                                    </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
                                                             <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "12px", height: "12px" }} />
@@ -341,16 +336,39 @@ const CanvasDrawingApp = () => {
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "30px", height: "30px" }} />
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "28px", height: "28px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
                                                         <Button variant="ghost" size="icon" className="group">
-                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "36px", height: "36px" }} />
+                                                            <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 30 ? 'bg-black' : 'bg-muted'}`} style={{ width: "30px", height: "30px" }} />
                                                         </Button>
                                                     </div>
                                                 </div>
                                             </div>
+                                            {/*Slider for custom thickness*/}
+                                            <div className="space-y-4 p-3">
+                                                <div className="flex justify-between items-center mb-3 mx-1">
+                                                    <span className="text-sm font-medium">Custom Size</span>
+                                                    <span className="text-sm text-muted-foreground">{thickness}px</span>
+                                                </div>
+                                                <Slider
+                                                    min={5}
+                                                    max={30}
+                                                    step={1}
+                                                    value={[thickness]}
+                                                    onValueChange={(value) => setThickness(value)}
+                                                />
+                                            </div>
+                                            <div className="border-t" />
+                                            <div className="flex justify-center items-center space-x-3 p-1">
+                                                <span className="text-sm font-medium">Preview:</span>
+                                                <div
+                                                    className="rounded-full bg-black border mt-1"
+                                                    style={{ width: `${thickness}px`, height: `${thickness}px` }}
+                                                />
+                                            </div>
+                                            <div className='space-y-6 flex-1'></div>
                                         </div>
                                         <div className='border-t'>
 
