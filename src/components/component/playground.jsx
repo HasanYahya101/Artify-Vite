@@ -260,7 +260,7 @@ const CanvasDrawingApp = () => {
                                             <Download size={20} />
                                         </Button>
                                     </PopoverTrigger>
-                                    <PopoverContent className='mx-4'>
+                                    <PopoverContent className='mx-4 w-40' side="bottom" align="center">
                                         <div className="grid grid-rows-2">
                                             <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100">
                                                 Download PNG
@@ -269,6 +269,7 @@ const CanvasDrawingApp = () => {
                                                 Download JPEG
                                             </div>
                                         </div>
+                                        <PopoverContent.Arrow className="fill-popover" />
                                     </PopoverContent>
                                 </Popover>
                             </TooltipTrigger>
