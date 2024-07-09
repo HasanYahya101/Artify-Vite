@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Brush, Minus, Square, Circle, Eraser, Download } from 'lucide-react';
+import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket } from 'lucide-react';
 import { Button } from '../ui/button';
 
 const CanvasDrawingApp = () => {
@@ -100,133 +100,56 @@ const CanvasDrawingApp = () => {
 
     return (
         <div className="flex min-h-screen">
-            <aside
-                className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-50 rounded-lg bg-background border shadow-lg">
-                <div className="flex flex-col h-full">
-                    <div className="p-4 border-b">
-                        <h2 className="text-lg font-semibold">Drawing Tools</h2>
-                    </div>
-                    <div className="flex-1 overflow-auto p-4 space-y-4">
-                        <div>
-                            <h3 className="text-sm font-medium mb-2">Shapes</h3>
-                            <div className="grid grid-cols-3 gap-2">
-                                <Button variant="ghost" size="icon">
-                                    <SquareIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <CircleIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <TriangleIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <StarIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <HexagonIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <OctagonIcon className="w-6 h-6" />
-                                </Button>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 className="text-sm font-medium mb-2">Colors</h3>
-                            <div className="grid grid-cols-3 gap-2">
-                                <Button variant="ghost" size="icon" className="bg-red-500 text-white">
-                                    <PaletteIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="bg-green-500 text-white">
-                                    <PaletteIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="bg-blue-500 text-white">
-                                    <PaletteIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="bg-yellow-500 text-white">
-                                    <PaletteIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="bg-purple-500 text-white">
-                                    <PaletteIcon className="w-6 h-6" />
-                                </Button>
-                                <Button variant="ghost" size="icon" className="bg-pink-500 text-white">
-                                    <PaletteIcon className="w-6 h-6" />
-                                </Button>
-                            </div>
-                        </div>
-                        <div>
-                            <h3 className="text-sm font-medium mb-2">Pen Thickness</h3>
-                            <div className="grid grid-cols-3 gap-2">
-                                <Button variant="ghost" size="icon">
-                                    <div className="w-6 h-6 bg-muted rounded-full" />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <div
-                                        className="w-6 h-6 bg-muted rounded-full"
-                                        style={{ width: "12px", height: "12px" }} />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <div
-                                        className="w-6 h-6 bg-muted rounded-full"
-                                        style={{ width: "18px", height: "18px" }} />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <div
-                                        className="w-6 h-6 bg-muted rounded-full"
-                                        style={{ width: "24px", height: "24px" }} />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <div
-                                        className="w-6 h-6 bg-muted rounded-full"
-                                        style={{ width: "30px", height: "30px" }} />
-                                </Button>
-                                <Button variant="ghost" size="icon">
-                                    <div
-                                        className="w-6 h-6 bg-muted rounded-full"
-                                        style={{ width: "36px", height: "36px" }} />
-                                </Button>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="p-4 border-t flex justify-between items-center">
-                        <Button variant="outline" size="sm">
-                            Clear Canvas
-                        </Button>
-                        <Button size="sm">Save Drawing</Button>
-                    </div>
+            <aside className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col">
+                <div className="p-4 border-b text-center">
+                    <h2 className="text-lg font-semibold">DT</h2>
+                </div>
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <SquareIcon className="w-6 h-6" />
+                    </Button>
+                </div>
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <Pencil className="w-6 h-6" />
+                    </Button>
+                </div>
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <Eraser className="w-6 h-6" />
+                    </Button>
+                </div>
+                {/*div for color picker*/}
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <div className='h-6 w-6 bg-black rounded-full' />
+                    </Button>
+                </div>
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <Slash className="w-6 h-6" />
+                    </Button>
+                </div>
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <Pipette className="w-6 h-6" />
+                    </Button>
+                </div>
+                <div className="flex-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon">
+                        <PaintBucket className="w-6 h-6" />
+                    </Button>
+                </div>
+                <div className='mt-auto flex-1' />
+                <div className="p-4 border-t flex justify-center">
+                    <Button variant="outline" size="sm">
+                        <Download size={20} />
+                    </Button>
                 </div>
             </aside>
-            <div className="fixed left-0 top-0 bottom-0 w-20 bg-gray-200 p-2 flex flex-col items-center space-y-4 overflow-y-auto">
-                <button onClick={() => setTool('pencil')} className={`p-2 ${tool === 'pencil' ? 'bg-blue-500 text-white' : 'bg-white'} rounded`}>
-                    <Pencil size={20} />
-                </button>
-                <button onClick={() => setTool('brush')} className={`p-2 ${tool === 'brush' ? 'bg-blue-500 text-white' : 'bg-white'} rounded`}>
-                    <Brush size={20} />
-                </button>
-                <button onClick={() => setTool('line')} className={`p-2 ${tool === 'line' ? 'bg-blue-500 text-white' : 'bg-white'} rounded`}>
-                    <Minus size={20} />
-                </button>
-                <button onClick={() => setTool('rectangle')} className={`p-2 ${tool === 'rectangle' ? 'bg-blue-500 text-white' : 'bg-white'} rounded`}>
-                    <Square size={20} />
-                </button>
-                <button onClick={() => setTool('circle')} className={`p-2 ${tool === 'circle' ? 'bg-blue-500 text-white' : 'bg-white'} rounded`}>
-                    <Circle size={20} />
-                </button>
-                <button onClick={() => setTool('eraser')} className={`p-2 ${tool === 'eraser' ? 'bg-blue-500 text-white' : 'bg-white'} rounded`}>
-                    <Eraser size={20} />
-                </button>
-                <input type="color" value={color} onChange={(e) => setColor(e.target.value)} className="w-8 h-8" />
-                <input type="range" min="1" max="20" value={thickness} onChange={(e) => setThickness(e.target.value)} className="w-16 -rotate-90 mt-8 mb-8" />
-                <button onClick={() => exportImage('png')} className="p-2 bg-green-500 text-white rounded">
-                    <Download size={20} />
-                    PNG
-                </button>
-                <button onClick={() => exportImage('jpeg')} className="p-2 bg-green-500 text-white rounded">
-                    <Download size={20} />
-                    JPEG
-                </button>
-            </div>
-            <div className="ml-20 rounded-md border-black h-[70vh] w-[50vh]">
-                <canvas className="border border-black rounded-md"
+
+            <div className="ml-40 rounded-md border-black h-[70vh] w-[50vh] p-10">
+                <canvas className="border border-black rounded-md h-[70vh] w-[50vh]"
                     ref={canvasRef}
                     onMouseDown={handleMouseDown}
                     onMouseUp={stopDrawing}
