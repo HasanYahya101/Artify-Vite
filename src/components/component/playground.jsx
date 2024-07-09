@@ -118,6 +118,9 @@ const CanvasDrawingApp = () => {
     };
 
     const [selected, setSelected] = useState('pencil');
+    const [shape, setShape] = useState('square');
+
+    const [shapeOpen, setShapeOpen] = useState(false);
 
 
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
@@ -167,13 +170,95 @@ const CanvasDrawingApp = () => {
                 <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
-                            <TooltipTrigger>
-                                <Button variant={selected === 'shapes' ? 'secondary' : 'ghost'} size="icon"
-                                    onClick={() => setSelected('shapes')}
+                            <PopoverArrow open={shapeOpen} onOpenChange={setShapeOpen}
+                            >
+                                <PopoverTriggerArrow>
+                                    <TooltipTrigger>
+                                        <Button variant={selected === 'shapes' ? 'secondary' : 'ghost'} size="icon"
+                                            onClick={() => setSelected('shapes')}
+                                        >
+                                            {shape === 'square'
+                                                ? <SquareIcon className="w-6 h-6" />
+                                                : shape === 'circle'
+                                                    ? <CircleIcon className="w-6 h-6" />
+                                                    : shape === 'triangle'
+                                                        ? <TriangleIcon className="w-6 h-6" />
+                                                        : shape === 'star'
+                                                            ? <StarIcon className="w-6 h-6" />
+                                                            : shape === 'hexagon'
+                                                                ? <HexagonIcon className="w-6 h-6" />
+                                                                : shape === 'octagon'
+                                                                    ? <OctagonIcon className="w-6 h-6" />
+                                                                    : <Slash className="w-6 h-6" />
+                                            }
+                                        </Button>
+                                    </TooltipTrigger>
+                                </PopoverTriggerArrow>
+                                <PopoverContentArrow className="" side="right"
+                                    align="center" sideOffset={6}
                                 >
-                                    <SquareIcon className="w-6 h-6" />
-                                </Button>
-                            </TooltipTrigger>
+                                    <div className="flex flex-col h-full">
+                                        <div className="p-4 border-b">
+                                            <h2 className="text-lg font-semibold">Select Shapes</h2>
+                                        </div>
+                                        <div className="flex-1 overflow-auto p-3 space-y-1 justify-center">
+                                            <div>
+                                                <div className="grid grid-cols-4 gap-2">
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'square' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('square'); setShapeOpen(false) }}
+                                                        >
+                                                            <SquareIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'circle' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('circle'); setShapeOpen(false) }}
+                                                        >
+                                                            <CircleIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'triangle' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('triangle'); setShapeOpen(false) }}
+                                                        >
+                                                            <TriangleIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'star' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('star'); setShapeOpen(false) }}
+                                                        >
+                                                            <StarIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'hexagon' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('hexagon'); setShapeOpen(false) }}
+                                                        >
+                                                            <HexagonIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'octagon' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('octagon'); setShapeOpen(false) }}
+                                                        >
+                                                            <OctagonIcon className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                    <div className="p-1">
+                                                        <Button variant={shape === 'slash' ? 'secondary' : 'ghost'} size="icon"
+                                                            onClick={() => { setShape('slash'); setShapeOpen(false) }}
+                                                        >
+                                                            <Slash className="w-6 h-6" />
+                                                        </Button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </PopoverContentArrow>
+                            </PopoverArrow>
                             <TooltipContent>
                                 <span className='text-gray-500'>Shapes</span>
                             </TooltipContent>
@@ -230,7 +315,7 @@ const CanvasDrawingApp = () => {
                                         <div className="p-4 border-b">
                                             <h2 className="text-lg font-semibold">Drawing Shapes</h2>
                                         </div>
-                                        <div className="flex-1 overflow-auto p-4 space-y-4 justify-center">
+                                        <div className="flex-1 overflow-auto p-3 space-y-1 justify-center">
                                             <div>
                                                 <div className="grid grid-cols-4 gap-2">
                                                     <div className="p-1">
