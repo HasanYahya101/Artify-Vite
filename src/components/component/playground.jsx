@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket } from 'lucide-react';
 import { Button } from '../ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -101,8 +102,11 @@ const CanvasDrawingApp = () => {
     return (
         <div className="flex min-h-screen">
             <aside className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col">
-                <div className="p-4 border-b text-center">
-                    <h2 className="text-lg font-semibold">DT</h2>
+                <div className="p-4 border-b flex items-center justify-center">
+                    <Avatar size="md">
+                        <AvatarImage src="https://github.com/HasanYahya101.png" />
+                        <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
                 </div>
                 <div className="flex-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
