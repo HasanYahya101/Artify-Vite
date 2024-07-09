@@ -128,7 +128,7 @@ const CanvasDrawingApp = () => {
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
 
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen bg-slate-50">
             <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start">
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
@@ -474,13 +474,16 @@ const CanvasDrawingApp = () => {
                 </div>
             </aside>
 
-            <div className="ml-40 rounded-md border-black h-[70vh] w-[50vh] p-10"
-                // on hover, load pencil svg for pointer
-                style={
-                    selected === 'pencil' ? { cursor: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23000000\' strokeWidth=\'2\' strokeLinecap=\'round\' strokeLinejoin=\'round\'><path d=\'M12 2L12 22\'></path><path d=\'M2 12L22 12\'></path></svg>") 0 24, auto' } : {}
-                }
+            <div
+                className="ml-[20vh] h-[90vh] bg-white self-center relative w-full max-w-[80vw] aspect-[4/3] border-2 border-black rounded-lg overflow-hidden"
+                style={{
+                    cursor: selected === 'pencil'
+                        ? 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23000000\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M12 2L12 22\'></path><path d=\'M2 12L22 12\'></path></svg>") 0 24, auto'
+                        : 'default'
+                }}
             >
-                <canvas className="border border-black rounded-md h-[70vh] w-[50vh]"
+                <canvas
+                    className="w-full h-full bg-white cursor-crosshair"
                     ref={canvasRef}
                     onMouseDown={handleMouseDown}
                     onMouseUp={stopDrawing}
