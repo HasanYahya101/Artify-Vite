@@ -109,12 +109,7 @@ const CanvasDrawingApp = () => {
                         >HY</AvatarFallback>
                     </Avatar>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon">
-                        <SquareIcon className="w-6 h-6" />
-                    </Button>
-                </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center mt-2">
                     <Button variant="ghost" size="icon">
                         <Pencil className="w-6 h-6" />
                     </Button>
@@ -124,17 +119,12 @@ const CanvasDrawingApp = () => {
                         <Eraser className="w-6 h-6" />
                     </Button>
                 </div>
-                {/*div for color picker*/}
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
-                        <div className='h-6 w-6 bg-black rounded-full' />
+                        <SquareIcon className="w-6 h-6" />
                     </Button>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
-                    <Button variant="ghost" size="icon" className="group">
-                        <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
-                    </Button>
-                </div>
+                {/*div for color picker*/}
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <Pipette className="w-6 h-6" />
@@ -143,6 +133,16 @@ const CanvasDrawingApp = () => {
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <Button variant="ghost" size="icon">
                         <PaintBucket className="w-6 h-6" />
+                    </Button>
+                </div>
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                    <Button variant="ghost" size="icon" className="group">
+                        <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
+                    </Button>
+                </div>
+                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center mb-2">
+                    <Button variant="ghost" size="icon">
+                        <div className='h-6 w-6 bg-black rounded-full' />
                     </Button>
                 </div>
                 <div className='mt-auto flex-1' />
