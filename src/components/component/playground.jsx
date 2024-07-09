@@ -132,7 +132,7 @@ const CanvasDrawingApp = () => {
                         >HY</AvatarFallback>
                     </Avatar>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center mt-2">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center mt-2">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -148,7 +148,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -164,7 +164,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -180,7 +180,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -196,7 +196,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -212,7 +212,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
@@ -227,7 +227,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center mb-2">
+                <div className="my-1.5 px-4 flex flex-col items-center justify-center mb-2">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
