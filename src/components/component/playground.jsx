@@ -292,7 +292,12 @@ const CanvasDrawingApp = () => {
                 </div>
             </aside>
 
-            <div className="ml-40 rounded-md border-black h-[70vh] w-[50vh] p-10">
+            <div className="ml-40 rounded-md border-black h-[70vh] w-[50vh] p-10"
+                // on hover, load pencil svg for pointer
+                style={
+                    selected === 'pencil' ? { cursor: 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23000000\' strokeWidth=\'2\' strokeLinecap=\'round\' strokeLinejoin=\'round\'><path d=\'M12 2L12 22\'></path><path d=\'M2 12L22 12\'></path></svg>") 0 24, auto' } : {}
+                }
+            >
                 <canvas className="border border-black rounded-md h-[70vh] w-[50vh]"
                     ref={canvasRef}
                     onMouseDown={handleMouseDown}
