@@ -180,29 +180,11 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Popover>
-                                    <PopoverTrigger>
-                                        <Button variant={selected === 'color picker' ? 'secondary' : 'ghost'} size="icon"
-                                            onClick={() => setSelected('color picker')}
-                                        >
-                                            <Pipette className="w-6 h-6" />
-                                        </Button>
-                                    </PopoverTrigger>
-                                    <PopoverContent className="w-64">
-                                        <div className="flex flex-col space-y-2">
-                                            <label htmlFor="color-picker" className="text-sm font-medium">
-                                                Select Color
-                                            </label>
-                                            <input
-                                                id="color-picker"
-                                                type="color"
-                                                value={color}
-                                                onChange={handleColorChange}
-                                                className="w-full h-8"
-                                            />
-                                        </div>
-                                    </PopoverContent>
-                                </Popover>
+                                <Button variant={selected === 'color picker' ? 'secondary' : 'ghost'} size="icon"
+                                    onClick={() => setSelected('color picker')}
+                                >
+                                    <Pipette className="w-6 h-6" />
+                                </Button>
                             </TooltipTrigger>
                             <TooltipContent>
                                 <span className='text-gray-500'>Color Picker</span>
