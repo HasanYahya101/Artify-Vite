@@ -109,7 +109,7 @@ const CanvasDrawingApp = () => {
 
     return (
         <div className="flex min-h-screen">
-            <aside className="fixed top-4 left-4 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col object-contain">
+            <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-lg flex flex-col object-contain">
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
                         <AvatarImage src="https://github.com/HasanYahya101.png" />
@@ -165,7 +165,6 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-                {/*div for color picker*/}
                 <div className="flex-1 my-1 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
