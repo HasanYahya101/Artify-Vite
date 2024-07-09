@@ -8,7 +8,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover-download";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -254,9 +254,23 @@ const CanvasDrawingApp = () => {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
-                                <Button variant="outline" size="sm">
-                                    <Download size={20} />
-                                </Button>
+                                <Popover>
+                                    <PopoverTrigger>
+                                        <Button variant="outline" size="sm">
+                                            <Download size={20} />
+                                        </Button>
+                                    </PopoverTrigger>
+                                    <PopoverContent className='mx-4'>
+                                        <div className="grid grid-rows-2">
+                                            <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100">
+                                                Download PNG
+                                            </div>
+                                            <div className="items-center text-center justify-center p-2 border rounded-b cursor-pointer hover:bg-gray-100">
+                                                Download JPEG
+                                            </div>
+                                        </div>
+                                    </PopoverContent>
+                                </Popover>
                             </TooltipTrigger>
                             <TooltipContent>
                                 <span className='text-gray-500'>Export
