@@ -319,33 +319,33 @@ const CanvasDrawingApp = () => {
                                             <div>
                                                 <div className="grid grid-cols-4 gap-2">
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <div className="w-6 h-6 bg-muted rounded-full" />
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "12px", height: "12px" }} />
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "12px", height: "12px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "18px", height: "18px" }} />
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "18px", height: "18px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "24px", height: "24px" }} />
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "24px", height: "24px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "30px", height: "30px" }} />
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "30px", height: "30px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon">
-                                                            <div className="w-6 h-6 bg-muted rounded-full" style={{ width: "36px", height: "36px" }} />
+                                                        <Button variant="ghost" size="icon" className="group">
+                                                            <div className="w-6 h-6 bg-muted rounded-full group-hover:bg-white" style={{ width: "36px", height: "36px" }} />
                                                         </Button>
                                                     </div>
                                                 </div>
