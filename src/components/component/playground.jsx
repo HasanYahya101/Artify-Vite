@@ -122,6 +122,7 @@ const CanvasDrawingApp = () => {
     const [shape, setShape] = useState('square');
 
     const [shapeOpen, setShapeOpen] = useState(false);
+    const [thicknessOpen, setThicknessOpen] = useState(false);
 
 
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
@@ -301,7 +302,8 @@ const CanvasDrawingApp = () => {
                 <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                     <TooltipProvider>
                         <Tooltip>
-                            <PopoverArrow>
+                            <PopoverArrow open={thicknessOpen} onOpenChange={setThicknessOpen}
+                            >
                                 <PopoverTriggerArrow>
                                     <TooltipTrigger>
                                         <Button variant="ghost" size="icon" className="group">
@@ -319,38 +321,52 @@ const CanvasDrawingApp = () => {
                                         <div className="flex-1 overflow-auto space-y-1 justify-center">
                                             <div className='p-3'>
                                                 <div className="grid grid-cols-4 gap-2">
-                                                    <div className="p-1">
+                                                    <div className="p-1"
+                                                        onClick={() => setThickness(5)}
+                                                    >
                                                         <Button variant="ghost" size="icon" className="group">
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 5 ? 'bg-black' : 'bg-muted'}`} style={{ width: "5px", height: "5px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
+                                                        <Button variant="ghost" size="icon" className="group"
+                                                            onClick={() => setThickness(9)}
+                                                        >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 9 ? 'bg-black' : 'bg-muted'}`} style={{ width: "9px", height: "9px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
+                                                        <Button variant="ghost" size="icon" className="group"
+                                                            onClick={() => setThickness(12)}
+                                                        >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 12 ? 'bg-black' : 'bg-muted'}`} style={{ width: "12px", height: "12px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
+                                                        <Button variant="ghost" size="icon" className="group"
+                                                            onClick={() => setThickness(18)}
+                                                        >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 18 ? 'bg-black' : 'bg-muted'}`} style={{ width: "18px", height: "18px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
+                                                        <Button variant="ghost" size="icon" className="group"
+                                                            onClick={() => setThickness(24)}
+                                                        >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 24 ? 'bg-black' : 'bg-muted'}`} style={{ width: "24px", height: "24px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
+                                                        <Button variant="ghost" size="icon" className="group"
+                                                            onClick={() => setThickness(28)}
+                                                        >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 28 ? 'bg-black' : 'bg-muted'}`} style={{ width: "28px", height: "28px" }} />
                                                         </Button>
                                                     </div>
                                                     <div className="p-1">
-                                                        <Button variant="ghost" size="icon" className="group">
+                                                        <Button variant="ghost" size="icon" className="group"
+                                                            onClick={() => setThickness(30)}
+                                                        >
                                                             <div className={`w-6 h-6 rounded-full group-hover:bg-white ${thickness[0] === 30 ? 'bg-black' : 'bg-muted'}`} style={{ width: "30px", height: "30px" }} />
                                                         </Button>
                                                     </div>
