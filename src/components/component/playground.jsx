@@ -487,7 +487,7 @@ const CanvasDrawingApp = () => {
             }}*/
             >
                 <canvas
-                    className="w-full h-full bg-white cursor-crosshair"
+                    className="w-[100vw] h-screen bg-white cursor-crosshair"
                     ref={canvasRef}
                     onMouseDown={handleMouseDown}
                     onMouseUp={stopDrawing}
