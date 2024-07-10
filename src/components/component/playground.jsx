@@ -725,15 +725,15 @@ const CanvasDrawingApp = () => {
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'sans-serif' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('sans-serif')}
+                                                            <Button variant={font === 'sans' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('sans')} // sans-serif
                                                             >
                                                                 <span className={`font-sans ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'monospace' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('monospace')}
+                                                            <Button variant={font === 'mono' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('mono')} // monospace
                                                             >
                                                                 <span className={`font-mono ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
@@ -743,7 +743,7 @@ const CanvasDrawingApp = () => {
                                                             <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('cursive')}
                                                             >
-                                                                <span style={{ fontFamily: 'cursive' }} className={`${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                <span className={`font-cursive ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
@@ -779,7 +779,7 @@ const CanvasDrawingApp = () => {
                                                 <div className='space-y-6 flex-1'></div>
                                             </div>
                                             {/*Slider for custom font size with preview*/}
-                                            <div className='border-t'>
+                                            <div>
                                                 <div className="p-3">
                                                     <div className="flex justify-between items-center mb-3 mx-1">
                                                         <span className="text-sm font-medium">Custom Size</span>
@@ -793,6 +793,16 @@ const CanvasDrawingApp = () => {
                                                         onValueChange={(value) => setFontSize(value)}
                                                         className="hover:cursor-move"
                                                     />
+                                                </div>
+                                                <div className="border-t" />
+                                                <div className="flex justify-center items-center space-x-3 p-3">
+                                                    <span className="text-sm font-medium">Preview:</span>
+                                                    <span
+                                                        className={`text-black items-center justify-center font-${font} flex ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}
+                                                        style={{ fontSize: `${fontSize}px` }}
+                                                    >
+                                                        Aa
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -979,7 +989,7 @@ const CanvasDrawingApp = () => {
                         </Tooltip>
                     </TooltipProvider>
                 </div>
-            </aside>
+            </aside >
 
             <div
                 className="h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden cursor-crosshair"

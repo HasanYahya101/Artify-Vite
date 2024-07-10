@@ -77,6 +77,7 @@ module.exports = {
         playwrite: ['Playwrite AU SA', 'sans-serif'],
         arsenal: ['Arsenal SC', 'sans-serif'],
         anton: ['Anton SC', 'sans-serif'],
+        cursive: ['Cedarville Cursive', 'cursive'],
       },
     },
   },
