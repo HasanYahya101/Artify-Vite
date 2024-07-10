@@ -738,6 +738,18 @@ const CanvasDrawingApp = () => {
                     onMouseOut={stopDrawing}
                     onMouseMove={draw}
                     onClick={draw}
+                // remove anti-aliasing using styles
+                /*style={{
+                    imageRendering: 'pixelated',
+                    imageRendering: 'crisp-edges',
+                    imageRendering: '-moz-crisp-edges',
+                    imageRendering: '-webkit-optimize-contrast',
+                    imageRendering: 'optimize-contrast',
+                    imageRendering: 'optimizeSpeed',
+                    imageRendering: 'optimizeQuality',
+                    transform: 'scale(1)',
+                    transformOrigin: '0 0',
+                }}*/
                 />
             </div>
             <div className="fixed bottom-24 right-9 flex flex-col gap-2">
