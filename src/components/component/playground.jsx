@@ -992,10 +992,10 @@ const CanvasDrawingApp = () => {
             </aside >
 
             <div
-                className="h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden cursor-crosshair"
+                className={`h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden ${selected === "text" ? 'cursor-text' : 'cursor-crosshair'}r`}
             >
                 <canvas
-                    className="w-[100vw] h-screen bg-white cursor-crosshair"
+                    className={`w-[100vw] h-screen bg-white ${selected === "text" ? 'cursor-text' : 'cursor-crosshair'}`}
                     ref={canvasRef}
                     onMouseDown={handleMouseDown}
                     onMouseUp={stopDrawing}
