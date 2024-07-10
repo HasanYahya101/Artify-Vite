@@ -23,6 +23,15 @@ const CanvasDrawingApp = () => {
     const [startY, setStartY] = useState(0);
     const [savedImageData, setSavedImageData] = useState(null);
 
+    const [selected, setSelected] = useState('pencil');
+    const [shape, setShape] = useState('square');
+
+    const [shapeOpen, setShapeOpen] = useState(false);
+    const [thicknessOpen, setThicknessOpen] = useState(false);
+
+
+    const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
+
     useEffect(() => {
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
@@ -51,13 +60,12 @@ const CanvasDrawingApp = () => {
         ctx.strokeStyle = color;
         ctx.lineWidth = thickness;
 
-        if (tool === 'eraser') {
+        if (selected === 'eraser') {
             ctx.strokeStyle = '#FFFFFF';
         }
 
-        switch (tool) {
+        switch (selected) {
             case 'pencil':
-            case 'brush':
             case 'eraser':
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
@@ -66,25 +74,95 @@ const CanvasDrawingApp = () => {
                 ctx.beginPath();
                 ctx.moveTo(x, y);
                 break;
-            case 'line':
-                ctx.putImageData(savedImageData, 0, 0);
-                ctx.beginPath();
-                ctx.moveTo(startX, startY);
-                ctx.lineTo(x, y);
-                ctx.stroke();
+            case 'fill':
+                const imageData = ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
+                fill(x, y, imageData);
                 break;
-            case 'rectangle':
-                ctx.putImageData(savedImageData, 0, 0);
-                ctx.beginPath();
-                ctx.rect(startX, startY, x - startX, y - startY);
-                ctx.stroke();
+            case 'color picker':
+                const pixel = ctx.getImageData(x, y, 1, 1).data;
+                const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+                setColor(color);
                 break;
-            case 'circle':
-                ctx.putImageData(savedImageData, 0, 0);
-                ctx.beginPath();
-                const radius = Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2));
-                ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
-                ctx.stroke();
+            case 'shapes':
+                switch (shape) {
+
+                    case 'line':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        ctx.moveTo(startX, startY);
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                        break;
+                    case 'square':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        ctx.rect(startX, startY, x - startX, y - startY);
+                        ctx.stroke();
+                        break;
+                    case 'rectangle':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        ctx.rect(startX, startY, x - startX, y - startY);
+                        ctx.stroke();
+                        break;
+                    case 'circle':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        const radius = Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2));
+                        ctx.arc(startX, startY, radius, 0, 2 * Math.PI);
+                        ctx.stroke();
+                        break;
+                    case 'triangle':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        ctx.moveTo((startX + x) / 2, startY);
+                        ctx.lineTo(startX, y);
+                        ctx.lineTo(x, y);
+                        ctx.closePath();
+                        ctx.stroke();
+                        break;
+                    case 'star':
+                        const star_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+                        // make sure size can be changed and make the thickness lower
+                        const star = new Image();
+                        star.src = 'data:image/svg+xml,' + encodeURIComponent(star_svg);
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.drawImage(star, startX, startY, x - startX, y - startY);
+                        break;
+                    case 'hexagon':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        const sideLength = Math.abs(x - startX);
+                        const apothem = sideLength * Math.cos(Math.PI / 6);
+                        for (let i = 0; i < 6; i++) {
+                            const angle = i * (2 * Math.PI) / 6;
+                            ctx.lineTo(startX + sideLength * Math.cos(angle), startY + sideLength * Math.sin(angle));
+                        }
+                        ctx.closePath();
+                        ctx.stroke();
+                        break;
+                    case 'octagon':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        const sideLengthOct = Math.abs(x - startX);
+                        const apothemOct = sideLengthOct * Math.cos(Math.PI / 8);
+                        for (let i = 0; i < 8; i++) {
+                            const angle = i * (2 * Math.PI) / 8;
+                            ctx.lineTo(startX + sideLengthOct * Math.cos(angle), startY + sideLengthOct * Math.sin(angle));
+                        }
+                        ctx.closePath();
+                        ctx.stroke();
+                        break;
+                    case 'slash':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        ctx.beginPath();
+                        ctx.moveTo(startX, startY);
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                        break;
+                    default:
+                        break;
+                }
                 break;
             default:
                 break;
@@ -117,15 +195,6 @@ const CanvasDrawingApp = () => {
     const handleColorChange = (e) => {
         setColor(e.target.value);
     };
-
-    const [selected, setSelected] = useState('pencil');
-    const [shape, setShape] = useState('square');
-
-    const [shapeOpen, setShapeOpen] = useState(false);
-    const [thicknessOpen, setThicknessOpen] = useState(false);
-
-
-    const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-slate-50">
