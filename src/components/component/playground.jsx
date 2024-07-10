@@ -696,7 +696,7 @@ const CanvasDrawingApp = () => {
                                                 <div className="flex items-center justify-between">
                                                     <h2 className="text-lg font-semibold">Select Font</h2>
                                                     {/*toggle group for bold and italic*/}
-                                                    <div className="flex items-center justify-center space-x-4 p-1 border rounded-md">
+                                                    <div className="flex items-center justify-center space-x-4 p-1 border rounded-lg">
                                                         <ToggleGroup size={"sm"} type="multiple">
                                                             <ToggleGroupItem value="bold" aria-label="Bold"
                                                                 onClick={() => { }}
