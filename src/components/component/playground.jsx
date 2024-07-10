@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket, Type, Plus } from 'lucide-react';
+import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket, Type, Plus, Spline } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -49,59 +49,6 @@ const CanvasDrawingApp = () => {
         ctx.beginPath();
     };
 
-    function drawStar(ctx, centerX, centerY, numPoints, radius) {
-        var star = generateStarTriangles(numPoints, radius);
-
-        var offset = [centerX, centerY];
-
-        ctx.strokeStyle = color;
-        drawObj(ctx, star, offset, true);
-    }
-
-    function rotate2D(vecArr, byRads) {
-        var mat = [
-            [Math.cos(byRads), -Math.sin(byRads)],
-            [Math.sin(byRads), Math.cos(byRads)]
-        ];
-        var result = [];
-        for (var i = 0; i < vecArr.length; ++i) {
-            result[i] = [
-                mat[0][0] * vecArr[i][0] + mat[0][1] * vecArr[i][1],
-                mat[1][0] * vecArr[i][0] + mat[1][1] * vecArr[i][1]
-            ];
-        }
-        return result;
-    }
-
-    function generateStarTriangles(numPoints, r) {
-        var triangleBase = r * Math.tan(Math.PI / numPoints);
-        var triangle = [
-            [0, r],
-            [triangleBase / 2, 0],
-            [-triangleBase / 2, 0],
-            [0, r]
-        ];
-        var result = [];
-        for (var i = 0; i < numPoints; ++i) {
-            result[i] = rotate2D(triangle, i * (2 * Math.PI / numPoints));
-        }
-        return result;
-    }
-
-    function drawObj(ctx, obj, offset, flipVert) {
-        var sign = flipVert ? -1 : 1;
-        for (var objIdx = 0; objIdx < obj.length; ++objIdx) {
-            var elem = obj[objIdx];
-            ctx.moveTo(elem[0][0] + offset[0], sign * elem[0][1] + offset[1]);
-            ctx.beginPath();
-            for (var vert = 1; vert < elem.length; ++vert) {
-                ctx.lineTo(elem[vert][0] + offset[0], sign * elem[vert][1] + offset[1]);
-            }
-            ctx.closePath();
-            ctx.stroke();
-        }
-    }
-
     const draw = (e) => {
         if (!isDrawing) return;
 
@@ -127,8 +74,7 @@ const CanvasDrawingApp = () => {
                 ctx.moveTo(x, y);
                 break;
             case 'fill':
-                // fill in all pixels that match the color of the pixel at the clicked location untill the color changes
-                fill(x, y, ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height));
+                floodFill(x, y, color);
                 break;
             case 'color picker':
                 const imageData_ = ctx.getImageData(x, y, 1, 1).data;
@@ -179,9 +125,7 @@ const CanvasDrawingApp = () => {
                         break;
                     case 'star':
                         ctx.putImageData(savedImageData, 0, 0);
-                        ctx.beginPath();
-                        drawStar(ctx, (startX + x) / 2, (startY + y) / 2, 5, Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2)));
-                        ctx.stroke();
+                        drawStar(ctx, (startX + x) / 2, (startY + y) / 2, 5, Math.abs(x - startX) / 2);
                         break;
                     case 'hexagon':
                         ctx.putImageData(savedImageData, 0, 0);
@@ -214,6 +158,10 @@ const CanvasDrawingApp = () => {
                         ctx.lineTo(x, y);
                         ctx.stroke();
                         break;
+                    case 'curve':
+                        ctx.putImageData(savedImageData, 0, 0);
+                        drawCurve(ctx, startX, startY, x, y);
+                        break;
                     default:
                         break;
                 }
@@ -228,67 +176,127 @@ const CanvasDrawingApp = () => {
         }
     };
 
-    const fill = (x, y, startImageData) => {
-        const pixelStack = [[x, y]];
-        const startColor = startImageData.data.slice(y * startImageData.width * 4 + x * 4, y * startImageData.width * 4 + x * 4 + 4);
-        const newColor = hexToRgb(color);
-        if (startColor[0] === newColor[0] && startColor[1] === newColor[1] && startColor[2] === newColor[2]) return;
-        while (pixelStack.length) {
-            const newPos = pixelStack.pop();
-            const x = newPos[0];
-            let y = newPos[1];
-            let pixelPos = y * startImageData.width * 4 + x * 4;
-            while (y-- >= 0 && matchStartColor(pixelPos, startImageData, startColor)) {
-                pixelPos -= startImageData.width * 4;
+    const floodFill = (startX, startY, newColor) => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const startPos = (startY * canvas.width + startX) * 4;
+        const startR = imageData.data[startPos];
+        const startG = imageData.data[startPos + 1];
+        const startB = imageData.data[startPos + 2];
+        const startA = imageData.data[startPos + 3];
+
+        const newColorRgb = hexToRgb(newColor);
+        const fillR = newColorRgb[0];
+        const fillG = newColorRgb[1];
+        const fillB = newColorRgb[2];
+        const fillA = 255;
+
+        if (startR === fillR && startG === fillG && startB === fillB && startA === fillA) {
+            return; // No need to fill if the colors are the same
+        }
+
+        const pixelsToCheck = [startX, startY];
+        const matchStartColor = (pixelPos) => {
+            return (
+                imageData.data[pixelPos] === startR &&
+                imageData.data[pixelPos + 1] === startG &&
+                imageData.data[pixelPos + 2] === startB &&
+                imageData.data[pixelPos + 3] === startA
+            );
+        };
+
+        while (pixelsToCheck.length > 0) {
+            const y = pixelsToCheck.pop();
+            const x = pixelsToCheck.pop();
+            let pixelPos = (y * canvas.width + x) * 4;
+
+            while (y >= 0 && matchStartColor(pixelPos)) {
+                y--;
+                pixelPos -= canvas.width * 4;
             }
-            pixelPos += startImageData.width * 4;
-            ++y;
+            pixelPos += canvas.width * 4;
+            y++;
+
             let reachLeft = false;
             let reachRight = false;
-            while (y++ < startImageData.height - 1 && matchStartColor(pixelPos, startImageData, startColor)) {
-                colorPixel(pixelPos, startImageData, newColor);
+            while (y < canvas.height - 1 && matchStartColor(pixelPos)) {
+                colorPixel(imageData, pixelPos, [fillR, fillG, fillB, fillA]);
                 if (x > 0) {
-                    if (matchStartColor(pixelPos - 4, startImageData, startColor)) {
+                    if (matchStartColor(pixelPos - 4)) {
                         if (!reachLeft) {
-                            pixelStack.push([x - 1, y]);
+                            pixelsToCheck.push(x - 1, y);
                             reachLeft = true;
                         }
                     } else if (reachLeft) {
                         reachLeft = false;
                     }
                 }
-                if (x < startImageData.width - 1) {
-                    if (matchStartColor(pixelPos + 4, startImageData, startColor)) {
+                if (x < canvas.width - 1) {
+                    if (matchStartColor(pixelPos + 4)) {
                         if (!reachRight) {
-                            pixelStack.push([x + 1, y]);
+                            pixelsToCheck.push(x + 1, y);
                             reachRight = true;
                         }
                     } else if (reachRight) {
                         reachRight = false;
                     }
                 }
-                pixelPos += startImageData.width * 4;
+                pixelPos += canvas.width * 4;
+                y++;
             }
         }
-        ctx.putImageData(startImageData, 0, 0);
+        ctx.putImageData(imageData, 0, 0);
     };
 
-    const matchStartColor = (pixelPos, startImageData, startColor) => {
-        const r = startImageData.data[pixelPos];
-        const g = startImageData.data[pixelPos + 1];
-        const b = startImageData.data[pixelPos + 2];
-        return r === startColor[0] && g === startColor[1] && b === startColor[2];
+    const getPixelColor = (imageData, x, y) => {
+        const pixelPos = (y * imageData.width + x) * 4;
+        return [
+            imageData.data[pixelPos],
+            imageData.data[pixelPos + 1],
+            imageData.data[pixelPos + 2],
+            imageData.data[pixelPos + 3]
+        ];
     };
 
-    const colorPixel = (pixelPos, startImageData, newColor) => {
-        startImageData.data[pixelPos] = newColor[0];
-        startImageData.data[pixelPos + 1] = newColor[1];
-        startImageData.data[pixelPos + 2] = newColor[2];
-        startImageData.data[pixelPos + 3] = 255;
+    const colorsMatch = (color1, color2) => {
+        return color1[0] === color2[0] && color1[1] === color2[1] && color1[2] === color2[2] && color1[3] === color2[3];
     };
 
+    const colorPixel = (imageData, pixelPos, color) => {
+        imageData.data[pixelPos] = color[0];
+        imageData.data[pixelPos + 1] = color[1];
+        imageData.data[pixelPos + 2] = color[2];
+        imageData.data[pixelPos + 3] = color[3];
+    };
 
+    const drawStar = (ctx, centerX, centerY, points, outerRadius) => {
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY - outerRadius);
 
+        for (let i = 0; i < points * 2; i++) {
+            const radius = i % 2 === 0 ? outerRadius : outerRadius / 2;
+            const angle = (Math.PI * 2 * i) / (points * 2);
+            const x = centerX + radius * Math.sin(angle);
+            const y = centerY - radius * Math.cos(angle);
+            ctx.lineTo(x, y);
+        }
+
+        ctx.closePath();
+        ctx.stroke();
+    };
+
+    const drawCurve = (ctx, startX, startY, endX, endY) => {
+        const midX = (startX + endX) / 2;
+        const midY = (startY + endY) / 2;
+        const controlX = midX + (endY - startY) / 4;
+        const controlY = midY - (endX - startX) / 4;
+
+        ctx.beginPath();
+        ctx.moveTo(startX, startY);
+        ctx.quadraticCurveTo(controlX, controlY, endX, endY);
+        ctx.stroke();
+    };
 
     const handleMouseDown = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
@@ -395,7 +403,11 @@ const CanvasDrawingApp = () => {
                                                                     ? <HexagonIcon className="w-6 h-6" />
                                                                     : shape === 'octagon'
                                                                         ? <OctagonIcon className="w-6 h-6" />
-                                                                        : <Slash className="w-6 h-6" />
+                                                                        : shape === 'slash' ?
+                                                                            <Slash className="w-6 h-6" />
+                                                                            : shape === 'curve' ?
+                                                                                <Spline className="w-6 h-6" />
+                                                                                : null
                                                 }
                                             </Button>
                                         </TooltipTrigger>
@@ -457,6 +469,13 @@ const CanvasDrawingApp = () => {
                                                                 onClick={() => { setShape('slash'); setShapeOpen(false) }}
                                                             >
                                                                 <Slash className="w-6 h-6" />
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={shape === 'curve' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => { setShape('curve'); setShapeOpen(false) }}
+                                                            >
+                                                                <Spline className="w-6 h-6" />
                                                             </Button>
                                                         </div>
                                                     </div>
