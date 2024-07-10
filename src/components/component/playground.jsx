@@ -45,8 +45,11 @@ const CanvasDrawingApp = () => {
     };
 
     const stopDrawing = () => {
-        setIsDrawing(false);
-        ctx.beginPath();
+        if (isDrawing) {
+            setIsDrawing(false);
+            ctx.beginPath();
+            saveState();
+        }
     };
 
     const clearCanvas = () => {
@@ -361,6 +364,83 @@ const CanvasDrawingApp = () => {
     const [newHover, setNewHover] = useState(false);
     const [downloadOpen, setDownloadOpen] = useState(false);
 
+    // keep a list of states for undo and redo
+    const [history, setHistory] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const context = canvas.getContext('2d');
+        setCtx(context);
+
+        // Save initial blank state
+        const initialState = context.getImageData(0, 0, canvas.width, canvas.height);
+        setHistory([initialState]);
+        setHistoryIndex(0);
+    }, []);
+
+    const saveState = () => {
+        if (!ctx) return;
+
+        const canvas = canvasRef.current;
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        // Remove any future states
+        const newHistory = history.slice(0, historyIndex + 1);
+        newHistory.push(imageData);
+
+        setHistory(newHistory);
+        setHistoryIndex(newHistory.length - 1);
+    };
+
+    const undo = () => {
+        if (historyIndex > 0) {
+            setHistoryIndex(prevIndex => {
+                const newIndex = prevIndex - 1;
+                ctx.putImageData(history[newIndex], 0, 0);
+                return newIndex;
+            });
+        }
+    };
+
+    const redo = () => {
+        if (historyIndex < history.length - 1) {
+            setHistoryIndex(prevIndex => {
+                const newIndex = prevIndex + 1;
+                ctx.putImageData(history[newIndex], 0, 0);
+                return newIndex;
+            });
+        }
+    };
+
+    const [undoDisabled, setUndoDisabled] = useState(true);
+    const [redoDisabled, setRedoDisabled] = useState(true);
+
+    useEffect(() => {
+        // if size of history is zero
+        if (history.length === 0) {
+            setUndoDisabled(true);
+            setRedoDisabled(true);
+        } else {
+            // if historyIndex is at the start
+            if (historyIndex === 0) {
+                setUndoDisabled(true);
+            } else {
+                setUndoDisabled(false);
+            }
+
+            // if historyIndex is at the end
+            if (historyIndex === history.length - 1) {
+                setRedoDisabled(true);
+            } else {
+                setRedoDisabled(false);
+            }
+        }
+    }, [history, historyIndex]);
+
+
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
@@ -370,7 +450,10 @@ const CanvasDrawingApp = () => {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <Button variant="ghost" size="icon" className='h-8 w-8'>
+                                    <Button variant="ghost" size="icon" className={`h-8 w-8 ${undoDisabled === true ? 'cursor-not-allowed' : ''}`}
+                                        onClick={undo}
+                                        disabled={undoDisabled}
+                                    >
                                         <Undo size={20} />
                                     </Button>
                                 </TooltipTrigger>
@@ -385,7 +468,10 @@ const CanvasDrawingApp = () => {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <Button variant="ghost" size="icon" className='h-8 w-8'>
+                                    <Button variant="ghost" size="icon" className={`h-8 w-8 ${redoDisabled === true ? 'cursor-not-allowed' : ''}`}
+                                        onClick={redo}
+                                        disabled={redoDisabled}
+                                    >
                                         <Redo size={20} />
                                     </Button>
                                 </TooltipTrigger>
