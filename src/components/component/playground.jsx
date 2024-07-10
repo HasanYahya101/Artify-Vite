@@ -260,20 +260,6 @@ const CanvasDrawingApp = () => {
         ctx.putImageData(imageData, 0, 0);
     };
 
-    const getPixelColor = (imageData, x, y) => {
-        const pixelPos = (y * imageData.width + x) * 4;
-        return [
-            imageData.data[pixelPos],
-            imageData.data[pixelPos + 1],
-            imageData.data[pixelPos + 2],
-            imageData.data[pixelPos + 3]
-        ];
-    };
-
-    const colorsMatch = (color1, color2) => {
-        return color1[0] === color2[0] && color1[1] === color2[1] && color1[2] === color2[2] && color1[3] === color2[3];
-    };
-
     const colorPixel = (imageData, pixelPos, color) => {
         imageData.data[pixelPos] = color[0];
         imageData.data[pixelPos + 1] = color[1];
