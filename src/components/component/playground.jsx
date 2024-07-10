@@ -720,21 +720,21 @@ const CanvasDrawingApp = () => {
                                                             <Button variant={font === 'serif' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('serif')}
                                                             >
-                                                                <span className="font-serif">Aa</span>
+                                                                <span className={`font-serif ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
                                                             <Button variant={font === 'sans-serif' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('sans-serif')}
                                                             >
-                                                                <span className="font-sans-serif">Aa</span>
+                                                                <span className={`font-sans ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
                                                             <Button variant={font === 'monospace' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('monospace')}
                                                             >
-                                                                <span className="font-mono">Aa</span>
+                                                                <span className={`font-mono ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         {/*custom fonts*/}
@@ -742,35 +742,35 @@ const CanvasDrawingApp = () => {
                                                             <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('cursive')}
                                                             >
-                                                                <span style={{ fontFamily: 'cursive' }}>Aa</span>
+                                                                <span style={{ fontFamily: 'cursive' }} className={`${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
                                                             <Button variant={font === 'roboto' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('roboto')}
                                                             >
-                                                                <span className="font-roboto">Aa</span>
+                                                                <span className={`font-roboto ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
                                                             <Button variant={font === 'playwrite' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('playwrite')}
                                                             >
-                                                                <span className="font-playwrite">Aa</span>
+                                                                <span className={`font-playwrite ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
                                                             <Button variant={font === 'arsenal' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('arsenal')}
                                                             >
-                                                                <span className="font-arsenal">Aa</span>
+                                                                <span className={`font-arsenal ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
                                                             <Button variant={font === 'anton' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('anton')}
                                                             >
-                                                                <span className="font-anton">Aa</span>
+                                                                <span className={`font-anton ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                             </Button>
                                                         </div>
                                                     </div>
@@ -793,7 +793,7 @@ const CanvasDrawingApp = () => {
                                     <PopoverTriggerArrow>
                                         <TooltipTrigger>
                                             <Button variant="ghost" size="icon" className="group">
-                                                <div className="bg-muted rounded-full group-hover:bg-white" style={{ width: `${thickness}px`, height: `${thickness}px` }} />
+                                                <div className="bg-muted rounded-full group-hover:bg-white" style={{ width: `${thickness} px`, height: `${thickness}px` }} />
                                             </Button>
                                         </TooltipTrigger>
                                     </PopoverTriggerArrow>
