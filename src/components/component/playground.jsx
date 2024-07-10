@@ -16,7 +16,6 @@ const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
     const [ctx, setCtx] = useState(null);
     const [isDrawing, setIsDrawing] = useState(false);
-    const [tool, setTool] = useState('pencil');
     const [color, setColor] = useState('#000000');
     const [thickness, setThickness] = useState([5]);
     const [startX, setStartX] = useState(0);
@@ -128,13 +127,17 @@ const CanvasDrawingApp = () => {
                 ctx.moveTo(x, y);
                 break;
             case 'fill':
-                const imageData = ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height);
-                fill(x, y, imageData);
+                // fill in all pixels that match the color of the pixel at the clicked location untill the color changes
+                fill(x, y, ctx.getImageData(0, 0, canvasRef.current.width, canvasRef.current.height));
                 break;
             case 'color picker':
-                const pixel = ctx.getImageData(x, y, 1, 1).data;
-                const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
-                setColor(color);
+                const imageData_ = ctx.getImageData(x, y, 1, 1).data;
+                if (imageData_[3] === 0) {
+                    setColor('#FFFFFF'); // white
+                } else {
+                    const pickedColor = `rgb(${imageData_[0]}, ${imageData_[1]}, ${imageData_[2]})`;
+                    setColor(pickedColor);
+                }
                 break;
             case 'shapes':
                 switch (shape) {
@@ -175,7 +178,6 @@ const CanvasDrawingApp = () => {
                         ctx.stroke();
                         break;
                     case 'star':
-
                         ctx.putImageData(savedImageData, 0, 0);
                         ctx.beginPath();
                         drawStar(ctx, (startX + x) / 2, (startY + y) / 2, 5, Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2)));
@@ -226,6 +228,68 @@ const CanvasDrawingApp = () => {
         }
     };
 
+    const fill = (x, y, startImageData) => {
+        const pixelStack = [[x, y]];
+        const startColor = startImageData.data.slice(y * startImageData.width * 4 + x * 4, y * startImageData.width * 4 + x * 4 + 4);
+        const newColor = hexToRgb(color);
+        if (startColor[0] === newColor[0] && startColor[1] === newColor[1] && startColor[2] === newColor[2]) return;
+        while (pixelStack.length) {
+            const newPos = pixelStack.pop();
+            const x = newPos[0];
+            let y = newPos[1];
+            let pixelPos = y * startImageData.width * 4 + x * 4;
+            while (y-- >= 0 && matchStartColor(pixelPos, startImageData, startColor)) {
+                pixelPos -= startImageData.width * 4;
+            }
+            pixelPos += startImageData.width * 4;
+            ++y;
+            let reachLeft = false;
+            let reachRight = false;
+            while (y++ < startImageData.height - 1 && matchStartColor(pixelPos, startImageData, startColor)) {
+                colorPixel(pixelPos, startImageData, newColor);
+                if (x > 0) {
+                    if (matchStartColor(pixelPos - 4, startImageData, startColor)) {
+                        if (!reachLeft) {
+                            pixelStack.push([x - 1, y]);
+                            reachLeft = true;
+                        }
+                    } else if (reachLeft) {
+                        reachLeft = false;
+                    }
+                }
+                if (x < startImageData.width - 1) {
+                    if (matchStartColor(pixelPos + 4, startImageData, startColor)) {
+                        if (!reachRight) {
+                            pixelStack.push([x + 1, y]);
+                            reachRight = true;
+                        }
+                    } else if (reachRight) {
+                        reachRight = false;
+                    }
+                }
+                pixelPos += startImageData.width * 4;
+            }
+        }
+        ctx.putImageData(startImageData, 0, 0);
+    };
+
+    const matchStartColor = (pixelPos, startImageData, startColor) => {
+        const r = startImageData.data[pixelPos];
+        const g = startImageData.data[pixelPos + 1];
+        const b = startImageData.data[pixelPos + 2];
+        return r === startColor[0] && g === startColor[1] && b === startColor[2];
+    };
+
+    const colorPixel = (pixelPos, startImageData, newColor) => {
+        startImageData.data[pixelPos] = newColor[0];
+        startImageData.data[pixelPos + 1] = newColor[1];
+        startImageData.data[pixelPos + 2] = newColor[2];
+        startImageData.data[pixelPos + 3] = 255;
+    };
+
+
+
+
     const handleMouseDown = (e) => {
         const rect = canvasRef.current.getBoundingClientRect();
         setStartX(e.clientX - rect.left);
@@ -253,25 +317,6 @@ const CanvasDrawingApp = () => {
         setColor(e.target.value);
     };
 
-    const fill = (x, y, imageData) => {
-        const stack = [[x, y]];
-        const targetColor = ctx.getImageData(x, y, 1, 1).data;
-        const fillColor = hexToRgb(color);
-        if (fillColor === targetColor) return;
-
-        while (stack.length) {
-            const [x, y] = stack.pop();
-            const pixelColor = ctx.getImageData(x, y, 1, 1).data;
-            if (pixelColor === targetColor) {
-                ctx.fillStyle = color;
-                ctx.fillRect(x, y, 1, 1);
-                stack.push([x + 1, y]);
-                stack.push([x - 1, y]);
-                stack.push([x, y + 1]);
-                stack.push([x, y - 1]);
-            }
-        }
-    }
 
     const hexToRgb = (hex) => {
         const r = parseInt(hex.slice(1, 3), 16);
@@ -635,12 +680,7 @@ const CanvasDrawingApp = () => {
             </aside>
 
             <div
-                className="h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden"
-            /*style={{
-                cursor: selected === 'pencil'
-                    ? 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23000000\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'><path d=\'M12 2L12 22\'></path><path d=\'M2 12L22 12\'></path></svg>") 0 24, auto'
-                    : 'default'
-            }}*/
+                className="h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden cursor-crosshair"
             >
                 <canvas
                     className="w-[100vw] h-screen bg-white cursor-crosshair"
@@ -649,9 +689,10 @@ const CanvasDrawingApp = () => {
                     onMouseUp={stopDrawing}
                     onMouseOut={stopDrawing}
                     onMouseMove={draw}
+                    onClick={draw}
                 />
             </div>
-            <div className="fixed bottom-24 right-10 flex flex-col gap-2">
+            <div className="fixed bottom-24 right-9 flex flex-col gap-2">
                 <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
                     onMouseEnter={() => setTextHover(true)}
                     onMouseLeave={() => setTextHover(false)}
@@ -664,7 +705,7 @@ const CanvasDrawingApp = () => {
                         : null}
                 </button>
             </div>
-            <div className="fixed bottom-9 right-10 flex flex-col gap-2">
+            <div className="fixed bottom-9 right-9 flex flex-col gap-2">
                 <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
                     onMouseEnter={() => setNewHover(true)}
                     onMouseLeave={() => setNewHover(false)}
