@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket, Type, Plus, Spline } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -363,6 +363,36 @@ const CanvasDrawingApp = () => {
 
     return (
         <div className="flex min-h-screen bg-slate-50">
+            {/* Undo and redo */}
+            <div className="fixed top-4 right-4 z-10">
+                <div className="flex flex-col gap-2">
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <Undo size={24} />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Undo</span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <Button variant="ghost" size="icon">
+                                    <Redo size={24} />
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <span className='text-gray-500'>Redo</span>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </div>
+            </div>
+
             <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
