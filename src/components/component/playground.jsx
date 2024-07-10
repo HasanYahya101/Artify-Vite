@@ -30,6 +30,7 @@ const CanvasDrawingApp = () => {
 
 
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
+    const [font, setFont] = useState('serif');
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -678,7 +679,7 @@ const CanvasDrawingApp = () => {
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
-                                    <span className='text-gray-500'>Fill</span>
+                                    <span className='text-gray-500'>Font and thickness</span>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
