@@ -1002,6 +1002,9 @@ const CanvasDrawingApp = () => {
                     onMouseOut={stopDrawing}
                     onMouseMove={draw}
                     onClick={draw}
+                    onDoubleClickCapture={draw}
+                    onMouseDownCapture={draw}
+                    onsingletap={draw}
                 // remove anti-aliasing using styles
                 /*style={{
                     imageRendering: 'pixelated',
