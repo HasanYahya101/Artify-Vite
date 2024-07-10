@@ -443,7 +443,8 @@ const CanvasDrawingApp = () => {
     }, [history, historyIndex]);
 
     const [fontOpen, setFontOpen] = useState(false);
-
+    const [bold, setBold] = useState(false);
+    const [italic, setItalic] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -699,12 +700,12 @@ const CanvasDrawingApp = () => {
                                                     <div className="flex items-center justify-center space-x-4 p-1 border rounded-lg">
                                                         <ToggleGroup size={"sm"} type="multiple">
                                                             <ToggleGroupItem value="bold" aria-label="Bold"
-                                                                onClick={() => { }}
+                                                                onClick={() => { setBold(!bold) }}
                                                             >
                                                                 <Bold className="h-4 w-4" />
                                                             </ToggleGroupItem>
                                                             <ToggleGroupItem value="italic" aria-label="Italic"
-                                                                onClick={() => { }}
+                                                                onClick={() => { setItalic(!italic) }}
                                                             >
                                                                 <Italic className="h-4 w-4" />
                                                             </ToggleGroupItem>
