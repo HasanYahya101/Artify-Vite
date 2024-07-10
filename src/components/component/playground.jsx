@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -472,6 +472,12 @@ const CanvasDrawingApp = () => {
     const [italic, setItalic] = useState(false);
     const [fontSize, setFontSize] = useState([16]); // pixels
 
+    const [isMac, setIsMac] = useState(false);
+
+    useEffect(() => {
+        setIsMac(window.navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+    }, []);
+
     const clearCanvas = () => {
         ctx.fillStyle = '#FFFFFF';
         ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
@@ -502,8 +508,19 @@ const CanvasDrawingApp = () => {
                                         <Undo size={20} />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent>
-                                    <span className='text-gray-500'>Undo</span>
+                                <TooltipContent className='mr-2'>
+                                    <div className="flex items-center justify-center">
+                                        <span className='text-gray-500
+                                        '>Undo</span>
+                                        {!isMac ? (
+                                            <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Z</kbd>
+                                        ) : (
+                                            <kbd className="flex ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">
+                                                <Command className='h-3 w-3 self-center' />
+                                                <span className='ml-0.5'>Z</span>
+                                            </kbd>
+                                        )}
+                                    </div>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
