@@ -304,10 +304,13 @@ const CanvasDrawingApp = () => {
     };
 
     const exportImagePNG = (format) => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
+        const canvas_ = canvasRef.current;
+        const tempCanvas = document.createElement('canvas'); // Create a temporary canvas
+        tempCanvas.width = canvas_.width;
+        tempCanvas.height = canvas_.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(canvas_, 0, 0);
+        const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
         for (let i = 0; i < imageData.data.length; i += 4) {
             const r = imageData.data[i];
             const g = imageData.data[i + 1];
@@ -318,24 +321,35 @@ const CanvasDrawingApp = () => {
                 imageData.data[i + 3] = 255 - ((r + g + b) / 3);
             }
         }
-
-        ctx.putImageData(imageData, 0, 0);
-
-        const dataURL = canvas.toDataURL(`image/${format}`);
+        tempCtx.putImageData(imageData, 0, 0);
+        const dataURL = tempCanvas.toDataURL(`image/${format}`);
         const link = document.createElement('a');
         link.download = `drawing.${format}`;
         link.href = dataURL;
         link.click();
+        tempCanvas.remove();
     };
 
     const exportImageJPEG = (format) => {
-        const canvas = canvasRef.current;
-        const dataURL = canvas.toDataURL(`image/${format}`);
+        const canvas_ = canvasRef.current;
+        const tempCanvas = document.createElement('canvas'); // Create a temporary canvas
+        tempCanvas.width = canvas_.width;
+        tempCanvas.height = canvas_.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.drawImage(canvas_, 0, 0);
+        const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+        tempCtx.putImageData(imageData, 0, 0);
+        const dataURL = tempCanvas.toDataURL(`image/${format}`);
         const link = document.createElement('a');
-        link.download = `drawing.jpeg`;
-        link.href = dataURL;
+
+        link.download = `drawing.${format}`;
+        link.setAttribute('href', dataURL);
         link.click();
+
     };
+
+    // Example usage:
+    // Call exportImagePNG('png') and then exportImageJPEG('jpeg') separately.
 
     const colorInputRef = useRef(null);
 
