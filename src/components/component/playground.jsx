@@ -178,9 +178,10 @@ const CanvasDrawingApp = () => {
                 }
                 break;
             case 'text':
-                ctx.putImageData(savedImageData, 0, 0);
-                ctx.font = '48px serif';
-                ctx.fillText('Hello World!', x, y);
+                ctx.font = `${fontSize}px ${font}`;
+                ctx.fillStyle = color;
+                ctx.fillText('Aa', x, y);
+
                 break;
             default:
                 break;
@@ -441,12 +442,7 @@ const CanvasDrawingApp = () => {
     const [undoDisabled, setUndoDisabled] = useState(true);
     const [redoDisabled, setRedoDisabled] = useState(true);
 
-    const clearCanvas = () => {
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-        // add the state to history
-        saveState();
-    };
+    const [time, setTime] = useState(0);
 
     useEffect(() => {
         // if size of history is zero
@@ -489,6 +485,20 @@ const CanvasDrawingApp = () => {
         e.preventDefault();
         stopDrawing();
     }; // for touch devices
+
+    const clearCanvas = () => {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        // add the state to history
+        if (time !== 0) {
+            saveState();
+        }
+        else {
+            if (history.length !== 0) {
+                setTime(1);
+            }
+        }
+    };
 
     return (
         <div className="flex min-h-screen bg-slate-50">
