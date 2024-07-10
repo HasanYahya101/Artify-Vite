@@ -718,11 +718,33 @@ const CanvasDrawingApp = () => {
                                                                 <span className="font-mono">Aa</span>
                                                             </Button>
                                                         </div>
+                                                        {/*custom fonts*/}
                                                         <div className="p-1">
                                                             <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
                                                                 onClick={() => setFont('cursive')}
                                                             >
-                                                                <span className="font-cursive">Aa</span>
+                                                                <span style={{ fontFamily: 'cursive' }}>Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'fantasy' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('fantasy')}
+                                                            >
+                                                                <span className="font-fantasy">Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'system-ui' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('system-ui')}
+                                                            >
+                                                                <span className="font-system-ui">Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'emoji' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('emoji')}
+                                                            >
+                                                                <span className="font-emoji">Aa</span>
                                                             </Button>
                                                         </div>
                                                     </div>
