@@ -50,6 +50,62 @@ const CanvasDrawingApp = () => {
         ctx.beginPath();
     };
 
+    function drawStar(ctx, centerX, centerY, numPoints, radius) {
+        // Generate star vertices
+        var star = generateStarTriangles(numPoints, radius);
+
+        // Define offset
+        var offset = [centerX, centerY];
+
+        // Draw star outline
+        ctx.strokeStyle = color;
+        drawObj(ctx, star, offset, true);
+    }
+
+    function rotate2D(vecArr, byRads) {
+        var mat = [
+            [Math.cos(byRads), -Math.sin(byRads)],
+            [Math.sin(byRads), Math.cos(byRads)]
+        ];
+        var result = [];
+        for (var i = 0; i < vecArr.length; ++i) {
+            result[i] = [
+                mat[0][0] * vecArr[i][0] + mat[0][1] * vecArr[i][1],
+                mat[1][0] * vecArr[i][0] + mat[1][1] * vecArr[i][1]
+            ];
+        }
+        return result;
+    }
+
+    function generateStarTriangles(numPoints, r) {
+        var triangleBase = r * Math.tan(Math.PI / numPoints);
+        var triangle = [
+            [0, r],
+            [triangleBase / 2, 0],
+            [-triangleBase / 2, 0],
+            [0, r]
+        ];
+        var result = [];
+        for (var i = 0; i < numPoints; ++i) {
+            result[i] = rotate2D(triangle, i * (2 * Math.PI / numPoints));
+        }
+        return result;
+    }
+
+    function drawObj(ctx, obj, offset, flipVert) {
+        var sign = flipVert ? -1 : 1;
+        for (var objIdx = 0; objIdx < obj.length; ++objIdx) {
+            var elem = obj[objIdx];
+            ctx.moveTo(elem[0][0] + offset[0], sign * elem[0][1] + offset[1]);
+            ctx.beginPath();
+            for (var vert = 1; vert < elem.length; ++vert) {
+                ctx.lineTo(elem[vert][0] + offset[0], sign * elem[vert][1] + offset[1]);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+    }
+
     const draw = (e) => {
         if (!isDrawing) return;
 
@@ -122,12 +178,11 @@ const CanvasDrawingApp = () => {
                         ctx.stroke();
                         break;
                     case 'star':
-                        const star_svg = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
-                        // make sure size can be changed and make the thickness lower
-                        const star = new Image();
-                        star.src = 'data:image/svg+xml,' + encodeURIComponent(star_svg);
+
                         ctx.putImageData(savedImageData, 0, 0);
-                        ctx.drawImage(star, startX, startY, x - startX, y - startY);
+                        ctx.beginPath();
+                        drawStar(ctx, (startX + x) / 2, (startY + y) / 2, 5, Math.sqrt(Math.pow(x - startX, 2) + Math.pow(y - startY, 2)));
+                        ctx.stroke();
                         break;
                     case 'hexagon':
                         ctx.putImageData(savedImageData, 0, 0);
@@ -163,6 +218,11 @@ const CanvasDrawingApp = () => {
                     default:
                         break;
                 }
+                break;
+            case 'text':
+                ctx.putImageData(savedImageData, 0, 0);
+                ctx.font = '48px serif';
+                ctx.fillText('Hello World!', x, y);
                 break;
             default:
                 break;
