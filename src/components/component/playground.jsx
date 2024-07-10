@@ -445,6 +445,7 @@ const CanvasDrawingApp = () => {
     const [fontOpen, setFontOpen] = useState(false);
     const [bold, setBold] = useState(false);
     const [italic, setItalic] = useState(false);
+    const [fontSize, setFontSize] = useState([16]); // pixels
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -777,7 +778,22 @@ const CanvasDrawingApp = () => {
                                                 </div>
                                                 <div className='space-y-6 flex-1'></div>
                                             </div>
+                                            {/*Slider for custom font size with preview*/}
                                             <div className='border-t'>
+                                                <div className="p-3">
+                                                    <div className="flex justify-between items-center mb-3 mx-1">
+                                                        <span className="text-sm font-medium">Custom Size</span>
+                                                        <span className="text-sm text-muted-foreground">{fontSize}px</span>
+                                                    </div>
+                                                    <Slider
+                                                        min={8}
+                                                        max={26}
+                                                        step={1}
+                                                        value={[fontSize]}
+                                                        onValueChange={(value) => setFontSize(value)}
+                                                        className="hover:cursor-move"
+                                                    />
+                                                </div>
                                             </div>
                                         </div>
                                     </PopoverContentArrow>
