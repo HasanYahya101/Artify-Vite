@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket } from 'lucide-react';
+import { Pencil, Brush, Minus, Square, Circle, Eraser, Download, LineChartIcon, Slash, Pipette, PaintBucket, Type, Plus } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -51,13 +51,10 @@ const CanvasDrawingApp = () => {
     };
 
     function drawStar(ctx, centerX, centerY, numPoints, radius) {
-        // Generate star vertices
         var star = generateStarTriangles(numPoints, radius);
 
-        // Define offset
         var offset = [centerX, centerY];
 
-        // Draw star outline
         ctx.strokeStyle = color;
         drawObj(ctx, star, offset, true);
     }
@@ -623,6 +620,20 @@ const CanvasDrawingApp = () => {
                     onMouseOut={stopDrawing}
                     onMouseMove={draw}
                 />
+            </div>
+            <div className="fixed bottom-9 right-9 flex flex-col gap-2">
+                <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6">
+                    <Type size={24} />
+                    <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
+                        Text
+                    </span>
+                </button>
+                <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6">
+                    <Plus size={24} />
+                    <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
+                        New
+                    </span>
+                </button>
             </div>
         </div>
     );
