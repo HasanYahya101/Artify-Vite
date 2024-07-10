@@ -303,11 +303,38 @@ const CanvasDrawingApp = () => {
         startDrawing(e);
     };
 
-    const exportImage = (format) => {
+    const exportImagePNG = (format) => {
         const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+        for (let i = 0; i < imageData.data.length; i += 4) {
+            const r = imageData.data[i];
+            const g = imageData.data[i + 1];
+            const b = imageData.data[i + 2];
+            const a = imageData.data[i + 3];
+
+            if (r > 240 && g > 240 && b > 240) {
+                imageData.data[i + 3] = 255 - ((r + g + b) / 3);
+            }
+        }
+
+        ctx.putImageData(imageData, 0, 0);
+
         const dataURL = canvas.toDataURL(`image/${format}`);
         const link = document.createElement('a');
         link.download = `drawing.${format}`;
+        link.href = dataURL;
+        link.click();
+    };
+
+
+
+    const exportImageJPEG = (format) => {
+        const canvas = canvasRef.current;
+        const dataURL = canvas.toDataURL(`image/${format}`);
+        const link = document.createElement('a');
+        link.download = `drawing.jpeg`;
         link.href = dataURL;
         link.click();
     };
@@ -332,6 +359,7 @@ const CanvasDrawingApp = () => {
 
     const [textHover, setTextHover] = useState(false);
     const [newHover, setNewHover] = useState(false);
+    const [downloadOpen, setDownloadOpen] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -662,7 +690,8 @@ const CanvasDrawingApp = () => {
                 <div className="p-4 border-t flex justify-center">
                     <TooltipProvider>
                         <Tooltip>
-                            <Popover>
+                            <Popover open={downloadOpen} onOpenChange={setDownloadOpen}
+                            >
                                 <PopoverTrigger>
                                     <TooltipTrigger>
                                         <Button variant="outline" size="sm">
@@ -674,12 +703,15 @@ const CanvasDrawingApp = () => {
                                     hoverJPEG={isHoveredJPEG}
                                 >
                                     <div className="grid grid-rows-2">
-                                        <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100 z-10">
+                                        <div className="items-center text-center justify-center p-2 border rounded-t cursor-pointer hover:bg-gray-100 z-10"
+                                            onClick={() => { exportImagePNG('png'); setDownloadOpen(false); }}
+                                        >
                                             Download PNG
                                         </div>
                                         <div className="items-center text-center justify-center p-2 border-t border-l border-r rounded-b cursor-pointer hover:bg-gray-100 z-10"
                                             onMouseEnter={() => setIsHoveredJPEG(true)}
                                             onMouseLeave={() => setIsHoveredJPEG(false)}
+                                            onClick={() => { exportImageJPEG('jpeg'); setDownloadOpen(false); }}
                                         >
                                             Download JPEG
                                         </div>
