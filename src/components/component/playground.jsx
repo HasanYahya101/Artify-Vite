@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -660,6 +660,21 @@ const CanvasDrawingApp = () => {
                                         onClick={() => setSelected('fill')}
                                     >
                                         <PaintBucket className="w-6 h-6" />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <span className='text-gray-500'>Fill</span>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
+                    <div className="my-1.5 px-4 flex flex-col items-center justify-center">
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Button variant="ghost" size="icon"
+                                    >
+                                        <ALargeSmall className="w-6 h-6" />
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent>
