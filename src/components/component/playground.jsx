@@ -441,6 +441,8 @@ const CanvasDrawingApp = () => {
         }
     }, [history, historyIndex]);
 
+    const [fontOpen, setFontOpen] = useState(false);
+
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -672,15 +674,66 @@ const CanvasDrawingApp = () => {
                     <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                         <TooltipProvider>
                             <Tooltip>
-                                <TooltipTrigger>
-                                    <Button variant="ghost" size="icon"
+                                <PopoverArrow open={fontOpen} onOpenChange={setFontOpen}
+                                >
+                                    <PopoverTriggerArrow>
+                                        <TooltipTrigger>
+                                            <Button variant="ghost" size="icon"
+                                            >
+                                                <ALargeSmall className="w-6 h-6" />
+                                            </Button>
+                                        </TooltipTrigger>
+                                    </PopoverTriggerArrow>
+                                    <TooltipContent>
+                                        <span className='text-gray-500'>Font and thickness</span>
+                                    </TooltipContent>
+                                    <PopoverContentArrow className="" side="right"
+                                        align="center" sideOffset={3}
                                     >
-                                        <ALargeSmall className="w-6 h-6" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <span className='text-gray-500'>Font and thickness</span>
-                                </TooltipContent>
+                                        <div className="flex flex-col h-full">
+                                            <div className="p-4 border-b">
+                                                <h2 className="text-lg font-semibold">Select Font</h2>
+                                            </div>
+                                            <div className="flex-1 overflow-auto space-y-1 justify-center">
+                                                <div className='p-3'>
+                                                    <div className="grid grid-cols-4 gap-2">
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'serif' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('serif')}
+                                                            >
+                                                                <span className="font-serif">Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'sans-serif' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('sans-serif')}
+                                                            >
+                                                                <span className="font-sans-serif">Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'monospace' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('monospace')}
+                                                            >
+                                                                <span className="font-mono">Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('cursive')}
+                                                            >
+                                                                <span className="font-cursive">Aa</span>
+                                                            </Button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className='space-y-6 flex-1'></div>
+                                            </div>
+                                            <div className='border-t'>
+                                            </div>
+                                        </div>
+                                    </PopoverContentArrow>
+                                </PopoverArrow>
                             </Tooltip>
                         </TooltipProvider>
                     </div>
