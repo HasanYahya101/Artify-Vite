@@ -364,32 +364,37 @@ const CanvasDrawingApp = () => {
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
-            <div className="fixed top-4 right-4 z-10">
-                <div className="flex flex-col gap-2">
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger>
-                                <Button variant="ghost" size="icon">
-                                    <Undo size={24} />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <span className='text-gray-500'>Undo</span>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger>
-                                <Button variant="ghost" size="icon">
-                                    <Redo size={24} />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <span className='text-gray-500'>Redo</span>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
+            <div className="fixed top-7 right-7 z-10 rounded-md shadow-lg border">
+                <div className="flex flex-col">
+                    <div className='p-1'>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Button variant="ghost" size="icon" className='h-8 w-8'>
+                                        <Undo size={20} />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <span className='text-gray-500'>Undo</span>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
+                    <div className='border-b'></div>
+                    <div className='p-1'>
+                        <TooltipProvider>
+                            <Tooltip>
+                                <TooltipTrigger>
+                                    <Button variant="ghost" size="icon" className='h-8 w-8'>
+                                        <Redo size={20} />
+                                    </Button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    <span className='text-gray-500'>Redo</span>
+                                </TooltipContent>
+                            </Tooltip>
+                        </TooltipProvider>
+                    </div>
                 </div>
             </div>
 
