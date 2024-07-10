@@ -508,10 +508,11 @@ const CanvasDrawingApp = () => {
                                         <Undo size={20} />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent className='mr-2'>
+                                <TooltipContent className='mr-2 p-1 px-2'>
                                     <div className="flex items-center justify-center">
                                         <span className='text-gray-500
                                         '>Undo</span>
+                                        <div className="w-[6px] h-[6px] bg-gray-500 rounded-full ml-2"></div>
                                         {!isMac ? (
                                             <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Z</kbd>
                                         ) : (
@@ -537,10 +538,11 @@ const CanvasDrawingApp = () => {
                                         <Redo size={20} />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent className='mr-2'
+                                <TooltipContent className='mr-2 p-1 px-2'
                                 >
                                     <div className="flex items-center justify-center">
                                         <span className='text-gray-500'>Redo</span>
+                                        <div className="w-[6px] h-[6px] bg-gray-500 rounded-full ml-2"></div>
                                         {!isMac ? (
                                             <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Shift+Z</kbd>
                                         ) : (
