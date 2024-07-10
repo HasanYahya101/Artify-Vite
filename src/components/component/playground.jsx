@@ -560,7 +560,7 @@ const CanvasDrawingApp = () => {
                 </div>
             </div>
 
-            <aside className="fixed top-5 left-7 ml-2 z-10 h-[calc(100vh-2.5rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
+            <aside className="fixed top-5 left-8 ml-2 z-10 h-[calc(100vh-2.5rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
                 <div className="p-4 border-b flex items-center justify-center">
                     <Avatar size="md">
                         <AvatarImage src="https://github.com/HasanYahya101.png" />
