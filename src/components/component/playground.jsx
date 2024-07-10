@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -11,6 +11,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover-download";
 import { Popover as PopoverArrow, PopoverContent as PopoverContentArrow, PopoverTrigger as PopoverTriggerArrow } from "@/components/ui/popover-sidebar";
 import { Slider } from "@/components/ui/slider";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -692,7 +693,24 @@ const CanvasDrawingApp = () => {
                                     >
                                         <div className="flex flex-col h-full shadow-xl">
                                             <div className="p-4 border-b">
-                                                <h2 className="text-lg font-semibold">Select Font</h2>
+                                                <div className="flex items-center justify-between">
+                                                    <h2 className="text-lg font-semibold">Select Font</h2>
+                                                    {/*toggle group for bold and italic*/}
+                                                    <div className="flex items-center justify-center space-x-4 p-1 border rounded-md">
+                                                        <ToggleGroup size={"sm"} type="multiple">
+                                                            <ToggleGroupItem value="bold" aria-label="Bold"
+                                                                onClick={() => { }}
+                                                            >
+                                                                <Bold className="h-4 w-4" />
+                                                            </ToggleGroupItem>
+                                                            <ToggleGroupItem value="italic" aria-label="Italic"
+                                                                onClick={() => { }}
+                                                            >
+                                                                <Italic className="h-4 w-4" />
+                                                            </ToggleGroupItem>
+                                                        </ToggleGroup>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div className="flex-1 overflow-auto space-y-1 justify-center">
                                                 <div className='p-3'>
