@@ -49,6 +49,17 @@ const CanvasDrawingApp = () => {
         ctx.beginPath();
     };
 
+    const clearCanvas = () => {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+    };
+
+    useEffect(() => {
+        if (ctx) {
+            clearCanvas();
+        }
+    }, [ctx]);
+
     const draw = (e) => {
         if (!isDrawing) return;
 
@@ -207,8 +218,8 @@ const CanvasDrawingApp = () => {
         };
 
         while (pixelsToCheck.length > 0) {
-            const y = pixelsToCheck.pop();
-            const x = pixelsToCheck.pop();
+            var y = pixelsToCheck.pop();
+            var x = pixelsToCheck.pop();
             let pixelPos = (y * canvas.width + x) * 4;
 
             while (y >= 0 && matchStartColor(pixelPos)) {
@@ -728,6 +739,7 @@ const CanvasDrawingApp = () => {
                 <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
                     onMouseEnter={() => setNewHover(true)}
                     onMouseLeave={() => setNewHover(false)}
+                    onClick={() => clearCanvas()}
                 >
                     <Plus size={24} />
                     {newHover === true ?
