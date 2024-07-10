@@ -52,11 +52,6 @@ const CanvasDrawingApp = () => {
         }
     };
 
-    const clearCanvas = () => {
-        ctx.fillStyle = '#FFFFFF';
-        ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-    };
-
     useEffect(() => {
         if (ctx) {
             clearCanvas();
@@ -331,8 +326,6 @@ const CanvasDrawingApp = () => {
         link.click();
     };
 
-
-
     const exportImageJPEG = (format) => {
         const canvas = canvasRef.current;
         const dataURL = canvas.toDataURL(`image/${format}`);
@@ -417,6 +410,13 @@ const CanvasDrawingApp = () => {
 
     const [undoDisabled, setUndoDisabled] = useState(true);
     const [redoDisabled, setRedoDisabled] = useState(true);
+
+    const clearCanvas = () => {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        // add the state to history
+        saveState();
+    };
 
     useEffect(() => {
         // if size of history is zero
