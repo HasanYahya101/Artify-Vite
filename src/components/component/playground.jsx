@@ -253,6 +253,36 @@ const CanvasDrawingApp = () => {
         setColor(e.target.value);
     };
 
+    const fill = (x, y, imageData) => {
+        const stack = [[x, y]];
+        const targetColor = ctx.getImageData(x, y, 1, 1).data;
+        const fillColor = hexToRgb(color);
+        if (fillColor === targetColor) return;
+
+        while (stack.length) {
+            const [x, y] = stack.pop();
+            const pixelColor = ctx.getImageData(x, y, 1, 1).data;
+            if (pixelColor === targetColor) {
+                ctx.fillStyle = color;
+                ctx.fillRect(x, y, 1, 1);
+                stack.push([x + 1, y]);
+                stack.push([x - 1, y]);
+                stack.push([x, y + 1]);
+                stack.push([x, y - 1]);
+            }
+        }
+    }
+
+    const hexToRgb = (hex) => {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return [r, g, b];
+    }
+
+    const [textHover, setTextHover] = useState(false);
+    const [newHover, setNewHover] = useState(false);
+
     return (
         <div className="flex min-h-screen bg-slate-50">
             <aside className="fixed top-4 left-4 ml-2 z-10 h-[calc(100vh-2rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
@@ -621,21 +651,33 @@ const CanvasDrawingApp = () => {
                     onMouseMove={draw}
                 />
             </div>
-            <div className="fixed bottom-9 right-9 flex flex-col gap-2">
-                <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6">
+            <div className="fixed bottom-24 right-10 flex flex-col gap-2">
+                <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
+                    onMouseEnter={() => setTextHover(true)}
+                    onMouseLeave={() => setTextHover(false)}
+                >
                     <Type size={24} />
-                    <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
-                        Text
-                    </span>
-                </button>
-                <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6">
-                    <Plus size={24} />
-                    <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
-                        New
-                    </span>
+                    {textHover === true ?
+                        <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
+                            Text
+                        </span>
+                        : null}
                 </button>
             </div>
-        </div>
+            <div className="fixed bottom-9 right-10 flex flex-col gap-2">
+                <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
+                    onMouseEnter={() => setNewHover(true)}
+                    onMouseLeave={() => setNewHover(false)}
+                >
+                    <Plus size={24} />
+                    {newHover === true ?
+                        <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
+                            New
+                        </span>
+                        : null}
+                </button>
+            </div>
+        </div >
     );
 };
 
