@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -474,6 +474,21 @@ const CanvasDrawingApp = () => {
     const [bold, setBold] = useState(false);
     const [italic, setItalic] = useState(false);
     const [fontSize, setFontSize] = useState([16]); // pixels
+
+    const HandleTouchStart = (e) => {
+        e.preventDefault();
+        handleMouseDown(e);
+    }; // for touch devices
+
+    const HandleTouchMove = (e) => {
+        e.preventDefault();
+        draw(e);
+    }; // for touch devices
+
+    const HandleTouchEnd = (e) => {
+        e.preventDefault();
+        stopDrawing();
+    }; // for touch devices
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -1021,10 +1036,12 @@ const CanvasDrawingApp = () => {
 
             <div
                 className={`h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden ${selected === "text" ? 'cursor-crosshair' : 'cursor-crosshair'}`}
+                onSingleTap={draw}
             >
                 <canvas
                     className={`w-[100vw] h-screen bg-white ${selected === "text" ? 'cursor-crosshair' : 'cursor-crosshair'}`}
                     ref={canvasRef}
+                    onSingleTap={draw}
                     onMouseDown={handleMouseDown}
                     onMouseUp={stopDrawing}
                     onMouseOut={stopDrawing}
@@ -1032,7 +1049,9 @@ const CanvasDrawingApp = () => {
                     onClick={draw}
                     onDoubleClickCapture={draw}
                     onMouseDownCapture={draw}
-                    onsingletap={draw}
+                    onTouchStart={HandleTouchStart}
+                    onTouchMove={HandleTouchMove}
+                    onTouchEnd={HandleTouchEnd}
                 // remove anti-aliasing using styles
                 /*style={{
                     imageRendering: 'pixelated',
