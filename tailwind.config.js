@@ -76,6 +76,7 @@ module.exports = {
         roboto: ['Roboto', 'sans-serif'],
         playwrite: ['Playwrite AU SA', 'sans-serif'],
         arsenal: ['Arsenal SC', 'sans-serif'],
+        anton: ['Anton SC', 'sans-serif'],
       },
     },
   },

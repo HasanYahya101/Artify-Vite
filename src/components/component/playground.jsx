@@ -747,6 +747,13 @@ const CanvasDrawingApp = () => {
                                                                 <span className="font-arsenal">Aa</span>
                                                             </Button>
                                                         </div>
+                                                        <div className="p-1">
+                                                            <Button variant={font === 'anton' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('anton')}
+                                                            >
+                                                                <span className="font-anton">Aa</span>
+                                                            </Button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className='space-y-6 flex-1'></div>
