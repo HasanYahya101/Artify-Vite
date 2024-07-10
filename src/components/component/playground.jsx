@@ -348,9 +348,6 @@ const CanvasDrawingApp = () => {
 
     };
 
-    // Example usage:
-    // Call exportImagePNG('png') and then exportImageJPEG('jpeg') separately.
-
     const colorInputRef = useRef(null);
 
     const handleButtonClick = () => {
