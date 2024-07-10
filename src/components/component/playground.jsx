@@ -37,7 +37,7 @@ const CanvasDrawingApp = () => {
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d', { willReadFrequently: true });
         setCtx(context);
     }, []);
 
@@ -190,7 +190,7 @@ const CanvasDrawingApp = () => {
 
     const floodFill = (startX, startY, newColor) => {
         const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
+        const ctx = canvas.getContext('2d', { willReadFrequently: true });
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const startPos = (startY * canvas.width + startX) * 4;
         const startR = imageData.data[startPos];
@@ -309,7 +309,7 @@ const CanvasDrawingApp = () => {
         const tempCanvas = document.createElement('canvas'); // Create a temporary canvas
         tempCanvas.width = canvas_.width;
         tempCanvas.height = canvas_.height;
-        const tempCtx = tempCanvas.getContext('2d');
+        const tempCtx = tempCanvas.getContext('2d', { willReadFrequently: true });
         tempCtx.drawImage(canvas_, 0, 0);
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
         for (let i = 0; i < imageData.data.length; i += 4) {
@@ -336,7 +336,7 @@ const CanvasDrawingApp = () => {
         const tempCanvas = document.createElement('canvas'); // Create a temporary canvas
         tempCanvas.width = canvas_.width;
         tempCanvas.height = canvas_.height;
-        const tempCtx = tempCanvas.getContext('2d');
+        const tempCtx = tempCanvas.getContext('2d', { willReadFrequently: true });
         tempCtx.drawImage(canvas_, 0, 0);
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
         tempCtx.putImageData(imageData, 0, 0);
@@ -378,11 +378,12 @@ const CanvasDrawingApp = () => {
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const context = canvas.getContext('2d');
+        const context = canvas.getContext('2d', { willReadFrequently: true });
         setCtx(context);
 
         // Save initial blank state
         const initialState = context.getImageData(0, 0, canvas.width, canvas.height);
+        // set will read frequently to true
         setHistory([initialState]);
         setHistoryIndex(0);
     }, []);
@@ -402,7 +403,8 @@ const CanvasDrawingApp = () => {
     };
 
     const undo = () => {
-        if (historyIndex > 0) {
+
+        if (!undoDisabled) {
             setHistoryIndex(prevIndex => {
                 const newIndex = prevIndex - 1;
                 ctx.putImageData(history[newIndex], 0, 0);
@@ -412,7 +414,7 @@ const CanvasDrawingApp = () => {
     };
 
     const redo = () => {
-        if (historyIndex < history.length - 1) {
+        if (!redoDisabled) {
             setHistoryIndex(prevIndex => {
                 const newIndex = prevIndex + 1;
                 ctx.putImageData(history[newIndex], 0, 0);
@@ -421,70 +423,54 @@ const CanvasDrawingApp = () => {
         }
     };
 
-    // do undo and redo with ctrl + z and ctrl + y
+    // do undo with ctrl z and redo with ctrl shift z
     const handleKeyDown = (e) => {
-        if ((e.ctrlKey || e.metaKey) && e.key === ('z' || 'Z')) {
-            e.preventDefault();
-            undo();
-        } else if ((e.ctrlKey || e.metaKey) && e.key === ('y' || 'Y')) {
+        const ctrlKey = e.ctrlKey || e.metaKey;
+        const shiftKey = e.shiftKey;
+        const zKey = e.key === 'z' || e.key === 'Z';
+
+        if (ctrlKey && zKey && shiftKey) {
             e.preventDefault();
             redo();
+        } else if (ctrlKey && zKey) {
+            e.preventDefault();
+            undo();
         }
     };
+
+    const [undoDisabled, setUndoDisabled] = useState(true);
+    const [redoDisabled, setRedoDisabled] = useState(true);
 
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         }
-    }, []);
-
-    const [undoDisabled, setUndoDisabled] = useState(true);
-    const [redoDisabled, setRedoDisabled] = useState(true);
+    }, [ctx, history, historyIndex, undoDisabled, redoDisabled]); // All the dependencies need to be added here
 
     const [time, setTime] = useState(0);
 
     useEffect(() => {
-        // if size of history is zero
-        if (history.length === 0) {
+        // If the historyIndex is at the start, disable undo
+        if (historyIndex === 0) {
             setUndoDisabled(true);
+        } else {
+            setUndoDisabled(false);
+        }
+
+        // If the historyIndex is at the end, disable redo
+        if (historyIndex === history.length - 1) {
             setRedoDisabled(true);
         } else {
-            // if historyIndex is at the start
-            if (historyIndex === 0) {
-                setUndoDisabled(true);
-            } else {
-                setUndoDisabled(false);
-            }
-
-            // if historyIndex is at the end
-            if (historyIndex === history.length - 1) {
-                setRedoDisabled(true);
-            } else {
-                setRedoDisabled(false);
-            }
+            setRedoDisabled(false);
         }
+
     }, [history, historyIndex]);
 
     const [fontOpen, setFontOpen] = useState(false);
     const [bold, setBold] = useState(false);
     const [italic, setItalic] = useState(false);
     const [fontSize, setFontSize] = useState([16]); // pixels
-
-    const HandleTouchStart = (e) => {
-        e.preventDefault();
-        handleMouseDown(e);
-    }; // for touch devices
-
-    const HandleTouchMove = (e) => {
-        e.preventDefault();
-        draw(e);
-    }; // for touch devices
-
-    const HandleTouchEnd = (e) => {
-        e.preventDefault();
-        stopDrawing();
-    }; // for touch devices
 
     const clearCanvas = () => {
         ctx.fillStyle = '#FFFFFF';
@@ -872,7 +858,7 @@ const CanvasDrawingApp = () => {
                                     <PopoverTriggerArrow>
                                         <TooltipTrigger>
                                             <Button variant="ghost" size="icon" className="group">
-                                                <div className="bg-muted rounded-full group-hover:bg-white" style={{ width: `${thickness} px`, height: `${thickness}px` }} />
+                                                <div className="bg-muted border rounded-full group-hover:bg-white" style={{ width: `${thickness}px`, height: `${thickness}px` }} />
                                             </Button>
                                         </TooltipTrigger>
                                     </PopoverTriggerArrow>
@@ -1059,9 +1045,6 @@ const CanvasDrawingApp = () => {
                     onClick={draw}
                     onDoubleClickCapture={draw}
                     onMouseDownCapture={draw}
-                    onTouchStart={HandleTouchStart}
-                    onTouchMove={HandleTouchMove}
-                    onTouchEnd={HandleTouchEnd}
                 // remove anti-aliasing using styles
                 /*style={{
                     imageRendering: 'pixelated',
