@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -537,8 +537,20 @@ const CanvasDrawingApp = () => {
                                         <Redo size={20} />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent>
-                                    <span className='text-gray-500'>Redo</span>
+                                <TooltipContent className='mr-2'
+                                >
+                                    <div className="flex items-center justify-center">
+                                        <span className='text-gray-500'>Redo</span>
+                                        {!isMac ? (
+                                            <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Shift+Z</kbd>
+                                        ) : (
+                                            <kbd className="flex ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">
+                                                <ArrowBigUp className='h-3 w-3 self-center' />
+                                                <Command className='h-3 w-3 self-center ml-[1px]' />
+                                                <span className='ml-0.5'>Z</span>
+                                            </kbd>
+                                        )}
+                                    </div>
                                 </TooltipContent>
                             </Tooltip>
                         </TooltipProvider>
