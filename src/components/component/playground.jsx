@@ -359,24 +359,6 @@ const CanvasDrawingApp = () => {
         setColor(e.target.value);
     };
 
-    // do undo and redo with ctrl + z and ctrl + y
-    useEffect(() => {
-        const handleKeyDown = (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
-                e.preventDefault();
-                undo();
-            } else if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
-                e.preventDefault();
-                redo();
-            }
-        };
-
-        window.addEventListener('keydown', handleKeyDown);
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-        }
-    }, []);
-
     const hexToRgb = (hex) => {
         const r = parseInt(hex.slice(1, 3), 16);
         const g = parseInt(hex.slice(3, 5), 16);
@@ -438,6 +420,24 @@ const CanvasDrawingApp = () => {
             });
         }
     };
+
+    // do undo and redo with ctrl + z and ctrl + y
+    const handleKeyDown = (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === ('z' || 'Z')) {
+            e.preventDefault();
+            undo();
+        } else if ((e.ctrlKey || e.metaKey) && e.key === ('y' || 'Y')) {
+            e.preventDefault();
+            redo();
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        }
+    }, []);
 
     const [undoDisabled, setUndoDisabled] = useState(true);
     const [redoDisabled, setRedoDisabled] = useState(true);
