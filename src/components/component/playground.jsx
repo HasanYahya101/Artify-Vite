@@ -840,7 +840,7 @@ const CanvasDrawingApp = () => {
                                                     </div>
                                                     <Slider
                                                         min={8}
-                                                        max={26}
+                                                        max={40}
                                                         step={1}
                                                         value={[fontSize]}
                                                         onValueChange={(value) => setFontSize(value)}
@@ -1080,6 +1080,7 @@ const CanvasDrawingApp = () => {
                 <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
                     onMouseEnter={() => setTextHover(true)}
                     onMouseLeave={() => setTextHover(false)}
+                    onClick={() => setSelected('text')}
                 >
                     <Type size={24} />
                     {textHover === true ?
