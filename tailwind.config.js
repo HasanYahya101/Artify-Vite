@@ -71,6 +71,12 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      fontFamily: {
+        sans: ["Inter", "sans-serif"],
+        roboto: ['Roboto', 'sans-serif'],
+        playwrite: ['Playwrite AU SA', 'sans-serif'],
+        arsenal: ['Arsenal SC', 'sans-serif'],
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

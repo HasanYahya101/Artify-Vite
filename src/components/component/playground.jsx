@@ -561,10 +561,10 @@ const CanvasDrawingApp = () => {
                                             </Button>
                                         </TooltipTrigger>
                                     </PopoverTriggerArrow>
-                                    <PopoverContentArrow className="" side="right"
+                                    <PopoverContentArrow className="shadow-xl" side="right"
                                         align="center" sideOffset={6}
                                     >
-                                        <div className="flex flex-col h-full">
+                                        <div className="flex flex-col h-full shadow-xl">
                                             <div className="p-4 border-b">
                                                 <h2 className="text-lg font-semibold">Select Shapes</h2>
                                             </div>
@@ -687,10 +687,10 @@ const CanvasDrawingApp = () => {
                                     <TooltipContent>
                                         <span className='text-gray-500'>Font and thickness</span>
                                     </TooltipContent>
-                                    <PopoverContentArrow className="" side="right"
+                                    <PopoverContentArrow className="shadow-xl" side="right"
                                         align="center" sideOffset={3}
                                     >
-                                        <div className="flex flex-col h-full">
+                                        <div className="flex flex-col h-full shadow-xl">
                                             <div className="p-4 border-b">
                                                 <h2 className="text-lg font-semibold">Select Font</h2>
                                             </div>
@@ -727,24 +727,24 @@ const CanvasDrawingApp = () => {
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'fantasy' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('fantasy')}
+                                                            <Button variant={font === 'roboto' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('roboto')}
                                                             >
-                                                                <span className="font-fantasy">Aa</span>
+                                                                <span className="font-roboto">Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'system-ui' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('system-ui')}
+                                                            <Button variant={font === 'playwrite' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('playwrite')}
                                                             >
-                                                                <span className="font-system-ui">Aa</span>
+                                                                <span className="font-playwrite">Aa</span>
                                                             </Button>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'emoji' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('emoji')}
+                                                            <Button variant={font === 'arsenal' ? 'secondary' : 'ghost'} size="icon"
+                                                                onClick={() => setFont('arsenal')}
                                                             >
-                                                                <span className="font-emoji">Aa</span>
+                                                                <span className="font-arsenal">Aa</span>
                                                             </Button>
                                                         </div>
                                                     </div>
@@ -771,10 +771,10 @@ const CanvasDrawingApp = () => {
                                             </Button>
                                         </TooltipTrigger>
                                     </PopoverTriggerArrow>
-                                    <PopoverContentArrow className="" side="right"
+                                    <PopoverContentArrow className="shadow-xl" side="right"
                                         align="center" sideOffset={3}
                                     >
-                                        <div className="flex flex-col h-full">
+                                        <div className="flex flex-col h-full shadow-xl">
                                             <div className="p-4 border-b">
                                                 <h2 className="text-lg font-semibold">Select Thickness</h2>
                                             </div>
