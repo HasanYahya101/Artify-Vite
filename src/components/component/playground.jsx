@@ -508,7 +508,7 @@ const CanvasDrawingApp = () => {
                                         <Undo size={20} />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent className='mr-2 p-1 px-2'>
+                                <TooltipContent className='mr-2 p-1 px-2 py-1.5'>
                                     <div className="flex items-center justify-center">
                                         <span className='text-gray-500
                                         '>Undo</span>
@@ -538,7 +538,7 @@ const CanvasDrawingApp = () => {
                                         <Redo size={20} />
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent className='mr-2 p-1 px-2'
+                                <TooltipContent className='mr-2 p-1 px-2 py-1.5'
                                 >
                                     <div className="flex items-center justify-center">
                                         <span className='text-gray-500'>Redo</span>
