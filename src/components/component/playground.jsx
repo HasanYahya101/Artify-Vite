@@ -105,7 +105,9 @@ const CanvasDrawingApp = () => {
     };
 
     /* Fonts 
+        serif: ["Source Serif Pro", "serif"],
         sans: ["Inter", "sans-serif"],
+        mono: ["Roboto Mono", "monospace"],
         roboto: ['Roboto', 'sans-serif'],
         playwrite: ['Playwrite AU SA', 'sans-serif'],
         arsenal: ['Arsenal SC', 'sans-serif'],
@@ -114,7 +116,10 @@ const CanvasDrawingApp = () => {
     */
 
     /*
-      <link
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
 href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
 rel="stylesheet">
 <link
@@ -129,9 +134,20 @@ rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
 */
 
+    const fonts = {
+        serif: 'Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap',
+        sans: '',
+        mono: '',
+        roboto: 'Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
+        playwrite: '',
+        arsenal: '',
+        anton: '',
+        cursive: '',
+    };
+
     useEffect(() => {
         const link = document.createElement('link');
-        link.href = `https://fonts.googleapis.com/css2?family=${font === 'serif' ? 'Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : font === 'font-sans' ? 'Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : font === 'font-mono' ? 'Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : font === 'cursive' ? 'Anton+SC&family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : 'Cedarville+Cursive&display=swap'}`;
+        link.href = `https://fonts.googleapis.com/css2?family=${fonts[font]}`;
         link.rel = 'stylesheet';
         document.head.appendChild(link);
 
