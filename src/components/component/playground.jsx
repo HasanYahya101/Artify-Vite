@@ -852,27 +852,32 @@ const CanvasDrawingApp = () => {
                                         align="center" sideOffset={3}
                                     >
                                         <div className="flex flex-col h-full shadow-xl">
-                                            <div className="p-4 border-b">
+                                            <div className="p-2 px-4 border-b">
                                                 <div className="flex items-center justify-between">
                                                     <h2 className="text-lg font-semibold">Select Font</h2>
-                                                    {/*toggle group for bold and italic*/}
-                                                    <div className="flex items-center justify-center space-x-1.5 p-1 border rounded-lg">
-                                                        <Toggle aria-label="Toggle bold"
-                                                            onPressedChange={() => setBold(!bold)}
-                                                            pressed={bold}
-                                                        >
-                                                            <Bold className="h-4 w-4" />
-                                                        </Toggle>
-                                                        <Toggle aria-label="Toggle italic"
-                                                            onPressedChange={() => setItalic(!italic)}
-                                                            pressed={italic}
-                                                        >
-                                                            <Italic className="h-4 w-4" />
-                                                        </Toggle>
-
+                                                    {/* Toggle group for bold and italic */}
+                                                    <div className="flex items-center space-x-1.5 p-1 border rounded-lg">
+                                                        {/* Place this div at the end of the flex container */}
+                                                        <div className="ml-auto flex items-center justify-center space-x-1.5">
+                                                            <Toggle
+                                                                aria-label="Toggle bold"
+                                                                onPressedChange={() => setBold(!bold)}
+                                                                pressed={bold}
+                                                            >
+                                                                <Bold className="h-4 w-4" />
+                                                            </Toggle>
+                                                            <Toggle
+                                                                aria-label="Toggle italic"
+                                                                onPressedChange={() => setItalic(!italic)}
+                                                                pressed={italic}
+                                                            >
+                                                                <Italic className="h-4 w-4" />
+                                                            </Toggle>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div className="flex-1 overflow-auto space-y-1 justify-center">
                                                 <div className='p-3'>
                                                     <div className="grid grid-cols-4 gap-2">
@@ -1032,7 +1037,10 @@ const CanvasDrawingApp = () => {
                                                     <span className="text-sm font-medium">Preview:</span>
                                                     <span
                                                         className={`text-black items-center justify-center font-${font} flex ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}
-                                                        style={{ fontSize: `${fontSize}px` }}
+                                                        style={{
+                                                            fontSize: `${fontSize}px`,
+                                                            fontFamily: font === 'cursive' ? 'cursive' : ''
+                                                        }}
                                                     >
                                                         Aa
                                                     </span>
