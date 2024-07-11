@@ -818,9 +818,9 @@ const CanvasDrawingApp = () => {
                                         align="center" sideOffset={3}
                                     >
                                         <div className="flex flex-col h-full shadow-xl">
-                                            <div className="p-2 px-4 border-b">
+                                            <div className="p-2 border-b">
                                                 <div className="flex items-center justify-between">
-                                                    <h2 className="text-lg font-semibold">Select Font</h2>
+                                                    <h2 className="text-lg font-semibold pl-2">Select Font</h2>
                                                     {/* Toggle group for bold and italic */}
                                                     <div className="flex items-center space-x-1.5 p-1 border rounded-lg">
                                                         {/* Place this div at the end of the flex container */}
@@ -829,6 +829,7 @@ const CanvasDrawingApp = () => {
                                                                 aria-label="Toggle bold"
                                                                 onPressedChange={() => setBold(!bold)}
                                                                 pressed={bold}
+                                                                variant="outline"
                                                             >
                                                                 <Bold className="h-4 w-4" />
                                                             </Toggle>
@@ -836,6 +837,7 @@ const CanvasDrawingApp = () => {
                                                                 aria-label="Toggle italic"
                                                                 onPressedChange={() => setItalic(!italic)}
                                                                 pressed={italic}
+                                                                variant="outline"
                                                             >
                                                                 <Italic className="h-4 w-4" />
                                                             </Toggle>
@@ -983,7 +985,7 @@ const CanvasDrawingApp = () => {
                                             </div>
                                             {/*Slider for custom font size with preview*/}
                                             <div>
-                                                <div className="p-3">
+                                                <div className="p-5">
                                                     <div className="flex justify-between items-center mb-3 mx-1">
                                                         <span className="text-sm font-medium">Custom Size</span>
                                                         <span className="text-sm text-muted-foreground">{fontSize}px</span>
