@@ -74,6 +74,35 @@ const CanvasDrawingApp = () => {
         }
     }, [ctx]);
 
+    const [inputValue, setInputValue] = useState('Hello World');
+    const [alertOpen, setAlertOpen] = useState(false);
+
+    const handleConfirm = () => {
+        if (inputValue === '') {
+            // throw error toast
+            toast("Error: The input field cannot be empty.", {
+                description: "Please enter some text to continue.",
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                },
+            });
+            setAlertOpen(true);
+            return;
+        }
+        setSelected('text');
+        setAlertOpen(false);
+        // throw toast
+        toast("Text added successfully!", {
+            description: "You can now add text to the canvas.",
+            action: {
+                label: "Close",
+                onClick: () => toast.dismiss(),
+            },
+        });
+        return;
+    };
+
     const draw = (e) => {
         if (!isDrawing) return;
 
@@ -192,10 +221,10 @@ const CanvasDrawingApp = () => {
                 }
                 break;
             case 'text':
-                ctx.font = `${fontSize}px ${font}`;
                 ctx.fillStyle = color;
-                ctx.fillText('Aa', x, y);
+                ctx.font = `${font} ${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px`;
 
+                ctx.fillText(inputValue, x, y);
                 break;
             default:
                 break;
@@ -506,35 +535,6 @@ const CanvasDrawingApp = () => {
         }
     };
 
-    const [inputValue, setInputValue] = useState('Hello World');
-    const [alertOpen, setAlertOpen] = useState(false);
-
-    const handleConfirm = () => {
-        if (inputValue === '') {
-            // throw error toast
-            toast("Error: The input field cannot be empty.", {
-                description: "Please enter some text to continue.",
-                action: {
-                    label: "Close",
-                    onClick: () => toast.dismiss(),
-                },
-            });
-            setAlertOpen(true);
-            return;
-        }
-        setSelected('text');
-        setAlertOpen(false);
-        // throw toast
-        toast("Text added successfully!", {
-            description: "You can now add text to the canvas.",
-            action: {
-                label: "Close",
-                onClick: () => toast.dismiss(),
-            },
-        });
-        return;
-    }
-
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
@@ -831,61 +831,133 @@ const CanvasDrawingApp = () => {
                                                 <div className='p-3'>
                                                     <div className="grid grid-cols-4 gap-2">
                                                         <div className="p-1">
-                                                            <Button variant={font === 'serif' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('serif')}
-                                                            >
-                                                                <span className={`font-serif ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'serif' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('serif')}
+                                                                        >
+                                                                            <span className={`font-serif ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Serif</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'sans' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('sans')} // sans-serif
-                                                            >
-                                                                <span className={`font-sans ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'sans' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('sans')} // sans-serif
+                                                                        >
+                                                                            <span className={`font-sans ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Sans</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'mono' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('mono')} // monospace
-                                                            >
-                                                                <span className={`font-mono ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'mono' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('mono')} // monospace
+                                                                        >
+                                                                            <span className={`font-mono ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Mono</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         {/*custom fonts*/}
                                                         <div className="p-1">
-                                                            <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('cursive')}
-                                                            >
-                                                                <span className={`font-cursive ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('cursive')}
+                                                                        >
+                                                                            <span className={`font-cursive ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Cursive</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'roboto' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('roboto')}
-                                                            >
-                                                                <span className={`font-roboto ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'roboto' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('roboto')}
+                                                                        >
+                                                                            <span className={`font-roboto ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Roboto</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'playwrite' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('playwrite')}
-                                                            >
-                                                                <span className={`font-playwrite ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'playwrite' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('playwrite')}
+                                                                        >
+                                                                            <span className={`font-playwrite ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Playwrite</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'arsenal' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('arsenal')}
-                                                            >
-                                                                <span className={`font-arsenal ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'arsenal' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('arsenal')}
+                                                                        >
+                                                                            <span className={`font-arsenal ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Arsenal</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={font === 'anton' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => setFont('anton')}
-                                                            >
-                                                                <span className={`font-anton ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={font === 'anton' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('anton')}
+                                                                        >
+                                                                            <span className={`font-anton ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Anton</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                     </div>
                                                 </div>
