@@ -26,6 +26,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
+import { Toggle } from "@/components/ui/toggle";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -103,6 +104,43 @@ const CanvasDrawingApp = () => {
         return;
     };
 
+    /* Fonts 
+        sans: ["Inter", "sans-serif"],
+        roboto: ['Roboto', 'sans-serif'],
+        playwrite: ['Playwrite AU SA', 'sans-serif'],
+        arsenal: ['Arsenal SC', 'sans-serif'],
+        anton: ['Anton SC', 'sans-serif'],
+        cursive: ['Cedarville Cursive', 'cursive'],
+    */
+
+    /*
+      <link
+href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+rel="stylesheet">
+<link
+href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+*/
+
+    useEffect(() => {
+        const link = document.createElement('link');
+        link.href = `https://fonts.googleapis.com/css2?family=${font === 'serif' ? 'Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : font === 'font-sans' ? 'Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : font === 'font-mono' ? 'Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : font === 'cursive' ? 'Anton+SC&family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' : 'Cedarville+Cursive&display=swap'}`;
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+
+        return () => {
+            document.head.removeChild(link);
+        };
+    }, [font]);
+
+
     async function loadFont(fontName, fontUrl) {
         const font = new FontFace(fontName, `url(${fontUrl})`);
         await font.load();
@@ -135,7 +173,7 @@ const CanvasDrawingApp = () => {
                 break;
             case 'text':
                 ctx.fillStyle = color;
-                ctx.font = `${font === 'serif' ? 'serif' : font === 'sans' ? 'sans-serif' : font === 'mono' ? 'monospace' : font === 'cursive' ? 'cursive' : font === 'roboto' ? 'roboto' : 'serif'} ${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px`;
+                ctx.font = `${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px ${font}`;
                 ctx.fillText(inputValue, x, y);
 
                 break;
@@ -817,19 +855,20 @@ const CanvasDrawingApp = () => {
                                                 <div className="flex items-center justify-between">
                                                     <h2 className="text-lg font-semibold">Select Font</h2>
                                                     {/*toggle group for bold and italic*/}
-                                                    <div className="flex items-center justify-center space-x-4 p-1 border rounded-lg">
-                                                        <ToggleGroup size={"sm"} type="multiple">
-                                                            <ToggleGroupItem value="bold" aria-label="Bold"
-                                                                onClick={() => { setBold(!bold) }}
-                                                            >
-                                                                <Bold className="h-4 w-4" />
-                                                            </ToggleGroupItem>
-                                                            <ToggleGroupItem value="italic" aria-label="Italic"
-                                                                onClick={() => { setItalic(!italic) }}
-                                                            >
-                                                                <Italic className="h-4 w-4" />
-                                                            </ToggleGroupItem>
-                                                        </ToggleGroup>
+                                                    <div className="flex items-center justify-center space-x-1.5 p-1 border rounded-lg">
+                                                        <Toggle aria-label="Toggle bold"
+                                                            onPressedChange={() => setBold(!bold)}
+                                                            pressed={bold}
+                                                        >
+                                                            <Bold className="h-4 w-4" />
+                                                        </Toggle>
+                                                        <Toggle aria-label="Toggle italic"
+                                                            onPressedChange={() => setItalic(!italic)}
+                                                            pressed={italic}
+                                                        >
+                                                            <Italic className="h-4 w-4" />
+                                                        </Toggle>
+
                                                     </div>
                                                 </div>
                                             </div>
