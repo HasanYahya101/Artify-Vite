@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is a basic {description}.
+This is a basic paint application in react. It uses a pencil to draw on the canvas. Moreover, you can draw shapes and text on the canvas as well. It also allows users to change colors and thickness of strokes. It also allows for `undo` and `redo` operations.
 
 ## UI Library
 
