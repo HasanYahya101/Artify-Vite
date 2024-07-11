@@ -12,6 +12,20 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Popover as PopoverArrow, PopoverContent as PopoverContentArrow, PopoverTrigger as PopoverTriggerArrow } from "@/components/ui/popover-sidebar";
 import { Slider } from "@/components/ui/slider";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import { Input } from "@/components/ui/input";
+import { Toaster } from "@/components/ui/sonner";
+import { toast } from "sonner";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -491,6 +505,35 @@ const CanvasDrawingApp = () => {
             }
         }
     };
+
+    const [inputValue, setInputValue] = useState('Hello World');
+    const [alertOpen, setAlertOpen] = useState(false);
+
+    const handleConfirm = () => {
+        if (inputValue === '') {
+            // throw error toast
+            toast("Error: The input field cannot be empty.", {
+                description: "Please enter some text to continue.",
+                action: {
+                    label: "Close",
+                    onClick: () => toast.dismiss(),
+                },
+            });
+            setAlertOpen(true);
+            return;
+        }
+        setSelected('text');
+        setAlertOpen(false);
+        // throw toast
+        toast("Text added successfully!", {
+            description: "You can now add text to the canvas.",
+            action: {
+                label: "Close",
+                onClick: () => toast.dismiss(),
+            },
+        });
+        return;
+    }
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -1091,18 +1134,53 @@ const CanvasDrawingApp = () => {
                 />
             </div>
             <div className="fixed bottom-24 right-9 flex flex-col gap-2">
-                <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
-                    onMouseEnter={() => setTextHover(true)}
-                    onMouseLeave={() => setTextHover(false)}
-                    onClick={() => setSelected('text')}
+                <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}
                 >
-                    <Type size={24} />
-                    {textHover === true ?
-                        <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
-                            Text
-                        </span>
-                        : null}
-                </button>
+                    <AlertDialogTrigger>
+                        <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
+                            onMouseEnter={() => setTextHover(true)}
+                            onMouseLeave={() => setTextHover(false)}
+                        //onClick={() => setSelected('text')}
+                        >
+                            <Type size={24} />
+                            {textHover === true ?
+                                <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ml-1">
+                                    Text
+                                </span>
+                                : null}
+                        </button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent className="max-w-md">
+                        <AlertDialogHeader>
+                            <AlertDialogTitle className="text-xl font-semibold">Enter Your Text</AlertDialogTitle>
+                            <AlertDialogDescription className="text-sm text-gray-500">
+                                Please enter the text you want to display on the canvas. Upon double clicking on the canvas, the text will be displayed.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <div className="my-4">
+                            <Input
+                                type="text"
+                                placeholder="Type here..."
+                                value={inputValue}
+                                onChange={(e) => setInputValue(e.target.value)}
+                                className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel asChild>
+                                <Button variant="outline" className="w-full sm:w-auto"
+                                    onClick={() => setAlertOpen(false)}
+                                >Cancel</Button>
+                            </AlertDialogCancel>
+                            <AlertDialogAction asChild>
+                                <Button onClick={() => { handleConfirm(); }}
+                                    disabled={inputValue === ''}
+                                    className="w-full sm:w-auto bg-blue-500 hover:bg-blue-600 text-white">Confirm</Button>
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
+
             </div>
             <div className="fixed bottom-9 right-9 flex flex-col gap-2">
                 <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
@@ -1118,6 +1196,8 @@ const CanvasDrawingApp = () => {
                         : null}
                 </button>
             </div>
+            <Toaster
+            />
         </div >
     );
 };
