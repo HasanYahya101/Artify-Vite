@@ -495,7 +495,7 @@ const CanvasDrawingApp = () => {
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
-            <div className="fixed top-7 right-7 z-10 rounded-md shadow-lg border">
+            <div className="fixed top-7 right-7 z-10 rounded-md bg-white shadow-lg border">
                 <div className="flex flex-col">
                     <div className='p-1'>
                         <TooltipProvider>
