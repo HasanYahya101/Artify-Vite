@@ -116,33 +116,18 @@ const CanvasDrawingApp = () => {
     */
 
     /*
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-
-href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-rel="stylesheet">
-<link
-href="https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-rel="stylesheet">
-<link
-href="https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-rel="stylesheet">
-<link
-href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&family=Playwrite+AU+SA:wght@100..400&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+    
 */
 
     const fonts = {
         serif: 'Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap',
-        sans: '',
-        mono: '',
+        sans: 'Inter:wght@100..900&display=swap',
+        mono: 'Roboto+Mono:wght@100..900&display=swap',
         roboto: 'Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
-        playwrite: '',
-        arsenal: '',
-        anton: '',
-        cursive: '',
+        playwrite: 'Playwrite+AU+SA:wght@100..400&display=swap',
+        arsenal: 'Arsenal&display=swap',
+        anton: 'Anton&display=swap',
+        cursive: 'Cedarville+Cursive&display=swap',
     };
 
     useEffect(() => {
@@ -947,7 +932,9 @@ rel="stylesheet">
                                                                         <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
                                                                             onClick={() => setFont('cursive')}
                                                                         >
-                                                                            <span className={`font-cursive ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                            <span className={` ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}
+                                                                                style={{ fontFamily: 'cursive' }}
+                                                                            >Aa</span>
                                                                         </Button>
                                                                     </TooltipTrigger>
                                                                     <TooltipContent>
