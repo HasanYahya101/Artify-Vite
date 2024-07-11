@@ -103,6 +103,12 @@ const CanvasDrawingApp = () => {
         return;
     };
 
+    async function loadFont(fontName, fontUrl) {
+        const font = new FontFace(fontName, `url(${fontUrl})`);
+        await font.load();
+        document.fonts.add(font);
+    }
+
     const draw = (e) => {
         if (!isDrawing) return;
 
@@ -126,6 +132,12 @@ const CanvasDrawingApp = () => {
                 ctx.stroke();
                 ctx.beginPath();
                 ctx.moveTo(x, y);
+                break;
+            case 'text':
+                ctx.fillStyle = color;
+                ctx.font = `${font === 'serif' ? 'serif' : font === 'sans' ? 'sans-serif' : font === 'mono' ? 'monospace' : font === 'cursive' ? 'cursive' : font === 'roboto' ? 'roboto' : 'serif'} ${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px`;
+                ctx.fillText(inputValue, x, y);
+
                 break;
             case 'fill':
                 floodFill(x, y, color);
@@ -219,12 +231,6 @@ const CanvasDrawingApp = () => {
                     default:
                         break;
                 }
-                break;
-            case 'text':
-                ctx.fillStyle = color;
-                ctx.font = `${font} ${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px`;
-
-                ctx.fillText(inputValue, x, y);
                 break;
             default:
                 break;
