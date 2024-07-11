@@ -46,7 +46,7 @@ const CanvasDrawingApp = () => {
 
 
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
-    const [font, setFont] = useState('serif');
+    const [font, setFont] = useState('sera');
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -75,7 +75,7 @@ const CanvasDrawingApp = () => {
         }
     }, [ctx]);
 
-    const [inputValue, setInputValue] = useState('Hello World');
+    const [inputValue, setInputValue] = useState('Aa');
     const [alertOpen, setAlertOpen] = useState(false);
 
     const handleConfirm = () => {
@@ -104,49 +104,16 @@ const CanvasDrawingApp = () => {
         return;
     };
 
-    /* Fonts 
-        serif: ["Source Serif Pro", "serif"],
-        sans: ["Inter", "sans-serif"],
-        mono: ["Roboto Mono", "monospace"],
-        roboto: ['Roboto', 'sans-serif'],
-        playwrite: ['Playwrite AU SA', 'sans-serif'],
-        arsenal: ['Arsenal SC', 'sans-serif'],
-        anton: ['Anton SC', 'sans-serif'],
-        cursive: ['Cedarville Cursive', 'cursive'],
-    */
-
-    /*
-    
-*/
-
     const fonts = {
-        serif: 'Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap',
-        sans: 'Inter:wght@100..900&display=swap',
-        mono: 'Roboto+Mono:wght@100..900&display=swap',
-        roboto: 'Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap',
-        playwrite: 'Playwrite+AU+SA:wght@100..400&display=swap',
-        arsenal: 'Arsenal&display=swap',
-        anton: 'Anton&display=swap',
-        cursive: 'Cedarville+Cursive&display=swap',
+        sera: 'Playwrite ID',
+        block: 'Tiny5',
+        oswald: 'Oswald',
+        roboto: 'Roboto',
+        playwrite: "Playwrite AU NSW",
+        arsenal: 'Arsenal SC',
+        anton: 'Anton SC',
+        cursive: 'Cedarville Cursive',
     };
-
-    useEffect(() => {
-        const link = document.createElement('link');
-        link.href = `https://fonts.googleapis.com/css2?family=${fonts[font]}`;
-        link.rel = 'stylesheet';
-        document.head.appendChild(link);
-
-        return () => {
-            document.head.removeChild(link);
-        };
-    }, [font]);
-
-
-    async function loadFont(fontName, fontUrl) {
-        const font = new FontFace(fontName, `url(${fontUrl})`);
-        await font.load();
-        document.fonts.add(font);
-    }
 
     const draw = (e) => {
         if (!isDrawing) return;
@@ -174,9 +141,8 @@ const CanvasDrawingApp = () => {
                 break;
             case 'text':
                 ctx.fillStyle = color;
-                ctx.font = `${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px ${font}`;
+                ctx.font = `${bold ? 'bold' : ''} ${italic ? 'italic' : ''} ${fontSize}px ${fonts[font]}`;
                 ctx.fillText(inputValue, x, y);
-
                 break;
             case 'fill':
                 floodFill(x, y, color);
@@ -885,14 +851,14 @@ const CanvasDrawingApp = () => {
                                                             <TooltipProvider>
                                                                 <Tooltip>
                                                                     <TooltipTrigger>
-                                                                        <Button variant={font === 'serif' ? 'secondary' : 'ghost'} size="icon"
-                                                                            onClick={() => setFont('serif')}
+                                                                        <Button variant={font === 'sera' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('sera')}
                                                                         >
-                                                                            <span className={`font-serif ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                            <span className={`font-sera ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                                         </Button>
                                                                     </TooltipTrigger>
                                                                     <TooltipContent>
-                                                                        <span className='text-gray-500'>Serif</span>
+                                                                        <span className='text-gray-500'>Sera</span>
                                                                     </TooltipContent>
                                                                 </Tooltip>
                                                             </TooltipProvider>
@@ -901,14 +867,14 @@ const CanvasDrawingApp = () => {
                                                             <TooltipProvider>
                                                                 <Tooltip>
                                                                     <TooltipTrigger>
-                                                                        <Button variant={font === 'sans' ? 'secondary' : 'ghost'} size="icon"
-                                                                            onClick={() => setFont('sans')} // sans-serif
+                                                                        <Button variant={font === 'block' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('block')}
                                                                         >
-                                                                            <span className={`font-sans ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                            <span className={`font-block ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                                         </Button>
                                                                     </TooltipTrigger>
                                                                     <TooltipContent>
-                                                                        <span className='text-gray-500'>Sans</span>
+                                                                        <span className='text-gray-500'>Block</span>
                                                                     </TooltipContent>
                                                                 </Tooltip>
                                                             </TooltipProvider>
@@ -917,14 +883,14 @@ const CanvasDrawingApp = () => {
                                                             <TooltipProvider>
                                                                 <Tooltip>
                                                                     <TooltipTrigger>
-                                                                        <Button variant={font === 'mono' ? 'secondary' : 'ghost'} size="icon"
-                                                                            onClick={() => setFont('mono')} // monospace
+                                                                        <Button variant={font === 'oswald' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => setFont('oswald')}
                                                                         >
-                                                                            <span className={`font-mono ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
+                                                                            <span className={`font-oswald ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}>Aa</span>
                                                                         </Button>
                                                                     </TooltipTrigger>
                                                                     <TooltipContent>
-                                                                        <span className='text-gray-500'>Mono</span>
+                                                                        <span className='text-gray-500'>Oswald</span>
                                                                     </TooltipContent>
                                                                 </Tooltip>
                                                             </TooltipProvider>
@@ -937,8 +903,7 @@ const CanvasDrawingApp = () => {
                                                                         <Button variant={font === 'cursive' ? 'secondary' : 'ghost'} size="icon"
                                                                             onClick={() => setFont('cursive')}
                                                                         >
-                                                                            <span className={` ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}
-                                                                                style={{ fontFamily: 'cursive' }}
+                                                                            <span className={`font-cursive ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}
                                                                             >Aa</span>
                                                                         </Button>
                                                                     </TooltipTrigger>
@@ -1039,7 +1004,6 @@ const CanvasDrawingApp = () => {
                                                         className={`text-black items-center justify-center font-${font} flex ${bold ? 'font-bold' : ''} ${italic ? 'italic' : ''}`}
                                                         style={{
                                                             fontSize: `${fontSize}px`,
-                                                            fontFamily: font === 'cursive' ? 'cursive' : ''
                                                         }}
                                                     >
                                                         Aa
