@@ -829,7 +829,7 @@ const CanvasDrawingApp = () => {
                                                                 aria-label="Toggle bold"
                                                                 onPressedChange={() => setBold(!bold)}
                                                                 pressed={bold}
-                                                                variant="outline"
+                                                                variant="ghost"
                                                             >
                                                                 <Bold className="h-4 w-4" />
                                                             </Toggle>
@@ -837,7 +837,7 @@ const CanvasDrawingApp = () => {
                                                                 aria-label="Toggle italic"
                                                                 onPressedChange={() => setItalic(!italic)}
                                                                 pressed={italic}
-                                                                variant="outline"
+                                                                variant="ghost"
                                                             >
                                                                 <Italic className="h-4 w-4" />
                                                             </Toggle>
