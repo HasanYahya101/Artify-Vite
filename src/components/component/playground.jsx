@@ -28,6 +28,21 @@ import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Toggle } from "@/components/ui/toggle";
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card-profile";
+import {
+    ContextMenu,
+    ContextMenuCheckboxItem,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuLabel,
+    ContextMenuRadioGroup,
+    ContextMenuRadioItem,
+    ContextMenuSeparator,
+    ContextMenuShortcut,
+    ContextMenuSub,
+    ContextMenuSubContent,
+    ContextMenuSubTrigger,
+    ContextMenuTrigger,
+} from "@/components/ui/context-menu";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -1259,30 +1274,83 @@ const CanvasDrawingApp = () => {
                 className={`h-screen max-h-screen max-w-[100vw] bg-white self-center relative w-screen border-black overflow-hidden ${selected === "text" ? 'cursor-crosshair' : 'cursor-crosshair'}`}
                 onSingleTap={draw}
             >
-                <canvas
-                    className={`w-[100vw] h-screen bg-white ${selected === "text" ? 'cursor-crosshair' : 'cursor-crosshair'}`}
-                    ref={canvasRef}
-                    onSingleTap={draw}
-                    onMouseDown={handleMouseDown}
-                    onMouseUp={stopDrawing}
-                    onMouseOut={stopDrawing}
-                    onMouseMove={draw}
-                    onClick={draw}
-                    onDoubleClickCapture={draw}
-                    onMouseDownCapture={draw}
-                // remove anti-aliasing using styles
-                /*style={{
-                    imageRendering: 'pixelated',
-                    imageRendering: 'crisp-edges',
-                    imageRendering: '-moz-crisp-edges',
-                    imageRendering: '-webkit-optimize-contrast',
-                    imageRendering: 'optimize-contrast',
-                    imageRendering: 'optimizeSpeed',
-                    imageRendering: 'optimizeQuality',
-                    transform: 'scale(1)',
-                    transformOrigin: '0 0',
-                }}*/
-                />
+                <ContextMenu>
+                    <ContextMenuTrigger>
+                        <canvas
+                            className={`w-[100vw] h-screen bg-white ${selected === "text" ? 'cursor-crosshair' : 'cursor-crosshair'}`}
+                            ref={canvasRef}
+                            onSingleTap={draw}
+                            onMouseDown={handleMouseDown}
+                            onMouseUp={stopDrawing}
+                            onMouseOut={stopDrawing}
+                            onMouseMove={draw}
+                            onClick={draw}
+                            onDoubleClickCapture={draw}
+                            onMouseDownCapture={draw}
+                        // remove anti-aliasing using styles
+                        /*style={{
+                            imageRendering: 'pixelated',
+                            imageRendering: 'crisp-edges',
+                            imageRendering: '-moz-crisp-edges',
+                            imageRendering: '-webkit-optimize-contrast',
+                            imageRendering: 'optimize-contrast',
+                            imageRendering: 'optimizeSpeed',
+                            imageRendering: 'optimizeQuality',
+                            transform: 'scale(1)',
+                            transformOrigin: '0 0',
+                        }}*/
+                        />
+                    </ContextMenuTrigger>
+                    <ContextMenuContent className="shadow-lg">
+                        <ContextMenuItem
+                            onClick={() => { undo(); }}
+                        >
+                            Undo
+                        </ContextMenuItem>
+                        <ContextMenuItem
+                            onClick={() => { redo(); }}
+                        >
+                            Redo
+                        </ContextMenuItem>
+                        <ContextMenuSeparator />
+                        <ContextMenuItem
+                            onClick={() => { setAlertOpen(true); }}
+                        >
+                            Add Text
+                        </ContextMenuItem>
+                        <ContextMenuItem
+                            onClick={() => { clearCanvas(); }}
+                        >
+                            Clear Canvas
+                        </ContextMenuItem>
+                        <ContextMenuSeparator />
+                        <ContextMenuItem
+                            onClick={() => { setSelected('pencil'); }}
+                        >
+                            Select Pencil
+                        </ContextMenuItem>
+                        <ContextMenuItem
+                            onClick={() => { setSelected('eraser'); }}
+                        >
+                            Select Eraser
+                        </ContextMenuItem>
+                        <ContextMenuItem
+                            onClick={() => { setSelected('shapes'); }}
+                        >
+                            Select Shapes
+                        </ContextMenuItem>
+                        <ContextMenuItem
+                            onClick={() => { setSelected('color picker'); }}
+                        >
+                            Select Color Picker
+                        </ContextMenuItem>
+                        <ContextMenuItem
+                            onClick={() => { setSelected('fill'); }}
+                        >
+                            Select Fill
+                        </ContextMenuItem>
+                    </ContextMenuContent>
+                </ContextMenu>
             </div>
             <div className="fixed bottom-24 right-9 flex flex-col gap-2">
                 <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}
