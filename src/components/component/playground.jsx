@@ -64,6 +64,12 @@ const CanvasDrawingApp = () => {
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
     const [font, setFont] = useState('sera');
 
+    const [isMac, setIsMac] = useState(false);
+
+    useEffect(() => {
+        setIsMac(window.navigator.platform.toUpperCase().indexOf('MAC') >= 0);
+    }, []);
+
     useEffect(() => {
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
@@ -586,12 +592,6 @@ const CanvasDrawingApp = () => {
     const [bold, setBold] = useState(false);
     const [italic, setItalic] = useState(false);
     const [fontSize, setFontSize] = useState([16]); // pixels
-
-    const [isMac, setIsMac] = useState(false);
-
-    useEffect(() => {
-        setIsMac(window.navigator.platform.toUpperCase().indexOf('MAC') >= 0);
-    }, []);
 
     const clearCanvas = () => {
         ctx.fillStyle = '#FFFFFF';
