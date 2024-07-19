@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp, GitCommitHorizontal, User, Star, Monitor, BookMarked, GitCompare } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -27,7 +27,7 @@ import { Input } from "@/components/ui/input";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Toggle } from "@/components/ui/toggle";
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card-profile";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -617,13 +617,66 @@ const CanvasDrawingApp = () => {
 
             <aside className="fixed top-5 left-6 ml-2 z-10 h-[calc(100vh-2.5rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
                 <div className="p-4 border-b flex items-center justify-center">
-                    <Avatar size="md" className='cursor-pointer'
-                        onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
-                    >
-                        <AvatarImage src="https://github.com/HasanYahya101.png" />
-                        <AvatarFallback className="bg-gray-100 border"
-                        >HY</AvatarFallback>
-                    </Avatar>
+                    <HoverCard>
+                        <HoverCardTrigger>
+                            <Avatar size="md" className='cursor-pointer'
+                                onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
+                            >
+                                <AvatarImage src="https://github.com/HasanYahya101.png" />
+                                <AvatarFallback className="bg-gray-100 border"
+                                >HY</AvatarFallback>
+                            </Avatar>
+                        </HoverCardTrigger>
+                        <HoverCardContent className="z-50 ml-3"
+                        >
+                            <div className="bg-white shadow-lg rounded-lg w-80 border border-gray-200">
+                                <div className="flex items-center space-x-3 border-b p-2">
+                                    <span className="text-xs ml-2 font-semibold text-gray-800">Last updated 7/19/2024
+                                    </span>
+                                </div>
+                                <div className='p-4'>
+
+                                    <div className="flex items-center space-x-4 mb-4">
+                                        <Avatar className='cursor-pointer h-12 w-12'
+                                            onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
+                                        >
+                                            <AvatarImage src="https://github.com/HasanYahya101.png" />
+                                            <AvatarFallback className="bg-gray-100 border"
+                                            >HY</AvatarFallback>
+                                        </Avatar>
+
+                                        <div>
+                                            <h2 className="font-bold text-gray-800 hover:cursor-pointer hover:text-blue-800"
+                                                onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
+                                            >HasanYahya101</h2>
+                                            <span className="text-gray-600 hover:cursor-pointer hover:text-blue-700"
+                                                onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
+                                            >Hasan Yahya</span>
+                                        </div>
+                                    </div>
+
+                                    <p className="text-gray-700 mb-4 text-base">
+                                        Student at Fast Nuces Lahore. Trying to be a good Problem Solver.
+                                    </p>
+
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <Star className="text-purple-600" size={14} />
+                                        <span className="text-purple-600 font-semibold px-2 py-0.5 rounded-full border border-purple-600 text-xs">PRO</span>
+                                    </div>
+
+                                    <div className="flex items-center space-x-2 mb-2">
+                                        <BookMarked className="text-gray-500" size={14} />
+                                        <span className="text-gray-700 text-sm">Owns this repository</span>
+                                    </div>
+
+                                    <div className="flex items-center space-x-2">
+                                        <GitCompare className="text-gray-500" size={14} />
+                                        <span className="text-gray-700 text-sm">Committed to this repository in the past.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </HoverCardContent>
+                    </HoverCard>
                 </div>
                 <div className='overflow-auto'
                     style={{ scrollbarWidth: 'none' }}
