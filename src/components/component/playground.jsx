@@ -1328,27 +1328,27 @@ const CanvasDrawingApp = () => {
                         <ContextMenuSub>
                             <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
                             <ContextMenuSubContent className="w-48">
-                                <ContextMenuItem inset
+                                <ContextMenuItem
                                     onClick={() => { setSelected('pencil'); }}
                                 >
                                     Select Pencil
                                 </ContextMenuItem>
-                                <ContextMenuItem inset
+                                <ContextMenuItem
                                     onClick={() => { setSelected('eraser'); }}
                                 >
                                     Select Eraser
                                 </ContextMenuItem>
-                                <ContextMenuItem inset
+                                <ContextMenuItem
                                     onClick={() => { setSelected('shapes'); }}
                                 >
                                     Select Shapes
                                 </ContextMenuItem>
-                                <ContextMenuItem inset
+                                <ContextMenuItem
                                     onClick={() => { setSelected('color picker'); }}
                                 >
                                     Select Color Picker
                                 </ContextMenuItem>
-                                <ContextMenuItem inset
+                                <ContextMenuItem
                                     onClick={() => { setSelected('fill'); }}
                                 >
                                     Select Fill
