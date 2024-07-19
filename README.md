@@ -28,7 +28,7 @@ This project was deployed to Github Pages and can be tested there. No servers or
 ![Screenshot 2024-07-11 093312](https://github.com/HasanYahya101/Artify-Vite/assets/118683092/fb30a751-b0da-43cd-9a40-4af91b85cfdf)
 ![Screenshot 2024-07-11 093337](https://github.com/HasanYahya101/Artify-Vite/assets/118683092/3c67c893-ecc0-4c8d-9c24-54d7e7197275)
 ![Screenshot 2024-07-11 093358](https://github.com/HasanYahya101/Artify-Vite/assets/118683092/8b9ab5a5-b936-4aa5-9456-f2a8d4e4c5b2)
-
+![image](https://github.com/user-attachments/assets/72b11704-d846-42ff-9be4-4b0392cb1ddd)
 
 ## React + Vite
 
