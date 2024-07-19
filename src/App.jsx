@@ -10,7 +10,7 @@ const isDesktop = () => {
 };
 
 function App() {
-    if (isDesktop()) {
+    if (!isDesktop()) {
         return <Apology />
     }
     else {
