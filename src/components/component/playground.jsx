@@ -607,6 +607,22 @@ const CanvasDrawingApp = () => {
         }
     };
 
+    // Touch events for mobile
+    const handleTouchStart = (e) => {
+        e.preventDefault();
+        handleMouseDown(e.touches[0]);
+    };
+
+    const handleTouchMove = (e) => {
+        e.preventDefault();
+        draw(e.touches[0]);
+    };
+
+    const handleTouchEnd = (e) => {
+        e.preventDefault();
+        stopDrawing();
+    };
+
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
@@ -1331,6 +1347,9 @@ const CanvasDrawingApp = () => {
                             onClick={draw}
                             onDoubleClickCapture={draw}
                             onMouseDownCapture={draw}
+                            onTouchStart={handleTouchStart}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
                         // remove anti-aliasing using styles
                         /*style={{
                             imageRendering: 'pixelated',
