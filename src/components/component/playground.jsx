@@ -1279,7 +1279,6 @@ const CanvasDrawingApp = () => {
                         <canvas
                             className={`w-[100vw] h-screen bg-white ${selected === "text" ? 'cursor-crosshair' : 'cursor-crosshair'}`}
                             ref={canvasRef}
-                            onSingleTap={draw}
                             onMouseDown={handleMouseDown}
                             onMouseUp={stopDrawing}
                             onMouseOut={stopDrawing}
@@ -1301,54 +1300,61 @@ const CanvasDrawingApp = () => {
                         }}*/
                         />
                     </ContextMenuTrigger>
-                    <ContextMenuContent className="shadow-lg">
-                        <ContextMenuItem
+                    <ContextMenuContent className='w-64'>
+                        <ContextMenuItem inset
                             onClick={() => { undo(); }}
+                            disabled={undoDisabled}
                         >
                             Undo
                         </ContextMenuItem>
-                        <ContextMenuItem
+                        <ContextMenuItem inset
                             onClick={() => { redo(); }}
+                            disabled={redoDisabled}
                         >
                             Redo
                         </ContextMenuItem>
                         <ContextMenuSeparator />
-                        <ContextMenuItem
+                        <ContextMenuItem inset
                             onClick={() => { setAlertOpen(true); }}
                         >
                             Add Text
                         </ContextMenuItem>
-                        <ContextMenuItem
+                        <ContextMenuItem inset
                             onClick={() => { clearCanvas(); }}
                         >
                             Clear Canvas
                         </ContextMenuItem>
                         <ContextMenuSeparator />
-                        <ContextMenuItem
-                            onClick={() => { setSelected('pencil'); }}
-                        >
-                            Select Pencil
-                        </ContextMenuItem>
-                        <ContextMenuItem
-                            onClick={() => { setSelected('eraser'); }}
-                        >
-                            Select Eraser
-                        </ContextMenuItem>
-                        <ContextMenuItem
-                            onClick={() => { setSelected('shapes'); }}
-                        >
-                            Select Shapes
-                        </ContextMenuItem>
-                        <ContextMenuItem
-                            onClick={() => { setSelected('color picker'); }}
-                        >
-                            Select Color Picker
-                        </ContextMenuItem>
-                        <ContextMenuItem
-                            onClick={() => { setSelected('fill'); }}
-                        >
-                            Select Fill
-                        </ContextMenuItem>
+                        <ContextMenuSub>
+                            <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+                            <ContextMenuSubContent className="w-48">
+                                <ContextMenuItem inset
+                                    onClick={() => { setSelected('pencil'); }}
+                                >
+                                    Select Pencil
+                                </ContextMenuItem>
+                                <ContextMenuItem inset
+                                    onClick={() => { setSelected('eraser'); }}
+                                >
+                                    Select Eraser
+                                </ContextMenuItem>
+                                <ContextMenuItem inset
+                                    onClick={() => { setSelected('shapes'); }}
+                                >
+                                    Select Shapes
+                                </ContextMenuItem>
+                                <ContextMenuItem inset
+                                    onClick={() => { setSelected('color picker'); }}
+                                >
+                                    Select Color Picker
+                                </ContextMenuItem>
+                                <ContextMenuItem inset
+                                    onClick={() => { setSelected('fill'); }}
+                                >
+                                    Select Fill
+                                </ContextMenuItem>
+                            </ContextMenuSubContent>
+                        </ContextMenuSub>
                     </ContextMenuContent>
                 </ContextMenu>
             </div>
