@@ -1316,23 +1316,27 @@ const CanvasDrawingApp = () => {
                             disabled={undoDisabled}
                         >
                             Undo
+                            <ContextMenuShortcut>{undo_shortcut}</ContextMenuShortcut>
                         </ContextMenuItem>
                         <ContextMenuItem inset
                             onClick={() => { redo(); }}
                             disabled={redoDisabled}
                         >
                             Redo
+                            <ContextMenuShortcut>{redo_shortcut}</ContextMenuShortcut>
                         </ContextMenuItem>
                         <ContextMenuSeparator />
                         <ContextMenuItem inset
                             onClick={() => { setAlertOpen(true); }}
                         >
                             Add Text
+                            <ContextMenuShortcut>{add_text_shortcut}</ContextMenuShortcut>
                         </ContextMenuItem>
                         <ContextMenuItem inset
                             onClick={() => { clearCanvas(); }}
                         >
                             Clear Canvas
+                            <ContextMenuShortcut>{clear_shortcut}</ContextMenuShortcut>
                         </ContextMenuItem>
                         <ContextMenuSeparator />
                         <ContextMenuSub>
@@ -1342,26 +1346,31 @@ const CanvasDrawingApp = () => {
                                     onClick={() => { setSelected('pencil'); }}
                                 >
                                     Select Pencil
+                                    <ContextMenuShortcut>{pencil_shortcut}</ContextMenuShortcut>
                                 </ContextMenuItem>
                                 <ContextMenuItem
                                     onClick={() => { setSelected('eraser'); }}
                                 >
                                     Select Eraser
+                                    <ContextMenuShortcut>{eraser_shortcut}</ContextMenuShortcut>
                                 </ContextMenuItem>
                                 <ContextMenuItem
                                     onClick={() => { setSelected('shapes'); }}
                                 >
                                     Select Shapes
+                                    <ContextMenuShortcut>{shapes_shortcut}</ContextMenuShortcut>
                                 </ContextMenuItem>
                                 <ContextMenuItem
                                     onClick={() => { setSelected('color picker'); }}
                                 >
                                     Select Color Picker
+                                    <ContextMenuShortcut>{color_picker_shortcut}</ContextMenuShortcut>
                                 </ContextMenuItem>
                                 <ContextMenuItem
                                     onClick={() => { setSelected('fill'); }}
                                 >
                                     Select Fill
+                                    <ContextMenuShortcut>{fill_shortcut}</ContextMenuShortcut>
                                 </ContextMenuItem>
                             </ContextMenuSubContent>
                         </ContextMenuSub>
