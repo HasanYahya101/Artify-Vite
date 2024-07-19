@@ -1101,7 +1101,7 @@ const CanvasDrawingApp = () => {
                                                 <div className='space-y-6 flex-1'></div>
                                             </div>
                                             {/*Slider for custom font size with preview*/}
-                                            <div>
+                                            <div className='mx-3'>
                                                 <div>
                                                     <div className="flex justify-between items-center mb-3 mx-1">
                                                         <span className="text-sm font-medium">Custom Size</span>
