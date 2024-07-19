@@ -499,15 +499,15 @@ const CanvasDrawingApp = () => {
         }
     };
 
-    var undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
-    var redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
-    var add_text_shortcut = isMac ? '⌘I' : 'Ctrl+I';
-    var clear_shortcut = isMac ? '⌘B' : 'Ctrl+B';
-    var pencil_shortcut = isMac ? '⌘Q' : 'Ctrl+Q';
-    var eraser_shortcut = isMac ? '⌘E' : 'Ctrl+E';
-    var shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
-    var fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
-    var color_picker_shortcut = isMac ? '⌘K' : 'Ctrl+K';
+    const undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
+    const redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
+    const add_text_shortcut = isMac ? '⌘I' : 'Ctrl+I';
+    const clear_shortcut = isMac ? '⌘B' : 'Ctrl+B';
+    const pencil_shortcut = isMac ? '⌘Q' : 'Ctrl+Q';
+    const eraser_shortcut = isMac ? '⌘E' : 'Ctrl+E';
+    const shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
+    const fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
+    const color_picker_shortcut = isMac ? '⌘K' : 'Ctrl+K';
 
     // do undo with ctrl z and redo with ctrl shift z
     const handleKeyDown = (e) => {
