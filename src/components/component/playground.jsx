@@ -671,7 +671,7 @@ const CanvasDrawingApp = () => {
 
                                     <div className="flex items-center space-x-2">
                                         <GitCompare className="text-gray-500" size={14} />
-                                        <span className="text-gray-700 text-sm">Committed to this repository in the past.</span>
+                                        <span className="text-gray-700 text-sm">Committed to this repository in the past</span>
                                     </div>
                                 </div>
                             </div>
