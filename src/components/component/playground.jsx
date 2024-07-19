@@ -627,7 +627,8 @@ const CanvasDrawingApp = () => {
                                 >HY</AvatarFallback>
                             </Avatar>
                         </HoverCardTrigger>
-                        <HoverCardContent className="z-50 ml-3"
+                        <HoverCardContent className="z-50 shadow-xl"
+                            side="bottom" align='start' sideOffset={3}
                         >
                             <div className="bg-white shadow-lg rounded-lg w-80 border border-gray-200">
                                 <div className="flex items-center space-x-3 border-b p-2">
@@ -677,7 +678,7 @@ const CanvasDrawingApp = () => {
                             </div>
                         </HoverCardContent>
                     </HoverCard>
-                </div>
+                </div >
                 <div className='overflow-auto'
                     style={{ scrollbarWidth: 'none' }}
                 >
