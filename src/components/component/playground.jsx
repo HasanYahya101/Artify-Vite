@@ -501,9 +501,9 @@ const CanvasDrawingApp = () => {
 
     var undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
     var redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
-    var add_text_shortcut = isMac ? '⌘T' : 'Ctrl+T';
-    var clear_shortcut = isMac ? '⌘N' : 'Ctrl+N';
-    var pencil_shortcut = isMac ? '⌘P' : 'Ctrl+P';
+    var add_text_shortcut = isMac ? '⌘I' : 'Ctrl+I';
+    var clear_shortcut = isMac ? '⌘B' : 'Ctrl+B';
+    var pencil_shortcut = isMac ? '⌘Q' : 'Ctrl+Q';
     var eraser_shortcut = isMac ? '⌘E' : 'Ctrl+E';
     var shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
     var fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
@@ -514,9 +514,9 @@ const CanvasDrawingApp = () => {
         const ctrlKey = e.ctrlKey || e.metaKey;
         const shiftKey = e.shiftKey;
         const zKey = e.key === 'z' || e.key === 'Z';
-        const tKey = e.key === 't' || e.key === 'T';
-        const nKey = e.key === 'n' || e.key === 'N';
-        const pKey = e.key === 'p' || e.key === 'P';
+        const iKey = e.key === 'i' || e.key === 'I';
+        const bKey = e.key === 'b' || e.key === 'B';
+        const qKey = e.key === 'q' || e.key === 'Q';
         const eKey = e.key === 'e' || e.key === 'E';
         const sKey = e.key === 's' || e.key === 'S';
         const fKey = e.key === 'f' || e.key === 'F';
@@ -529,15 +529,15 @@ const CanvasDrawingApp = () => {
             e.preventDefault();
             undo();
         }
-        else if (ctrlKey && tKey) {
+        else if (ctrlKey && iKey) {
             e.preventDefault();
             setAlertOpen(true);
         }
-        else if (ctrlKey && nKey) {
+        else if (ctrlKey && bKey) {
             e.preventDefault();
             clearCanvas();
         }
-        else if (ctrlKey && pKey) {
+        else if (ctrlKey && qKey) {
             e.preventDefault();
             setSelected('pencil');
         }
