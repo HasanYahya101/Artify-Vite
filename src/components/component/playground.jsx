@@ -1389,6 +1389,7 @@ const CanvasDrawingApp = () => {
                                     Select Eraser
                                     <ContextMenuShortcut>{eraser_shortcut}</ContextMenuShortcut>
                                 </ContextMenuItem>
+                                <ContextMenuSeparator />
                                 <ContextMenuItem
                                     onClick={() => { setSelected('shapes'); }}
                                 >
