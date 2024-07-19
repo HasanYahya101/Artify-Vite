@@ -493,11 +493,28 @@ const CanvasDrawingApp = () => {
         }
     };
 
+    var undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
+    var redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
+    var add_text_shortcut = isMac ? '⌘T' : 'Ctrl+T';
+    var clear_shortcut = isMac ? '⌘N' : 'Ctrl+N';
+    var pencil_shortcut = isMac ? '⌘P' : 'Ctrl+P';
+    var eraser_shortcut = isMac ? '⌘E' : 'Ctrl+E';
+    var shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
+    var fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
+    var color_picker_shortcut = isMac ? '⌘K' : 'Ctrl+K';
+
     // do undo with ctrl z and redo with ctrl shift z
     const handleKeyDown = (e) => {
         const ctrlKey = e.ctrlKey || e.metaKey;
         const shiftKey = e.shiftKey;
         const zKey = e.key === 'z' || e.key === 'Z';
+        const tKey = e.key === 't' || e.key === 'T';
+        const nKey = e.key === 'n' || e.key === 'N';
+        const pKey = e.key === 'p' || e.key === 'P';
+        const eKey = e.key === 'e' || e.key === 'E';
+        const sKey = e.key === 's' || e.key === 'S';
+        const fKey = e.key === 'f' || e.key === 'F';
+        const kKey = e.key === 'k' || e.key === 'K';
 
         if (ctrlKey && zKey && shiftKey) {
             e.preventDefault();
@@ -505,6 +522,34 @@ const CanvasDrawingApp = () => {
         } else if (ctrlKey && zKey) {
             e.preventDefault();
             undo();
+        }
+        else if (ctrlKey && tKey) {
+            e.preventDefault();
+            setAlertOpen(true);
+        }
+        else if (ctrlKey && nKey) {
+            e.preventDefault();
+            clearCanvas();
+        }
+        else if (ctrlKey && pKey) {
+            e.preventDefault();
+            setSelected('pencil');
+        }
+        else if (ctrlKey && eKey) {
+            e.preventDefault();
+            setSelected('eraser');
+        }
+        else if (ctrlKey && sKey) {
+            e.preventDefault();
+            setSelected('shapes');
+        }
+        else if (ctrlKey && fKey) {
+            e.preventDefault();
+            setSelected('fill');
+        }
+        else if (ctrlKey && kKey) {
+            e.preventDefault();
+            setSelected('color picker');
         }
     };
 
@@ -561,16 +606,6 @@ const CanvasDrawingApp = () => {
             }
         }
     };
-
-    var undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
-    var redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
-    var add_text_shortcut = isMac ? '⌘T' : 'Ctrl+T';
-    var clear_shortcut = isMac ? '⌘N' : 'Ctrl+N';
-    var pencil_shortcut = isMac ? '⌘P' : 'Ctrl+P';
-    var eraser_shortcut = isMac ? '⌘E' : 'Ctrl+E';
-    var shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
-    var fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
-    var color_picker_shortcut = isMac ? '⌘K' : 'Ctrl+K';
 
     return (
         <div className="flex min-h-screen bg-slate-50">
