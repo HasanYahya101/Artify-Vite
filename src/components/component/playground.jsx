@@ -27,6 +27,7 @@ import { Input } from "@/components/ui/input";
 import { Toaster } from "@/components/ui/sonner";
 import { toast } from "sonner";
 import { Toggle } from "@/components/ui/toggle";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 
 const CanvasDrawingApp = () => {
     const canvasRef = useRef(null);
@@ -616,7 +617,9 @@ const CanvasDrawingApp = () => {
 
             <aside className="fixed top-5 left-6 ml-2 z-10 h-[calc(100vh-2.5rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
                 <div className="p-4 border-b flex items-center justify-center">
-                    <Avatar size="md">
+                    <Avatar size="md" className='cursor-pointer'
+                        onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
+                    >
                         <AvatarImage src="https://github.com/HasanYahya101.png" />
                         <AvatarFallback className="bg-gray-100 border"
                         >HY</AvatarFallback>
