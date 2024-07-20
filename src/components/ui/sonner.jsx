@@ -17,7 +17,7 @@ const Toaster = ({
             "select-none group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
           description: "group-[.toast]:text-muted-foreground select-none",
           actionButton:
-            "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
+            "group-[.toast]:bg-black group-[.toast]:text-white",
           cancelButton:
             "group-[.toast]:bg-black group-[.toast]:text-white",
         },
