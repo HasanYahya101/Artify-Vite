@@ -75,6 +75,12 @@ const CanvasDrawingApp = () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         const context = canvas.getContext('2d', { willReadFrequently: true });
+        if (context) {
+            context.imageSmoothingEnabled = false;
+            context.mozImageSmoothingEnabled = false;
+            context.webkitImageSmoothingEnabled = false;
+            context.msImageSmoothingEnabled = false;
+        }
         setCtx(context);
     }, []);
 
@@ -1355,18 +1361,23 @@ const CanvasDrawingApp = () => {
                             onTouchStart={handleTouchStart}
                             onTouchMove={handleTouchMove}
                             onTouchEnd={handleTouchEnd}
-                        // remove anti-aliasing using styles
-                        /*style={{
-                            imageRendering: 'pixelated',
-                            imageRendering: 'crisp-edges',
-                            imageRendering: '-moz-crisp-edges',
-                            imageRendering: '-webkit-optimize-contrast',
-                            imageRendering: 'optimize-contrast',
-                            imageRendering: 'optimizeSpeed',
-                            imageRendering: 'optimizeQuality',
-                            transform: 'scale(1)',
-                            transformOrigin: '0 0',
-                        }}*/
+                            // remove anti-aliasing using styles
+                            /*style={{
+                                imageRendering: 'pixelated',
+                                imageRendering: 'crisp-edges',
+                                imageRendering: '-moz-crisp-edges',
+                                imageRendering: '-webkit-optimize-contrast',
+                                imageRendering: 'optimize-contrast',
+                                imageRendering: 'optimizeSpeed',
+                                imageRendering: 'optimizeQuality',
+                                transform: 'scale(1)',
+                                transformOrigin: '0 0',
+                            }}*/
+                            style={{
+                                imageRendering: 'crisp-edges',
+                                transform: 'scale(1)',
+                                transformOrigin: '0 0'
+                            }}
                         />
                     </ContextMenuTrigger>
                     <ContextMenuContent className='w-64'>
