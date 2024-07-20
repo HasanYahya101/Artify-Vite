@@ -1496,7 +1496,7 @@ const CanvasDrawingApp = () => {
                 </button>
             </div>
             <Toaster theme="light" position="top-left"
-                className="z-50 ml-[33vw]"
+                className="ml-[calc(50vw-13rem)]"
             />
         </div >
     );
