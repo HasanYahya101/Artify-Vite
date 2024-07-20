@@ -698,7 +698,7 @@ const CanvasDrawingApp = () => {
                             <Avatar size="md" className='cursor-pointer select-none'
                                 onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
                             >
-                                <AvatarImage src="https://github.com/HasanYahya101.png" />
+                                <AvatarImage src="https://github.com/HasanYahya101.png" draggable="false" />
                                 <AvatarFallback className="bg-gray-100 border"
                                 >HY</AvatarFallback>
                             </Avatar>
@@ -717,7 +717,7 @@ const CanvasDrawingApp = () => {
                                         <Avatar className='cursor-pointer h-12 w-12 select-none'
                                             onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
                                         >
-                                            <AvatarImage src="https://github.com/HasanYahya101.png" />
+                                            <AvatarImage src="https://github.com/HasanYahya101.png" draggable="false" />
                                             <AvatarFallback className="bg-gray-100 border"
                                             >HY</AvatarFallback>
                                         </Avatar>
