@@ -938,10 +938,15 @@ const CanvasDrawingApp = () => {
                                 >
                                     <PopoverTriggerArrow>
                                         <TooltipTrigger>
-                                            <Button variant="ghost" size="icon"
+                                            {selected === 'text' ? (
+                                                <Button variant="secondary" size="icon" onClick={() => setSelected('text')}
+                                                >
+                                                    <ALargeSmall className="w-6 h-6" />
+                                                </Button>
+                                            ) : (<Button variant="ghost" size="icon" onClick={() => setSelected('text')}
                                             >
                                                 <ALargeSmall className="w-6 h-6" />
-                                            </Button>
+                                            </Button>)}
                                         </TooltipTrigger>
                                     </PopoverTriggerArrow>
                                     <TooltipContent>
