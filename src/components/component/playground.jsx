@@ -733,7 +733,7 @@ const CanvasDrawingApp = () => {
                                     </div>
 
                                     <p className="text-gray-700 mb-4 text-base">
-                                        Student at Fast Nuces Lahore. Trying to be a good Problem Solver.
+                                        Just a Person with a Computer. Trying to be a good Problem Solver.
                                     </p>
 
                                     <div className="flex items-center space-x-2 mb-2">
