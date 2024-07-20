@@ -1495,7 +1495,8 @@ const CanvasDrawingApp = () => {
                         : null}
                 </button>
             </div>
-            <Toaster theme="light" position="bottom-left" className="z-50 ml-20"
+            <Toaster theme="light" position="top-left"
+                className="z-50 ml-[33vw]"
             />
         </div >
     );
