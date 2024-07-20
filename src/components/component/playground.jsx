@@ -695,7 +695,7 @@ const CanvasDrawingApp = () => {
                 <div className="p-4 border-b flex items-center justify-center">
                     <HoverCard>
                         <HoverCardTrigger>
-                            <Avatar size="md" className='cursor-pointer'
+                            <Avatar size="md" className='cursor-pointer select-none'
                                 onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
                             >
                                 <AvatarImage src="https://github.com/HasanYahya101.png" />
@@ -714,7 +714,7 @@ const CanvasDrawingApp = () => {
                                 <div className='p-4'>
 
                                     <div className="flex items-center space-x-4 mb-4">
-                                        <Avatar className='cursor-pointer h-12 w-12'
+                                        <Avatar className='cursor-pointer h-12 w-12 select-none'
                                             onClick={() => window.open('https://github.com/HasanYahya101', '_blank')}
                                         >
                                             <AvatarImage src="https://github.com/HasanYahya101.png" />
