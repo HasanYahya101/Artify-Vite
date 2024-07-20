@@ -152,6 +152,7 @@ const CanvasDrawingApp = () => {
 
         ctx.strokeStyle = color;
         ctx.lineWidth = thickness;
+        //ctx.antiAlias = false;
 
         if (selected === 'eraser') {
             ctx.strokeStyle = '#FFFFFF';
