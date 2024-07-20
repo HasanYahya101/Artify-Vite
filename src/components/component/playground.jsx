@@ -152,7 +152,6 @@ const CanvasDrawingApp = () => {
 
         ctx.strokeStyle = color;
         ctx.lineWidth = thickness;
-        //ctx.antiAlias = false;
 
         if (selected === 'eraser') {
             ctx.strokeStyle = '#FFFFFF';
@@ -160,6 +159,13 @@ const CanvasDrawingApp = () => {
 
         switch (selected) {
             case 'pencil':
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+                break;
             case 'eraser':
                 ctx.lineCap = 'round';
                 ctx.lineJoin = 'round';
