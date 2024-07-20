@@ -105,7 +105,7 @@ const CanvasDrawingApp = () => {
             // throw error toast
             toast("Error: The input field cannot be empty.", {
                 description: "Please enter some text to continue.",
-                action: {
+                cancel: {
                     label: "Close",
                     onClick: () => toast.dismiss(),
                 },
