@@ -521,6 +521,7 @@ const CanvasDrawingApp = () => {
     const shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
     const fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
     const color_picker_shortcut = isMac ? '⌘K' : 'Ctrl+K';
+    const overlays_shortcut = isMac ? '⌘.' : 'Ctrl+.';
 
     // do undo with ctrl z and redo with ctrl shift z
     const handleKeyDown = (e) => {
@@ -534,6 +535,7 @@ const CanvasDrawingApp = () => {
         const sKey = e.key === 's' || e.key === 'S';
         const fKey = e.key === 'f' || e.key === 'F';
         const kKey = e.key === 'k' || e.key === 'K';
+        const periodKey = e.key === '.';
 
         if (ctrlKey && zKey && shiftKey) {
             e.preventDefault();
@@ -569,6 +571,10 @@ const CanvasDrawingApp = () => {
         else if (ctrlKey && kKey) {
             e.preventDefault();
             setSelected('color picker');
+        }
+        else if (ctrlKey && periodKey) {
+            e.preventDefault();
+            setOverlaysHiden(!OverlaysHiden);
         }
     };
 
@@ -674,6 +680,8 @@ const CanvasDrawingApp = () => {
             window.removeEventListener('mouseup', handleMouseUpResize);
         };
     }, [isDragging]);
+
+    const [OverlaysHiden, setOverlaysHiden] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-slate-50">
@@ -1467,6 +1475,13 @@ const CanvasDrawingApp = () => {
                         >
                             Clear Canvas
                             <ContextMenuShortcut>{clear_shortcut}</ContextMenuShortcut>
+                        </ContextMenuItem>
+                        <ContextMenuSeparator />
+                        <ContextMenuItem inset
+                            onClick={() => { setOverlaysHiden(!OverlaysHiden); }}
+                        >
+                            {OverlaysHiden ? 'Show Overlays' : 'Hide Overlays'}
+                            <ContextMenuShortcut>{overlays_shortcut}</ContextMenuShortcut>
                         </ContextMenuItem>
                         <ContextMenuSeparator />
                         <ContextMenuSub>
