@@ -766,7 +766,7 @@ const CanvasDrawingApp = () => {
                                 >HY</AvatarFallback>
                             </Avatar>
                         </HoverCardTrigger>
-                        <HoverCardContent className="z-50"
+                        <HoverCardContent className="z-[100]"
                             side="bottom" align='start' sideOffset={3}
                         >
                             <div className="bg-white shadow-lg rounded-lg w-80 border border-gray-200">
