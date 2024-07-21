@@ -686,7 +686,7 @@ const CanvasDrawingApp = () => {
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
-            <div className="fixed top-7 right-7 z-10 rounded-md bg-white shadow-lg border">
+            <div className={`fixed top-7 right-7 ${OverlaysHiden === true ? 'z-0' : 'z-10'} rounded-md bg-white shadow-lg border`}>
                 <div className="flex flex-col">
                     <div className='p-1'>
                         <TooltipProvider>
@@ -751,7 +751,7 @@ const CanvasDrawingApp = () => {
                 </div>
             </div>
 
-            <aside className="fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 z-10 w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[134px]"
+            <aside className={`fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 ${OverlaysHiden === true ? 'z-0' : 'z-10'} w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[134px]`}
                 style={{ height: `${height}px`, maxHeight: 'calc(100vh - 2.5rem)' }}
                 ref={asideRef}
             >
@@ -1527,7 +1527,7 @@ const CanvasDrawingApp = () => {
                 <AlertDialog open={alertOpen} onOpenChange={setAlertOpen}
                 >
                     <AlertDialogTrigger>
-                        <button className="bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
+                        <button className={`bg-purple-500 hover:bg-purple-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6 ${OverlaysHiden === true ? 'hidden' : ''}`}
                             onMouseEnter={() => setTextHover(true)}
                             onMouseLeave={() => setTextHover(false)}
                         //onClick={() => setSelected('text')}
@@ -1572,7 +1572,7 @@ const CanvasDrawingApp = () => {
                 </AlertDialog>
 
             </div>
-            <div className="fixed bottom-9 right-9 flex flex-col gap-2">
+            <div className={`fixed bottom-9 right-9 flex flex-col gap-2 ${OverlaysHiden === true ? 'hidden' : ''}`}>
                 <button className="bg-green-500 hover:bg-green-600 text-white rounded-full p-3 shadow-lg transition-all duration-300 flex items-center group hover:pr-6"
                     onMouseEnter={() => setNewHover(true)}
                     onMouseLeave={() => setNewHover(false)}
