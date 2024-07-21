@@ -649,7 +649,7 @@ const CanvasDrawingApp = () => {
     const asideRef = useRef(null);
     const startYRef = useRef(0);
     const startHeightRef = useRef(0);
-    const minHeight = 134; // Minimum height
+    const minHeight = 140; // Minimum height
 
     const handleMouseDownResize = (e) => {
         e.preventDefault();
@@ -751,7 +751,7 @@ const CanvasDrawingApp = () => {
                 </div>
             </div>
 
-            <aside className={`fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 ${OverlaysHiden === true ? 'z-0' : 'z-10'} w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[134px]`}
+            <aside className={`fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 ${OverlaysHiden === true ? 'z-0' : 'z-10'} w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]`}
                 style={{ height: `${height}px`, maxHeight: 'calc(100vh - 2.5rem)' }}
                 ref={asideRef}
             >
@@ -1359,7 +1359,7 @@ const CanvasDrawingApp = () => {
                     </div>
                 </div>
                 <div className='mt-auto flex-1' />
-                <div className="p-3 px-1 border-t flex justify-center z-50 group">
+                <div className="p-4 border-t flex justify-center z-50 group">
                     <TooltipProvider>
                         <Tooltip>
                             <Popover open={downloadOpen} onOpenChange={setDownloadOpen}
