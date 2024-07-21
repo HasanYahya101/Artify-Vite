@@ -512,6 +512,8 @@ const CanvasDrawingApp = () => {
         }
     };
 
+    const [OverlaysHiden, setOverlaysHiden] = useState(false);
+
     const undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
     const redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
     const add_text_shortcut = isMac ? '⌘I' : 'Ctrl+I';
@@ -521,7 +523,7 @@ const CanvasDrawingApp = () => {
     const shapes_shortcut = isMac ? '⌘S' : 'Ctrl+S';
     const fill_shortcut = isMac ? '⌘F' : 'Ctrl+F';
     const color_picker_shortcut = isMac ? '⌘K' : 'Ctrl+K';
-    const overlays_shortcut = isMac ? '⌘.' : 'Ctrl+.';
+    const overlays_shortcut = isMac ? '⌘M' : 'Ctrl+M';
 
     // do undo with ctrl z and redo with ctrl shift z
     const handleKeyDown = (e) => {
@@ -535,7 +537,7 @@ const CanvasDrawingApp = () => {
         const sKey = e.key === 's' || e.key === 'S';
         const fKey = e.key === 'f' || e.key === 'F';
         const kKey = e.key === 'k' || e.key === 'K';
-        const periodKey = e.key === '.';
+        const mKey = e.key === 'm' || e.key === 'M';
 
         if (ctrlKey && zKey && shiftKey) {
             e.preventDefault();
@@ -572,9 +574,9 @@ const CanvasDrawingApp = () => {
             e.preventDefault();
             setSelected('color picker');
         }
-        else if (ctrlKey && periodKey) {
+        else if (ctrlKey && mKey) {
             e.preventDefault();
-            setOverlaysHiden(!OverlaysHiden);
+            setOverlaysHiden(prev => !prev);
         }
     };
 
@@ -680,8 +682,6 @@ const CanvasDrawingApp = () => {
             window.removeEventListener('mouseup', handleMouseUpResize);
         };
     }, [isDragging]);
-
-    const [OverlaysHiden, setOverlaysHiden] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-slate-50">
