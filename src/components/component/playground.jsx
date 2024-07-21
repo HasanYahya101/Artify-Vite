@@ -1394,7 +1394,7 @@ const CanvasDrawingApp = () => {
                     >
                         <div className="w-full h-full rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <svg className="h-full w-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 15L15 21M21 8L8 21" stroke="#9ca3af" // gray-500
+                                <path d="M21 15L15 21M21 8L8 21" stroke="#6b7280" // gray-500
                                     strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
