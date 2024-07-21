@@ -744,7 +744,7 @@ const CanvasDrawingApp = () => {
             </div>
 
             <aside className="fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 z-10 w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[134px]"
-                style={{ height: `${height}px` }}
+                style={{ height: `${height}px`, maxHeight: 'calc(100vh - 2.5rem)' }}
                 ref={asideRef}
             >
                 <div className="p-4 border-b flex items-center justify-center">
@@ -1394,7 +1394,8 @@ const CanvasDrawingApp = () => {
                     >
                         <div className="w-full h-full rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
                             <svg className="h-full w-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M21 15L15 21M21 8L8 21" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                                <path d="M21 15L15 21M21 8L8 21" stroke="#9ca3af" // gray-500
+                                    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
                     </div>
