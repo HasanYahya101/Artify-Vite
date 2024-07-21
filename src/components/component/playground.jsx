@@ -751,8 +751,8 @@ const CanvasDrawingApp = () => {
                 </div>
             </div>
 
-            <aside className={`fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 ${OverlaysHiden === true ? 'z-0' : 'z-10'} w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]`}
-                style={{ height: `${height}px`, maxHeight: 'calc(100vh - 2.5rem)' }}
+            <aside className={`fixed top-5 left-6 max-h-[calc(100vh-40px)] ml-2 ${OverlaysHiden === true ? 'z-0' : 'z-10'} w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]`}
+                style={{ height: `${height}px`, maxHeight: 'calc(100vh - 40px)' }}
                 ref={asideRef}
             >
                 <div className="p-4 border-b flex items-center justify-center">
