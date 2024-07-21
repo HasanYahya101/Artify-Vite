@@ -1476,7 +1476,6 @@ const CanvasDrawingApp = () => {
                             Clear Canvas
                             <ContextMenuShortcut>{clear_shortcut}</ContextMenuShortcut>
                         </ContextMenuItem>
-                        <ContextMenuSeparator />
                         <ContextMenuItem inset
                             onClick={() => { setOverlaysHiden(!OverlaysHiden); }}
                         >
