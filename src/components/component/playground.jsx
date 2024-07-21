@@ -636,6 +636,45 @@ const CanvasDrawingApp = () => {
         stopDrawing();
     };
 
+    const [height, setHeight] = useState(window.innerHeight - 40); // Initial height
+    const [isDragging, setIsDragging] = useState(false);
+    const asideRef = useRef(null);
+    const startYRef = useRef(0);
+    const startHeightRef = useRef(0);
+    const minHeight = 134; // Minimum height
+
+    const handleMouseDownResize = (e) => {
+        e.preventDefault();
+        setIsDragging(true);
+        startYRef.current = e.clientY;
+        startHeightRef.current = height;
+    };
+
+    const handleMouseMoveResize = (e) => {
+        if (!isDragging) return;
+
+        const deltaY = e.clientY - startYRef.current;
+        const newHeight = Math.max(minHeight, startHeightRef.current + deltaY);
+
+        setHeight(Math.min(newHeight, window.innerHeight - 40));
+    };
+
+    const handleMouseUpResize = () => {
+        setIsDragging(false);
+    };
+
+    useEffect(() => {
+        if (isDragging) {
+            window.addEventListener('mousemove', handleMouseMoveResize);
+            window.addEventListener('mouseup', handleMouseUpResize);
+        }
+
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMoveResize);
+            window.removeEventListener('mouseup', handleMouseUpResize);
+        };
+    }, [isDragging]);
+
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
@@ -704,7 +743,10 @@ const CanvasDrawingApp = () => {
                 </div>
             </div>
 
-            <aside className="fixed top-5 left-6 ml-2 z-10 h-[calc(100vh-2.5rem)] w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[140px]">
+            <aside className="fixed top-5 left-6 max-h-[calc(100vh-2.5rem)] ml-2 z-10 w-16 rounded-lg bg-background border shadow-xl flex flex-col object-contain justify-start min-h-[134px]"
+                style={{ height: `${height}px` }}
+                ref={asideRef}
+            >
                 <div className="p-4 border-b flex items-center justify-center">
                     <HoverCard>
                         <HoverCardTrigger>
@@ -1309,7 +1351,7 @@ const CanvasDrawingApp = () => {
                     </div>
                 </div>
                 <div className='mt-auto flex-1' />
-                <div className="p-4 border-t flex justify-center">
+                <div className="p-3 px-1 border-t flex justify-center z-50 group">
                     <TooltipProvider>
                         <Tooltip>
                             <Popover open={downloadOpen} onOpenChange={setDownloadOpen}
@@ -1346,6 +1388,16 @@ const CanvasDrawingApp = () => {
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
+                    <div
+                        className="absolute bottom-0 right-0 w-4 h-4 cursor-ns-resize bg-white bg-opacity-0 rounded-lg"
+                        onMouseDown={handleMouseDownResize}
+                    >
+                        <div className="w-full h-full rounded-lg flex items-center justify-center opacity-0 group-hover:opacity-100">
+                            <svg className="h-full w-full" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M21 15L15 21M21 8L8 21" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                        </div>
+                    </div>
                 </div>
             </aside >
 
