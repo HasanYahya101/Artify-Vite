@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp, GitCommitHorizontal, User, Star, Monitor, BookMarked, GitCompare, Brush, Pen } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp, GitCommitHorizontal, User, Star, Monitor, BookMarked, GitCompare, Brush, Pen, BrushIcon, Paintbrush } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -108,6 +108,14 @@ const CanvasDrawingApp = () => {
 
     const startDrawing = (e) => {
         setIsDrawing(true);
+        if (penciltype === 'pen') {
+            const point = getPointFromEvent(e);
+            path.current = [point];
+            setLastPoint(point);
+        } else {
+            path.current = [];
+            setLastPoint(null);
+        }
         draw(e);
     };
 
@@ -117,6 +125,8 @@ const CanvasDrawingApp = () => {
             ctx.beginPath();
             saveState();
         }
+        setLastPoint(null);
+        path.current = [];
     };
 
     useEffect(() => {
@@ -162,6 +172,81 @@ const CanvasDrawingApp = () => {
         cursive: 'Cedarville Cursive',
     };
 
+    const [lastPoint, setLastPoint] = useState(null);
+    const [baseWidth, setBaseWidth] = useState(2);
+    const [smoothing, setSmoothing] = useState(0.2);
+    const [thinning, setThinning] = useState(0.5);
+    const [minDistance, setMinDistance] = useState(0.5);
+    const path = useRef([]);
+
+    useEffect(() => {
+        setBaseWidth(thickness);
+    }, [thickness]);
+
+    const getPointWithPressure = (x, y, p) => ({
+        x, y, pressure: p !== undefined ? p : 0.5
+    });
+
+    const getStrokeWidth = (speed, baseWidth, thinning) => {
+        const minWidth = baseWidth * 0.5;
+        const maxWidth = baseWidth * 1.5;
+        const dynamicWidth = baseWidth * (1 - Math.min(speed / 500, 1) * thinning);
+        return Math.max(minWidth, Math.min(dynamicWidth, maxWidth));
+    };
+
+    const drawPath = () => {
+        const ctx = canvasRef.current.getContext('2d');
+        //ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+        if (path.current.length < 2) return;
+
+        ctx.beginPath();
+        ctx.moveTo(path.current[0].x, path.current[0].y);
+
+        for (let i = 1; i < path.current.length; i++) {
+            const p0 = i > 1 ? path.current[i - 2] : path.current[i - 1];
+            const p1 = path.current[i - 1];
+            const p2 = path.current[i];
+
+            const d = Math.hypot(p2.x - p1.x, p2.y - p1.y);
+            const speed = d;
+
+            const width = getStrokeWidth(speed, baseWidth, thinning);
+            ctx.lineWidth = width * p1.pressure;
+
+            const midPoint = {
+                x: (p1.x + p2.x) / 2,
+                y: (p1.y + p2.y) / 2
+            };
+
+            ctx.quadraticCurveTo(p1.x, p1.y, midPoint.x, midPoint.y);
+        }
+
+        ctx.stroke();
+    };
+
+    const addPoint = (point) => {
+        const smoothedPoint = lastPoint ? {
+            x: lastPoint.x + (point.x - lastPoint.x) * smoothing,
+            y: lastPoint.y + (point.y - lastPoint.y) * smoothing,
+            pressure: point.pressure
+        } : point;
+
+        path.current.push(smoothedPoint);
+        setLastPoint(smoothedPoint);
+        drawPath();
+    };
+
+    const getPointFromEvent = (e) => {
+        const rect = canvasRef.current.getBoundingClientRect();
+        const point = e.touches ? e.touches[0] : e;
+        return getPointWithPressure(
+            point.clientX - rect.left,
+            point.clientY - rect.top,
+            point.pressure
+        );
+    };
+
     const draw = (e) => {
         if (!isDrawing) return;
 
@@ -172,13 +257,22 @@ const CanvasDrawingApp = () => {
         ctx.strokeStyle = color;
         ctx.fillStyle = color;
         ctx.lineWidth = thickness;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+        const newPoint = getPointFromEvent(e);
+        const dist = lastPoint ? Math.hypot(newPoint.x - lastPoint.x, newPoint.y - lastPoint.y) : 0;
+
+        if (dist >= minDistance) {
+            addPoint(newPoint);
+        }
 
         switch (selected) {
             case 'pencil':
                 switch (penciltype) {
                     case 'pencil':
-                        ctx.lineCap = 'round';
-                        ctx.lineJoin = 'round';
+                        ctx.lineCap = 'square';
+                        ctx.lineJoin = 'flat';
+                        ctx.lineWidth = thickness;
                         ctx.lineTo(x, y);
                         ctx.stroke();
                         ctx.beginPath();
@@ -187,7 +281,17 @@ const CanvasDrawingApp = () => {
                     case 'brush':
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
+                        ctx.lineWidth = thickness * 1.3;
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        break;
+                    case 'airbrush':
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
                         ctx.strokeStyle = color;
+                        ctx.lineWidth = thickness;
                         var dotSize = 1;
                         const spread = thickness * 1;
                         var amount = 1;
@@ -209,10 +313,8 @@ const CanvasDrawingApp = () => {
                         // draw freehand
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
-                        ctx.lineTo(x, y);
-                        ctx.stroke();
-                        ctx.beginPath();
-                        ctx.moveTo(x, y);
+                        ctx.lineWidth = thickness;
+                        drawPath();
                         break;
                     default:
                         break;
@@ -865,21 +967,22 @@ const CanvasDrawingApp = () => {
                                                 onClick={() => setSelected('pencil')}
                                             >
                                                 {penciltype === 'pencil' ? <Pencil className="w-6 h-6" />
-                                                    : penciltype === 'brush' ? <Brush className="w-6 h-6" />
+                                                    : penciltype === 'brush' ? <Paintbrush className="w-6 h-6" />
                                                         : penciltype === 'pen' ? <Pen className="w-6 h-6" />
-                                                            : null
+                                                            : penciltype === 'airbrush' ? <Brush className="w-6 h-6" />
+                                                                : null
                                                 }
                                             </Button>
                                         </TooltipTrigger>
                                         <TooltipContent>
                                             <span className='text-gray-500'>
-                                                {penciltype === 'pencil' ? 'Pencil' : penciltype === 'brush' ? 'Brush' : penciltype === 'pen' ? 'Pen' : null}
+                                                {penciltype === 'pencil' ? 'Pencil' : penciltype === 'brush' ? 'Brush' : penciltype === 'pen' ? 'Pen' : penciltype === 'airbrush' ? 'Air Brush' : null}
                                             </span>
                                         </TooltipContent>
                                     </Tooltip>
                                 </TooltipProvider>
                             </PopoverTriggerArrow>
-                            <PopoverContentArrow className="shadow-xl" side="right"
+                            <PopoverContentArrow className="shadow-xl mt-1" side="right"
                                 align="center" sideOffset={6}
                             >
                                 <div className="flex flex-col h-full shadow-xl">
@@ -888,13 +991,13 @@ const CanvasDrawingApp = () => {
                                     </div>
                                     <div className="flex-1 overflow-auto p-3 space-y-1 justify-center">
                                         <div>
-                                            <div className="grid grid-cols-3 gap-2">
+                                            <div className="grid grid-cols-4 gap-2">
                                                 <div className="p-1">
                                                     <TooltipProvider>
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'pencil' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('pencil'); setPencilPopoverOpen(false) }}
+                                                                    onClick={() => { setPencilType('pencil'); }}
                                                                 >
                                                                     <Pencil className="w-6 h-6" />
                                                                 </Button>
@@ -910,9 +1013,9 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'brush' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('brush'); setPencilPopoverOpen(false) }}
+                                                                    onClick={() => { setPencilType('brush'); }}
                                                                 >
-                                                                    <Brush className="w-6 h-6" />
+                                                                    <Paintbrush className="w-6 h-6" />
                                                                 </Button>
                                                             </TooltipTrigger>
                                                             <TooltipContent>
@@ -926,7 +1029,7 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'pen' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('pen'); setPencilPopoverOpen(false) }}
+                                                                    onClick={() => { setPencilType('pen'); }}
                                                                 >
                                                                     <Pen className="w-6 h-6" />
                                                                 </Button>
@@ -937,7 +1040,49 @@ const CanvasDrawingApp = () => {
                                                         </Tooltip>
                                                     </TooltipProvider>
                                                 </div>
+                                                <div className="p-1">
+                                                    <TooltipProvider>
+                                                        <Tooltip>
+                                                            <TooltipTrigger>
+                                                                <Button variant={penciltype === 'airbrush' ? 'secondary' : 'ghost'} size="icon"
+                                                                    onClick={() => { setPencilType('airbrush'); }}
+                                                                >
+                                                                    <Brush className="w-6 h-6" />
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <span className='text-gray-500'>Air Brush</span>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </TooltipProvider>
+                                                </div>
                                             </div>
+                                            {/*sliders for pen*/}
+                                            {penciltype === 'pen' ? (
+                                                <div className='p-1 mb-3'>
+                                                    <div className="flex flex-col items-center justify-center mt-4">
+                                                        <div className="flex w-full mb-2.5">
+                                                            <span className="text-sm mr-auto text-gray-500 ml-2">Smoothing</span>
+                                                            <span className="text-sm text-gray-500 ml-auto mr-2">{smoothing}</span>
+                                                        </div>
+                                                        <Slider className='w-full' value={[smoothing]} onValueChange={([value]) => setSmoothing(value)} max={1} step={0.01} />
+                                                    </div>
+                                                    <div className="flex flex-col items-center justify-center mt-4">
+                                                        <div className="flex w-full mb-2.5">
+                                                            <span className="text-sm mr-auto text-gray-500 ml-2">Thinning</span>
+                                                            <span className="text-sm text-gray-500 ml-auto mr-2">{thinning}</span>
+                                                        </div>
+                                                        <Slider className='w-full' value={[thinning]} onValueChange={([value]) => setThinning(value)} max={1} step={0.01} />
+                                                    </div>
+                                                    <div className="flex flex-col items-center justify-center mt-4">
+                                                        <div className="flex w-full mb-2.5">
+                                                            <span className="text-sm mr-auto text-gray-500 ml-2">Min Distance</span>
+                                                            <span className="text-sm text-gray-500 ml-auto mr-2">{minDistance}</span>
+                                                        </div>
+                                                        <Slider className='w-full' value={[minDistance]} onValueChange={([value]) => setMinDistance(value)} max={5} step={0.1} />
+                                                    </div>
+                                                </div>
+                                            ) : null}
                                         </div>
                                     </div>
                                 </div>
@@ -1716,6 +1861,24 @@ const CanvasDrawingApp = () => {
         </div >
     );
 };
+
+function AirbrushIcon(props) {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            x="0px"
+            y="0px"
+            viewBox="0 0 100 125"
+            enableBackground="new 0 0 100 100"
+            xmlSpace="preserve"
+            {...props}
+        >
+            <path fill="#000000" d="M91.6,10.8c-0.9-0.9-2-1.3-3.3-1.3c-1.2,0-2.4,0.5-3.3,1.3L50.9,45l-5.5-0.8c-0.2-1.2-0.9-2.1-1.8-2.4  c-0.1,0-0.3,0-0.4,0c-1.4,0-2.7,1.5-3.2,3.7c-0.5,2.4,0.2,4.5,1.8,4.8c0.1,0,0.3,0,0.4,0c0.9,0,1.8-0.7,2.5-1.8l2.4,0.3l-8.7,8.7  C39.4,54.1,39,50,37,46.3l-3.8-6.7c-0.3-0.5-0.9-0.6-1.3-0.4L13.1,49.7c-0.5,0.3-0.6,0.9-0.4,1.3l1.6,2.8c0,0,0,0,0,0c0,0,0,0,0,0.1  l2.1,3.8c2.6,4.6,7.1,7.4,11.7,7.4c1,0,2-0.2,3-0.4L17.7,78.2c-0.1,0.1-0.2,0.3-0.2,0.4c0,0-0.9,3.3-5.2,8.4c-0.3,0.4-0.3,1,0.1,1.3  l1.8,1.8c0.2,0.2,0.4,0.3,0.7,0.3c0,0,0,0,0,0c0.3,0,0.5-0.1,0.7-0.3c4-4.2,8.2-5.2,8.2-5.2c0.2,0,0.3-0.1,0.5-0.3l23.5-23.5  c4.8-4.8,11.2-6.3,14.2-3.3l4.7,4.7c1,1,2.3,1.5,3.5,1.5s2.6-0.5,3.5-1.5c2-2,2-5.1,0-7.1L63.6,45.3l21.8-21.8l0,0l0,0l6.3-6.3  C93.4,15.5,93.4,12.6,91.6,10.8z M32,41.3l0.6,1.1l-17.1,9.6l-0.6-1.1L32,41.3z M18.2,56.8l-1.7-3l17.1-9.6l1.7,3  c3.1,5.6,1.8,12.3-2.9,14.9c-1.3,0.7-2.7,1.1-4.2,1.1C24.3,63.2,20.4,60.7,18.2,56.8z M42.1,48.5c-0.2-0.1-0.6-1-0.3-2.5  c0.3-1.5,1.1-2.2,1.3-2.2c0.2,0.1,0.6,1,0.3,2.5C43.1,47.8,42.3,48.5,42.1,48.5z M45.3,46.7C45.3,46.7,45.3,46.7,45.3,46.7  c0-0.2,0.1-0.4,0.1-0.6l3.8,0.6l-0.5,0.5L45.3,46.7z M23,83.2c-1,0.3-4.6,1.5-8.2,4.9l-0.5-0.5c3.5-4.3,4.7-7.3,5-8.2l60.3-60.3  l3.8,3.8L46.4,59.8c0,0,0,0,0,0c0,0,0,0,0,0L23,83.2z M53.9,55l2.6-2.6l2,2C57,54.3,55.5,54.5,53.9,55z M72.3,56.8  c1.2,1.2,1.2,3.1,0,4.3c-1.2,1.2-3.1,1.2-4.3,0L57.9,51.1l4.3-4.3L72.3,56.8z M90.3,15.9l-5.6,5.6l-3.8-3.8l5.6-5.6  c0.5-0.5,1.2-0.8,1.9-0.8c0.7,0,1.4,0.3,1.9,0.8C91.3,13.2,91.3,14.9,90.3,15.9z" />
+        </svg>
+    );
+}
 
 function CircleIcon(props) {
     return (
