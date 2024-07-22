@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp, GitCommitHorizontal, User, Star, Monitor, BookMarked, GitCompare } from 'lucide-react';
+import { Pencil, Eraser, Download, Slash, Pipette, PaintBucket, Type, Plus, Spline, Undo, Redo, ALargeSmall, Bold, Italic, Hand, Command, ArrowBigUp, GitCommitHorizontal, User, Star, Monitor, BookMarked, GitCompare, Brush, Pen } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -56,6 +56,7 @@ const CanvasDrawingApp = () => {
 
     const [selected, setSelected] = useState('pencil');
     const [shape, setShape] = useState('square');
+    const [penciltype, setPencilType] = useState('pencil');
 
     const [shapeOpen, setShapeOpen] = useState(false);
     const [thicknessOpen, setThicknessOpen] = useState(false);
@@ -159,12 +160,47 @@ const CanvasDrawingApp = () => {
 
         switch (selected) {
             case 'pencil':
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
-                ctx.lineTo(x, y);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.moveTo(x, y);
+                switch (penciltype) {
+                    case 'pencil':
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        break;
+                    case 'brush':
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        var dotSize = 1;
+                        const spread = thickness * 1;
+                        var amount = 1;
+                        if (thickness <= 17) {
+                            amount = thickness;
+                        }
+                        else {
+                            amount = thickness * 2;
+                        }
+                        for (let i = 0; i < amount; i++) {
+                            const offsetX = Math.random() * spread - spread / 2;
+                            const offsetY = Math.random() * spread - spread / 2;
+                            ctx.beginPath();
+                            ctx.arc(x + offsetX, y + offsetY, dotSize, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                        break;
+                    case 'pen':
+                        // draw freehand
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
+                        ctx.lineTo(x, y);
+                        ctx.stroke();
+                        ctx.beginPath();
+                        ctx.moveTo(x, y);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 'eraser':
                 ctx.lineCap = 'round';
@@ -683,6 +719,8 @@ const CanvasDrawingApp = () => {
         };
     }, [isDragging]);
 
+    const [pencilPopoverOpen, setPencilPopoverOpen] = useState(false);
+
     return (
         <div className="flex min-h-screen bg-slate-50">
             {/* Undo and redo */}
@@ -822,20 +860,94 @@ const CanvasDrawingApp = () => {
                     style={{ scrollbarWidth: 'none' }}
                 >
                     <div className="my-1.5 px-4 flex flex-col items-center justify-center mt-2">
-                        <TooltipProvider>
-                            <Tooltip>
-                                <TooltipTrigger>
-                                    <Button size="icon" variant={selected === 'pencil' ? 'secondary' : 'ghost'}
-                                        onClick={() => setSelected('pencil')}
-                                    >
-                                        <Pencil className="w-6 h-6" />
-                                    </Button>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <span className='text-gray-500'>Pencil</span>
-                                </TooltipContent>
-                            </Tooltip>
-                        </TooltipProvider>
+                        <PopoverArrow open={pencilPopoverOpen} onOpenChange={setPencilPopoverOpen}
+                        >
+                            <PopoverTriggerArrow>
+                                <TooltipProvider>
+                                    <Tooltip>
+                                        <TooltipTrigger>
+                                            <Button size="icon" variant={selected === 'pencil' ? 'secondary' : 'ghost'}
+                                                onClick={() => setSelected('pencil')}
+                                            >
+                                                {penciltype === 'pencil' ? <Pencil className="w-6 h-6" />
+                                                    : penciltype === 'brush' ? <Brush className="w-6 h-6" />
+                                                        : penciltype === 'pen' ? <Pen className="w-6 h-6" />
+                                                            : null
+                                                }
+                                            </Button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                            <span className='text-gray-500'>
+                                                {penciltype === 'pencil' ? 'Pencil' : penciltype === 'brush' ? 'Brush' : penciltype === 'pen' ? 'Pen' : null}
+                                            </span>
+                                        </TooltipContent>
+                                    </Tooltip>
+                                </TooltipProvider>
+                            </PopoverTriggerArrow>
+                            <PopoverContentArrow className="shadow-xl" side="right"
+                                align="center" sideOffset={6}
+                            >
+                                <div className="flex flex-col h-full shadow-xl">
+                                    <div className="p-4 border-b">
+                                        <h2 className="text-lg font-semibold">Select Pencil Type</h2>
+                                    </div>
+                                    <div className="flex-1 overflow-auto p-3 space-y-1 justify-center">
+                                        <div>
+                                            <div className="grid grid-cols-3 gap-2">
+                                                <div className="p-1">
+                                                    <TooltipProvider>
+                                                        <Tooltip>
+                                                            <TooltipTrigger>
+                                                                <Button variant={penciltype === 'pencil' ? 'secondary' : 'ghost'} size="icon"
+                                                                    onClick={() => { setPencilType('pencil'); setPencilPopoverOpen(false) }}
+                                                                >
+                                                                    <Pencil className="w-6 h-6" />
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <span className='text-gray-500'>Pencil</span>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </TooltipProvider>
+                                                </div>
+                                                <div className="p-1">
+                                                    <TooltipProvider>
+                                                        <Tooltip>
+                                                            <TooltipTrigger>
+                                                                <Button variant={penciltype === 'brush' ? 'secondary' : 'ghost'} size="icon"
+                                                                    onClick={() => { setPencilType('brush'); setPencilPopoverOpen(false) }}
+                                                                >
+                                                                    <Brush className="w-6 h-6" />
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <span className='text-gray-500'>Brush</span>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </TooltipProvider>
+                                                </div>
+                                                <div className="p-1">
+                                                    <TooltipProvider>
+                                                        <Tooltip>
+                                                            <TooltipTrigger>
+                                                                <Button variant={penciltype === 'pen' ? 'secondary' : 'ghost'} size="icon"
+                                                                    onClick={() => { setPencilType('pen'); setPencilPopoverOpen(false) }}
+                                                                >
+                                                                    <Pen className="w-6 h-6" />
+                                                                </Button>
+                                                            </TooltipTrigger>
+                                                            <TooltipContent>
+                                                                <span className='text-gray-500'>Pen</span>
+                                                            </TooltipContent>
+                                                        </Tooltip>
+                                                    </TooltipProvider>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </PopoverContentArrow>
+                        </PopoverArrow>
                     </div>
                     <div className="my-1.5 px-4 flex flex-col items-center justify-center">
                         <TooltipProvider>
