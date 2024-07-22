@@ -1029,7 +1029,7 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'pen' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('pen'); setPencilPopoverOpen(false); }}
+                                                                    onClick={() => { setPencilType('pen'); }}
                                                                 >
                                                                     <Pen className="w-6 h-6" />
                                                                 </Button>
