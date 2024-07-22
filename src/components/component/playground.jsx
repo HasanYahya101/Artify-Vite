@@ -1140,22 +1140,40 @@ const CanvasDrawingApp = () => {
                                                     <div className="flex items-center space-x-1.5 p-1 border rounded-lg">
                                                         {/* Place this div at the end of the flex container */}
                                                         <div className="ml-auto flex items-center justify-center space-x-1.5">
-                                                            <Toggle
-                                                                aria-label="Toggle bold"
-                                                                onPressedChange={() => setBold(!bold)}
-                                                                pressed={bold}
-                                                                variant="ghost"
-                                                            >
-                                                                <Bold className="h-4 w-4" />
-                                                            </Toggle>
-                                                            <Toggle
-                                                                aria-label="Toggle italic"
-                                                                onPressedChange={() => setItalic(!italic)}
-                                                                pressed={italic}
-                                                                variant="ghost"
-                                                            >
-                                                                <Italic className="h-4 w-4" />
-                                                            </Toggle>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Toggle
+                                                                            aria-label="Toggle bold"
+                                                                            onPressedChange={() => setBold(!bold)}
+                                                                            pressed={bold}
+                                                                            variant="ghost"
+                                                                        >
+                                                                            <Bold className="h-4 w-4" />
+                                                                        </Toggle>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Bold</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Toggle
+                                                                            aria-label="Toggle italic"
+                                                                            onPressedChange={() => setItalic(!italic)}
+                                                                            pressed={italic}
+                                                                            variant="ghost"
+                                                                        >
+                                                                            <Italic className="h-4 w-4" />
+                                                                        </Toggle>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Italic</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                     </div>
                                                 </div>
