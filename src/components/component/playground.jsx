@@ -1424,7 +1424,7 @@ const CanvasDrawingApp = () => {
                                                         <span className="text-sm text-muted-foreground">{thickness}px</span>
                                                     </div>
                                                     <Slider
-                                                        min={5}
+                                                        min={1}
                                                         max={30}
                                                         step={1}
                                                         value={[thickness]}
