@@ -155,10 +155,6 @@ const CanvasDrawingApp = () => {
         ctx.fillStyle = color;
         ctx.lineWidth = thickness;
 
-        if (selected === 'eraser') {
-            ctx.strokeStyle = '#FFFFFF';
-        }
-
         switch (selected) {
             case 'pencil':
                 switch (penciltype) {
@@ -205,8 +201,8 @@ const CanvasDrawingApp = () => {
                 }
                 break;
             case 'eraser':
-                ctx.lineCap = 'round';
-                ctx.lineJoin = 'round';
+                // remove the pixels instead of adding white
+                ctx.globalCompositeOperation = 'destination-out';
                 ctx.lineTo(x, y);
                 ctx.stroke();
                 ctx.beginPath();
@@ -438,16 +434,16 @@ const CanvasDrawingApp = () => {
         const tempCtx = tempCanvas.getContext('2d', { willReadFrequently: true });
         tempCtx.drawImage(canvas_, 0, 0);
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
-        for (let i = 0; i < imageData.data.length; i += 4) {
+        /*for (let i = 0; i < imageData.data.length; i += 4) {
             const r = imageData.data[i];
             const g = imageData.data[i + 1];
-            const b = imageData.data[i + 2];
+            const b = imageData.data[i + 2]; // no need to remove white pixels
             const a = imageData.data[i + 3];
 
             if (r > 240 && g > 240 && b > 240) {
                 imageData.data[i + 3] = 255 - ((r + g + b) / 3);
             }
-        }
+        }*/
         tempCtx.putImageData(imageData, 0, 0);
         const dataURL = tempCanvas.toDataURL(`image/${format}`);
         const link = document.createElement('a');
@@ -463,6 +459,8 @@ const CanvasDrawingApp = () => {
         tempCanvas.width = canvas_.width;
         tempCanvas.height = canvas_.height;
         const tempCtx = tempCanvas.getContext('2d', { willReadFrequently: true });
+        tempCtx.fillStyle = 'white';
+        tempCtx.fillRect(0, 0, tempCanvas.width, tempCanvas.height);
         tempCtx.drawImage(canvas_, 0, 0);
         const imageData = tempCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
         tempCtx.putImageData(imageData, 0, 0);
@@ -472,7 +470,6 @@ const CanvasDrawingApp = () => {
         link.download = `drawing.${format}`;
         link.setAttribute('href', dataURL);
         link.click();
-
     };
 
     const colorInputRef = useRef(null);
@@ -652,8 +649,10 @@ const CanvasDrawingApp = () => {
     const [fontSize, setFontSize] = useState([16]); // pixels
 
     const clearCanvas = () => {
-        ctx.fillStyle = '#FFFFFF';
+        // remove all pixels instead of adding white
+        ctx.globalCompositeOperation = 'destination-out';
         ctx.fillRect(0, 0, canvasRef.current.width, canvasRef.current.height);
+        ctx.globalCompositeOperation = 'source-over';
         // add the state to history
         if (time !== 0) {
             saveState();
