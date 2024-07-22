@@ -61,11 +61,32 @@ const CanvasDrawingApp = () => {
     const [shapeOpen, setShapeOpen] = useState(false);
     const [thicknessOpen, setThicknessOpen] = useState(false);
 
-
     const [isHoveredJPEG, setIsHoveredJPEG] = useState(false);
     const [font, setFont] = useState('sera');
 
+    const [fontOpen, setFontOpen] = useState(false);
+    const [bold, setBold] = useState(false);
+    const [italic, setItalic] = useState(false);
+    const [fontSize, setFontSize] = useState([16]); // pixels
+
+    const [textHover, setTextHover] = useState(false);
+    const [newHover, setNewHover] = useState(false);
+    const [downloadOpen, setDownloadOpen] = useState(false);
+
+    // keep a list of states for undo and redo
+    const [history, setHistory] = useState([]);
+    const [historyIndex, setHistoryIndex] = useState(-1);
+
     const [isMac, setIsMac] = useState(false);
+
+    const colorInputRef = useRef(null);
+    const [inputValue, setInputValue] = useState('Aa');
+    const [alertOpen, setAlertOpen] = useState(false);
+    const [OverlaysHiden, setOverlaysHiden] = useState(false);
+    const [undoDisabled, setUndoDisabled] = useState(true);
+    const [redoDisabled, setRedoDisabled] = useState(true);
+    const [time, setTime] = useState(0);
+    const [pencilPopoverOpen, setPencilPopoverOpen] = useState(false);
 
     useEffect(() => {
         setIsMac(window.navigator.platform.toUpperCase().indexOf('MAC') >= 0);
@@ -103,9 +124,6 @@ const CanvasDrawingApp = () => {
             clearCanvas();
         }
     }, [ctx]);
-
-    const [inputValue, setInputValue] = useState('Aa');
-    const [alertOpen, setAlertOpen] = useState(false);
 
     const handleConfirm = () => {
         if (inputValue === '') {
@@ -472,8 +490,6 @@ const CanvasDrawingApp = () => {
         link.click();
     };
 
-    const colorInputRef = useRef(null);
-
     const handleButtonClick = () => {
         colorInputRef.current.click();
     };
@@ -488,14 +504,6 @@ const CanvasDrawingApp = () => {
         const b = parseInt(hex.slice(5, 7), 16);
         return [r, g, b];
     }
-
-    const [textHover, setTextHover] = useState(false);
-    const [newHover, setNewHover] = useState(false);
-    const [downloadOpen, setDownloadOpen] = useState(false);
-
-    // keep a list of states for undo and redo
-    const [history, setHistory] = useState([]);
-    const [historyIndex, setHistoryIndex] = useState(-1);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -545,8 +553,6 @@ const CanvasDrawingApp = () => {
             });
         }
     };
-
-    const [OverlaysHiden, setOverlaysHiden] = useState(false);
 
     const undo_shortcut = isMac ? '⌘Z' : 'Ctrl+Z';
     const redo_shortcut = isMac ? '⇧⌘Z' : 'Ctrl+Shift+Z';
@@ -615,17 +621,12 @@ const CanvasDrawingApp = () => {
         }
     };
 
-    const [undoDisabled, setUndoDisabled] = useState(true);
-    const [redoDisabled, setRedoDisabled] = useState(true);
-
     useEffect(() => {
         window.addEventListener('keydown', handleKeyDown);
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         }
     }, [ctx, history, historyIndex, undoDisabled, redoDisabled]); // All the dependencies need to be added here
-
-    const [time, setTime] = useState(0);
 
     useEffect(() => {
         // If the historyIndex is at the start, disable undo
@@ -643,11 +644,6 @@ const CanvasDrawingApp = () => {
         }
 
     }, [history, historyIndex]);
-
-    const [fontOpen, setFontOpen] = useState(false);
-    const [bold, setBold] = useState(false);
-    const [italic, setItalic] = useState(false);
-    const [fontSize, setFontSize] = useState([16]); // pixels
 
     const clearCanvas = () => {
         // remove all pixels instead of adding white
@@ -719,8 +715,6 @@ const CanvasDrawingApp = () => {
             window.removeEventListener('mouseup', handleMouseUpResize);
         };
     }, [isDragging]);
-
-    const [pencilPopoverOpen, setPencilPopoverOpen] = useState(false);
 
     return (
         <div className="flex min-h-screen bg-slate-50">
