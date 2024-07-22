@@ -563,6 +563,7 @@ const CanvasDrawingApp = () => {
     const handleKeyDown = (e) => {
         const ctrlKey = e.ctrlKey || e.metaKey;
         const shiftKey = e.shiftKey;
+        const altKey = e.altKey;
         const zKey = e.key === 'z' || e.key === 'Z';
         const iKey = e.key === 'i' || e.key === 'I';
         const bKey = e.key === 'b' || e.key === 'B';
@@ -573,42 +574,42 @@ const CanvasDrawingApp = () => {
         const kKey = e.key === 'k' || e.key === 'K';
         const mKey = e.key === 'm' || e.key === 'M';
 
-        if (ctrlKey && zKey && shiftKey) {
+        if (ctrlKey && zKey && shiftKey && !altKey) {
             e.preventDefault();
             redo();
-        } else if (ctrlKey && zKey) {
+        } else if (ctrlKey && zKey && !shiftKey && !altKey) {
             e.preventDefault();
             undo();
         }
-        else if (ctrlKey && iKey) {
+        else if (ctrlKey && iKey && !shiftKey && !altKey) {
             e.preventDefault();
             setAlertOpen(true);
         }
-        else if (ctrlKey && bKey) {
+        else if (ctrlKey && bKe && !shiftKey && !altKey) {
             e.preventDefault();
             clearCanvas();
         }
-        else if (ctrlKey && qKey) {
+        else if (ctrlKey && qKey && !shiftKey && !altKey) {
             e.preventDefault();
             setSelected('pencil');
         }
-        else if (ctrlKey && eKey) {
+        else if (ctrlKey && eKey && !shiftKey && !altKey) {
             e.preventDefault();
             setSelected('eraser');
         }
-        else if (ctrlKey && sKey) {
+        else if (ctrlKey && sKey && !shiftKey && !altKey) {
             e.preventDefault();
             setSelected('shapes');
         }
-        else if (ctrlKey && fKey) {
+        else if (ctrlKey && fKey && !shiftKey && !altKey) {
             e.preventDefault();
             setSelected('fill');
         }
-        else if (ctrlKey && kKey) {
+        else if (ctrlKey && kKey && !shiftKey && !altKey) {
             e.preventDefault();
             setSelected('color picker');
         }
-        else if (ctrlKey && mKey) {
+        else if (ctrlKey && mKey && !shiftKey && !altKey) {
             e.preventDefault();
             setOverlaysHiden(prev => !prev);
         }
