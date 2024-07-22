@@ -231,7 +231,6 @@ const CanvasDrawingApp = () => {
                 break;
             case 'shapes':
                 switch (shape) {
-
                     case 'line':
                         ctx.putImageData(savedImageData, 0, 0);
                         ctx.beginPath();
