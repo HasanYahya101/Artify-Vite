@@ -1862,5 +1862,4 @@ function TriangleIcon(props) {
     );
 }
 
-
 export default CanvasDrawingApp;
