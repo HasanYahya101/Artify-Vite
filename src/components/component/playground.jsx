@@ -270,8 +270,8 @@ const CanvasDrawingApp = () => {
             case 'pencil':
                 switch (penciltype) {
                     case 'pencil':
-                        ctx.lineCap = 'square';
-                        ctx.lineJoin = 'flat';
+                        ctx.lineCap = 'round';
+                        ctx.lineJoin = 'round';
                         ctx.lineWidth = thickness;
                         ctx.lineTo(x, y);
                         ctx.stroke();
@@ -281,7 +281,7 @@ const CanvasDrawingApp = () => {
                     case 'brush':
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
-                        ctx.lineWidth = thickness * 1.3;
+                        ctx.lineWidth = thickness * 1.4;
                         ctx.lineTo(x, y);
                         ctx.stroke();
                         ctx.beginPath();
@@ -997,7 +997,7 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'pencil' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('pencil'); }}
+                                                                    onClick={() => { setPencilType('pencil'); setPencilPopoverOpen(false); }}
                                                                 >
                                                                     <Pencil className="w-6 h-6" />
                                                                 </Button>
@@ -1013,7 +1013,7 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'brush' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('brush'); }}
+                                                                    onClick={() => { setPencilType('brush'); setPencilPopoverOpen(false); }}
                                                                 >
                                                                     <Paintbrush className="w-6 h-6" />
                                                                 </Button>
@@ -1029,7 +1029,7 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'pen' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('pen'); }}
+                                                                    onClick={() => { setPencilType('pen'); setPencilPopoverOpen(false); }}
                                                                 >
                                                                     <Pen className="w-6 h-6" />
                                                                 </Button>
@@ -1045,7 +1045,7 @@ const CanvasDrawingApp = () => {
                                                         <Tooltip>
                                                             <TooltipTrigger>
                                                                 <Button variant={penciltype === 'airbrush' ? 'secondary' : 'ghost'} size="icon"
-                                                                    onClick={() => { setPencilType('airbrush'); }}
+                                                                    onClick={() => { setPencilType('airbrush'); setPencilPopoverOpen(false); }}
                                                                 >
                                                                     <Brush className="w-6 h-6" />
                                                                 </Button>
