@@ -1065,21 +1065,21 @@ const CanvasDrawingApp = () => {
                                                             <span className="text-sm mr-auto text-gray-500 ml-2">Smoothing</span>
                                                             <span className="text-sm text-gray-500 ml-auto mr-2">{smoothing}</span>
                                                         </div>
-                                                        <Slider className='w-full' value={[smoothing]} onValueChange={([value]) => setSmoothing(value)} max={1} step={0.01} />
+                                                        <Slider className='w-full hover:cursor-move' value={[smoothing]} onValueChange={([value]) => setSmoothing(value)} max={1} step={0.01} />
                                                     </div>
                                                     <div className="flex flex-col items-center justify-center mt-4">
                                                         <div className="flex w-full mb-2.5">
                                                             <span className="text-sm mr-auto text-gray-500 ml-2">Thinning</span>
                                                             <span className="text-sm text-gray-500 ml-auto mr-2">{thinning}</span>
                                                         </div>
-                                                        <Slider className='w-full' value={[thinning]} onValueChange={([value]) => setThinning(value)} max={1} step={0.01} />
+                                                        <Slider className='w-full hover:cursor-move' value={[thinning]} onValueChange={([value]) => setThinning(value)} max={1} step={0.01} />
                                                     </div>
                                                     <div className="flex flex-col items-center justify-center mt-4">
                                                         <div className="flex w-full mb-2.5">
                                                             <span className="text-sm mr-auto text-gray-500 ml-2">Min Distance</span>
                                                             <span className="text-sm text-gray-500 ml-auto mr-2">{minDistance}</span>
                                                         </div>
-                                                        <Slider className='w-full' value={[minDistance]} onValueChange={([value]) => setMinDistance(value)} max={5} step={0.1} />
+                                                        <Slider className='w-full hover:cursor-move' value={[minDistance]} onValueChange={([value]) => setMinDistance(value)} max={5} step={0.1} />
                                                     </div>
                                                 </div>
                                             ) : null}
