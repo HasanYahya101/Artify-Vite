@@ -172,6 +172,7 @@ const CanvasDrawingApp = () => {
                     case 'brush':
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
+                        ctx.strokeStyle = color;
                         var dotSize = 1;
                         const spread = thickness * 1;
                         var amount = 1;
