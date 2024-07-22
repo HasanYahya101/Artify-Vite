@@ -585,7 +585,7 @@ const CanvasDrawingApp = () => {
             e.preventDefault();
             setAlertOpen(true);
         }
-        else if (ctrlKey && bKe && !shiftKey && !altKey) {
+        else if (ctrlKey && bKey && !shiftKey && !altKey) {
             e.preventDefault();
             clearCanvas();
         }
