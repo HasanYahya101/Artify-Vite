@@ -162,6 +162,7 @@ const CanvasDrawingApp = () => {
             case 'pencil':
                 switch (penciltype) {
                     case 'pencil':
+                        ctx.lineWidth = thickness;
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
                         ctx.lineTo(x, y);
@@ -191,6 +192,7 @@ const CanvasDrawingApp = () => {
                         }
                         break;
                     case 'pen':
+                        ctx.lineWidth = thickness;
                         // draw freehand
                         ctx.lineCap = 'round';
                         ctx.lineJoin = 'round';
