@@ -1062,22 +1062,22 @@ const CanvasDrawingApp = () => {
                                                 <div className='p-1 mb-3'>
                                                     <div className="flex flex-col items-center justify-center mt-4">
                                                         <div className="flex w-full mb-2.5">
-                                                            <span className="text-sm mr-auto text-gray-500 ml-2">Smoothing</span>
-                                                            <span className="text-sm text-gray-500 ml-auto mr-2">{smoothing}</span>
+                                                            <span className="text-sm font-medium mr-auto text-black ml-1">Smoothing</span>
+                                                            <span className="text-sm text-gray-500 ml-auto mr-1">{smoothing}</span>
                                                         </div>
                                                         <Slider className='w-full hover:cursor-move' value={[smoothing]} onValueChange={([value]) => setSmoothing(value)} max={1} step={0.01} />
                                                     </div>
                                                     <div className="flex flex-col items-center justify-center mt-4">
                                                         <div className="flex w-full mb-2.5">
-                                                            <span className="text-sm mr-auto text-gray-500 ml-2">Thinning</span>
-                                                            <span className="text-sm text-gray-500 ml-auto mr-2">{thinning}</span>
+                                                            <span className="text-sm font-medium mr-auto text-black ml-1">Thinning</span>
+                                                            <span className="text-sm text-gray-500 ml-auto mr-1">{thinning}</span>
                                                         </div>
                                                         <Slider className='w-full hover:cursor-move' value={[thinning]} onValueChange={([value]) => setThinning(value)} max={1} step={0.01} />
                                                     </div>
                                                     <div className="flex flex-col items-center justify-center mt-4">
                                                         <div className="flex w-full mb-2.5">
-                                                            <span className="text-sm mr-auto text-gray-500 ml-2">Min Distance</span>
-                                                            <span className="text-sm text-gray-500 ml-auto mr-2">{minDistance}</span>
+                                                            <span className="text-sm font-medium mr-auto text-black ml-1">Min Distance</span>
+                                                            <span className="text-sm text-gray-500 ml-auto mr-1">{minDistance}</span>
                                                         </div>
                                                         <Slider className='w-full hover:cursor-move' value={[minDistance]} onValueChange={([value]) => setMinDistance(value)} max={5} step={0.1} />
                                                     </div>
