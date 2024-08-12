@@ -1147,60 +1147,132 @@ const CanvasDrawingApp = () => {
                                                 <div>
                                                     <div className="grid grid-cols-4 gap-2">
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'square' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('square'); setShapeOpen(false) }}
-                                                            >
-                                                                <SquareIcon className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'square' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('square'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <SquareIcon className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Square</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'circle' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('circle'); setShapeOpen(false) }}
-                                                            >
-                                                                <CircleIcon className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'circle' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('circle'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <CircleIcon className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Circle</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'triangle' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('triangle'); setShapeOpen(false) }}
-                                                            >
-                                                                <TriangleIcon className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'triangle' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('triangle'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <TriangleIcon className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Triangle</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'star' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('star'); setShapeOpen(false) }}
-                                                            >
-                                                                <StarIcon className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'star' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('star'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <StarIcon className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Star</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'hexagon' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('hexagon'); setShapeOpen(false) }}
-                                                            >
-                                                                <HexagonIcon className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'hexagon' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('hexagon'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <HexagonIcon className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Hexagon</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'octagon' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('octagon'); setShapeOpen(false) }}
-                                                            >
-                                                                <OctagonIcon className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'octagon' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('octagon'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <OctagonIcon className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Octagon</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'slash' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('slash'); setShapeOpen(false) }}
-                                                            >
-                                                                <Slash className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'slash' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('slash'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <Slash className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Line</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                         <div className="p-1">
-                                                            <Button variant={shape === 'curve' ? 'secondary' : 'ghost'} size="icon"
-                                                                onClick={() => { setShape('curve'); setShapeOpen(false) }}
-                                                            >
-                                                                <Spline className="w-6 h-6" />
-                                                            </Button>
+                                                            <TooltipProvider>
+                                                                <Tooltip>
+                                                                    <TooltipTrigger>
+                                                                        <Button variant={shape === 'curve' ? 'secondary' : 'ghost'} size="icon"
+                                                                            onClick={() => { setShape('curve'); setShapeOpen(false) }}
+                                                                        >
+                                                                            <Spline className="w-6 h-6" />
+                                                                        </Button>
+                                                                    </TooltipTrigger>
+                                                                    <TooltipContent>
+                                                                        <span className='text-gray-500'>Curve</span>
+                                                                    </TooltipContent>
+                                                                </Tooltip>
+                                                            </TooltipProvider>
                                                         </div>
                                                     </div>
                                                 </div>
