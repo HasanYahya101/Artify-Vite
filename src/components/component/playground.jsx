@@ -935,17 +935,17 @@ const CanvasDrawingApp = () => {
                                     </p>
 
                                     <div className="flex items-center space-x-2 mb-2">
-                                        <Star className="text-purple-600" size={14} />
+                                        <Star className="text-purple-600" size={18} />
                                         <span className="text-purple-600 font-semibold px-2 py-0.5 rounded-full border border-purple-600 text-xs">PRO</span>
                                     </div>
 
                                     <div className="flex items-center space-x-2 mb-2">
-                                        <BookMarked className="text-gray-500" size={14} />
+                                        <BookMarked className="text-gray-500" size={18} />
                                         <span className="text-gray-700 text-sm">Owns this repository</span>
                                     </div>
 
                                     <div className="flex items-center space-x-2">
-                                        <GitCompare className="text-gray-500" size={14} />
+                                        <GitCompare className="text-gray-500" size={18} />
                                         <span className="text-gray-700 text-sm">Committed to this repository in the past</span>
                                     </div>
                                 </div>
