@@ -842,10 +842,7 @@ const CanvasDrawingApp = () => {
                                         {!isMac ? (
                                             <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Z</kbd>
                                         ) : (
-                                            <kbd className="flex ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">
-                                                <Command className='h-3 w-3 self-center' />
-                                                <span className='ml-0.5'>Z</span>
-                                            </kbd>
+                                            <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">⌘Z</kbd>
                                         )}
                                     </div>
                                 </TooltipContent>
@@ -872,11 +869,7 @@ const CanvasDrawingApp = () => {
                                         {!isMac ? (
                                             <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">Ctrl+Shift+Z</kbd>
                                         ) : (
-                                            <kbd className="flex ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">
-                                                <ArrowBigUp className='h-3 w-3 self-center' />
-                                                <Command className='h-3 w-3 self-center ml-[1px]' />
-                                                <span className='ml-0.5'>Z</span>
-                                            </kbd>
+                                            <kbd className="ml-2 px-2 py-1.5 text-xs font-semibold text-gray-800 bg-gray-100 border border-gray-200 rounded-lg">⇧⌘Z</kbd>
                                         )}
                                     </div>
                                 </TooltipContent>
