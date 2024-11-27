@@ -827,7 +827,7 @@ const CanvasDrawingApp = () => {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <Button variant="ghost" size="icon" className={`h-8 w-8 ${undoDisabled === true ? 'cursor-not-allowed' : ''}`}
+                                    <Button variant="ghost" size="icon" className={`h-8 w-8 ${undoDisabled === true ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                         onClick={undo}
                                         disabled={undoDisabled}
                                     >
@@ -857,7 +857,7 @@ const CanvasDrawingApp = () => {
                         <TooltipProvider>
                             <Tooltip>
                                 <TooltipTrigger>
-                                    <Button variant="ghost" size="icon" className={`h-8 w-8 ${redoDisabled === true ? 'cursor-not-allowed' : ''}`}
+                                    <Button variant="ghost" size="icon" className={`h-8 w-8 ${redoDisabled === true ? 'hover:cursor-not-allowed' : 'hover:cursor-pointer'}`}
                                         onClick={redo}
                                         disabled={redoDisabled}
                                     >
